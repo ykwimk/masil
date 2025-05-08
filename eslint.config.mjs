@@ -72,6 +72,7 @@ const eslintConfig = [
       ],
       'react-hooks/exhaustive-deps': 'off',
       'react/display-name': 'off',
+      'react/no-unescaped-entities': 'off',
       'jsx-a11y/anchor-is-valid': 'off',
       'jsx-a11y/interactive-supports-focus': 'off',
       'jsx-a11y/click-events-have-key-events': 'off',
