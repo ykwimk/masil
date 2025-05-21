@@ -3,7 +3,6 @@
 import { Quote } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Avatar, AvatarFallback } from '../components/ui/avatar';
-import { Card, CardContent } from '../components/ui/card';
 
 const testimonials = [
   {
@@ -27,35 +26,25 @@ const testimonials = [
     role: '콘텐츠 마케터',
     initials: '박',
   },
-  {
-    quote:
-      '마케팅 트렌드를 놓치지 않고 따라갈 수 있게 되었어요. 함께 공부하고 성장하는 문화가 정말 좋습니다.',
-    author: '최준호',
-    role: '퍼포먼스 마케터',
-    initials: '최',
-  },
 ];
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="bg-white py-20">
+    <section id="testimonials" className="bg-white py-16 md:py-20">
       <div className="container mx-auto px-4">
         <motion.div
-          className="mx-auto mb-16 max-w-3xl text-center"
+          className="section-title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
-            마실 멤버들의 이야기
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            마실에서 함께한 마케터들이 들려주는 진솔한 경험담
-          </p>
+          <span className="tag">멤버 후기</span>
+          <h2>마실 멤버들의 이야기</h2>
+          <p>마실에서 함께한 마케터들이 들려주는 진솔한 경험담</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
@@ -63,26 +52,30 @@ export default function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="instructor-card"
             >
-              <Card className="h-full border-none shadow-md transition-shadow hover:shadow-lg">
-                <CardContent className="p-6 md:p-8">
-                  <Quote className="text-primary/30 mb-4 h-8 w-8" />
-                  <p className="mb-6 text-lg">"{testimonial.quote}"</p>
-                  <div className="flex items-center">
-                    <Avatar className="bg-primary/10 mr-4 h-10 w-10">
-                      <AvatarFallback className="text-primary font-medium">
-                        {testimonial.initials}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold">{testimonial.author}</p>
-                      <p className="text-muted-foreground text-sm">
-                        {testimonial.role}
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="relative h-48 bg-gray-200 md:h-64">
+                <div className="tag">NEW</div>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/5">
+                  <Avatar className="h-20 w-20 border-4 border-white md:h-24 md:w-24">
+                    <AvatarFallback className="bg-primary text-2xl text-white md:text-3xl">
+                      {testimonial.initials}
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
+              </div>
+              <div className="content">
+                <h3 className="mb-1 text-lg font-bold md:text-xl">
+                  {testimonial.author}
+                </h3>
+                <p className="text-muted-foreground mb-3 text-xs md:mb-4 md:text-sm">
+                  {testimonial.role}
+                </p>
+                <Quote className="text-primary/30 mb-2 h-5 w-5 md:h-6 md:w-6" />
+                <p className="text-muted-foreground text-sm md:text-base">
+                  "{testimonial.quote}"
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>

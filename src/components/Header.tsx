@@ -52,8 +52,20 @@ export default function Header() {
           >
             후기
           </Link>
+          <Link
+            href="#join"
+            className="text-foreground/80 hover:text-primary transition-colors"
+          >
+            참여하기
+          </Link>
           <Button asChild>
-            <Link href="#join">참여하기</Link>
+            <Link
+              href="https://tally.so/r/your-form-id"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              신청하기
+            </Link>
           </Button>
         </nav>
 
@@ -67,6 +79,7 @@ export default function Header() {
         </Button>
       </div>
 
+      {/* Mobile menu */}
       {isMobileMenuOpen && (
         <div className="bg-white p-4 shadow-lg md:hidden">
           <nav className="flex flex-col space-y-4">
@@ -91,9 +104,21 @@ export default function Header() {
             >
               후기
             </Link>
+            <Link
+              href="#join"
+              className="text-foreground/80 hover:text-primary py-2 transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              참여하기
+            </Link>
             <Button asChild className="w-full">
-              <Link href="#join" onClick={() => setIsMobileMenuOpen(false)}>
-                참여하기
+              <Link
+                href="https://tally.so/r/your-form-id"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                신청하기
               </Link>
             </Button>
           </nav>
