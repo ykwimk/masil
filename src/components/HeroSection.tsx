@@ -80,7 +80,7 @@ export default function HeroSection() {
               asChild
               variant="outline"
               size="lg"
-              className="rounded-full border-white px-6 py-5 text-sm text-white hover:bg-white/10 sm:px-8 sm:py-6 sm:text-base"
+              className="rounded-full border-white px-6 py-5 text-sm text-white sm:px-8 sm:py-6 sm:text-base"
             >
               <Link href="#about">더 알아보기</Link>
             </Button>
