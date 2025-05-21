@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="bg-black py-16 md:py-20">
+    <section id="features" className="bg-section py-16 md:py-20">
       <div className="container mx-auto px-4">
         <motion.div
           className="section-title"
@@ -15,8 +15,8 @@ export default function FeaturesSection() {
           transition={{ duration: 0.5 }}
         >
           <span className="tag">특별한 경험</span>
-          <h2 className="text-white">마실에서 만나는 특별한 경험</h2>
-          <p className="text-white/70">
+          <h2>마실에서 만나는 특별한 경험</h2>
+          <p className="break-keep opacity-70">
             마케터로서 성장하는 데 필요한 모든 것을 마실에서 경험해보세요
           </p>
         </motion.div>
@@ -29,15 +29,18 @@ export default function FeaturesSection() {
             transition={{ duration: 0.5 }}
             className="relative order-2 lg:order-1"
           >
-            <div className="bg-primary/20 absolute -top-10 -left-10 h-40 w-40 rounded-full blur-3xl"></div>
-            <div className="relative z-10">
-              <Image
-                src="/placeholder.svg?height=400&width=600"
-                alt="마실 커뮤니티 활동"
-                width={600}
-                height={400}
-                className="rounded-xl shadow-xl"
-              />
+            <div className="bg-primary/20 absolute -top-10 -left-10 z-50 h-40 w-40 rounded-full blur-3xl"></div>
+            <div className="rounded-xl bg-white shadow-lg">
+              <div className="relative z-10 mx-auto max-w-[400px]">
+                <Image
+                  src="/images/img-community.png"
+                  alt="마실 커뮤니티 활동"
+                  width={400}
+                  height={400}
+                  layout="responsive"
+                  // className="rounded-xl shadow-xl"
+                />
+              </div>
             </div>
           </motion.div>
 
@@ -49,10 +52,10 @@ export default function FeaturesSection() {
             className="order-1 space-y-6 md:space-y-8 lg:order-2"
           >
             <div className="space-y-4">
-              <h3 className="text-xl font-bold text-white md:text-2xl">
+              <h3 className="text-xl font-bold md:text-2xl">
                 함께 성장하는 마케터 커뮤니티
               </h3>
-              <p className="text-sm text-white/70 md:text-base">
+              <p className="text-sm break-keep opacity-70 md:text-base">
                 마실은 단순한 네트워킹을 넘어 실질적인 성장을 추구합니다. 다양한
                 배경을 가진 마케터들이 모여 서로의 경험과 지식을 나누며 함께
                 성장합니다.
@@ -83,21 +86,21 @@ export default function FeaturesSection() {
               ].map((feature, index) => (
                 <div
                   key={index}
-                  className="border-primary/20 rounded-lg border bg-white/5 p-3 md:p-4"
+                  className="rounded-lg bg-white p-3 shadow-sm md:p-4"
                 >
                   <h4 className="text-primary mb-1 text-base font-bold md:mb-2 md:text-lg">
                     {feature.title}
                   </h4>
-                  <p className="text-xs text-white/70 md:text-sm">
+                  <p className="text-xs break-keep opacity-70 md:text-sm">
                     {feature.description}
                   </p>
                 </div>
               ))}
             </div>
 
-            <button className="bg-primary hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium text-white transition-colors md:px-6 md:py-3 md:text-base">
+            {/* <button className="bg-primary hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium text-white transition-colors md:px-6 md:py-3 md:text-base">
               더 알아보기
-            </button>
+            </button> */}
           </motion.div>
         </div>
       </div>

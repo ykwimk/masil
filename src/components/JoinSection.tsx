@@ -13,7 +13,7 @@ import { Button } from '../components/ui/button';
 
 export default function JoinSection() {
   return (
-    <section id="join" className="relative overflow-hidden bg-black py-20">
+    <section id="join" className="bg-section relative overflow-hidden py-20">
       <div className="gradient-bg absolute inset-0"></div>
 
       {/* Floating elements */}
@@ -43,10 +43,11 @@ export default function JoinSection() {
           transition={{ duration: 0.5 }}
         >
           <span className="tag">함께하기</span>
-          <h2 className="text-white">마실과 함께 성장하세요</h2>
-          <p className="text-white/70">
-            마케팅의 길에서 혼자가 아닌 함께 걸어가는 동료를 만나보세요. 잠깐
-            마실 나가듯, 가볍게 시작해볼까요?
+          <h2>마실과 함께 성장하세요</h2>
+          <p className="break-keep opacity-70">
+            마케팅의 길에서 혼자가 아닌 함께 걸어가는 동료를 만나보세요.
+            <br />
+            잠깐 마실 나가듯, 가볍게 시작해볼까요?
           </p>
         </motion.div>
 
@@ -57,7 +58,7 @@ export default function JoinSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm">
+          <div className="overflow-hidden rounded-2xl border border-white/20 bg-white/30 backdrop-blur-sm">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="bg-primary relative overflow-hidden p-6 md:p-8 lg:p-10">
                 <div className="absolute -right-10 -bottom-10 h-40 w-40 rounded-full bg-white/10"></div>
@@ -65,7 +66,7 @@ export default function JoinSection() {
                   <h3 className="mb-4 text-2xl font-bold text-white">
                     마실 참여 신청
                   </h3>
-                  <p className="mb-6 text-white/90">
+                  <p className="keep-all mb-6 text-white/90">
                     아래 버튼을 클릭하여 마실 커뮤니티 참여 신청서를
                     작성해주세요.
                   </p>
@@ -130,10 +131,11 @@ export default function JoinSection() {
                 </div>
               </div>
 
-              <div className="p-6 text-white md:p-8 lg:p-10">
+              <div className="bg-white p-6 md:p-8 lg:p-10">
                 <h3 className="mb-4 text-2xl font-bold">문의하기</h3>
-                <p className="mb-6 text-white/70">
-                  마실에 대해 더 알고 싶으신가요? 언제든지 문의해주세요.
+                <p className="mb-6 break-keep opacity-70">
+                  마실에 대해 더 알고 싶으신가요? <br />
+                  언제든지 문의해주세요.
                 </p>
 
                 <div className="space-y-6">
@@ -142,12 +144,12 @@ export default function JoinSection() {
                       <Mail className="text-primary h-6 w-6" />
                     </div>
                     <div>
-                      <h4 className="mb-1 font-medium text-white">이메일</h4>
+                      <h4 className="mb-1 font-medium">이메일</h4>
                       <a
-                        href="mailto:hello@masil.community"
-                        className="hover:text-primary text-white/70 transition-colors"
+                        href="mailto:ygyu101710@gmail.com"
+                        className="hover:text-primary opacity-70 transition-colors"
                       >
-                        hello@masil.community
+                        ygyu101710@gmail.com
                       </a>
                     </div>
                   </div>
@@ -157,15 +159,13 @@ export default function JoinSection() {
                       <MessageCircle className="text-primary h-6 w-6" />
                     </div>
                     <div>
-                      <h4 className="mb-1 font-medium text-white">
-                        카카오톡 채널
-                      </h4>
-                      <p className="text-white/70">@마실커뮤니티</p>
+                      <h4 className="mb-1 font-medium">카카오톡 채널</h4>
+                      <p className="opacity-70">@마실커뮤니티</p>
                     </div>
                   </div>
 
                   <div className="mt-4 border-t border-white/10 pt-4">
-                    <p className="text-sm text-white/70">
+                    <p className="text-sm break-keep opacity-70">
                       문의사항은 이메일 또는 카카오톡 채널로 연락주시면 빠르게
                       답변드리겠습니다. 평일 기준 24시간 이내 답변을 드립니다.
                     </p>

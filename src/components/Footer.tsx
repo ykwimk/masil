@@ -3,14 +3,14 @@ import { Instagram, Linkedin, Twitter } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-white py-12">
+    <footer className="border-t bg-white py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-between md:flex-row">
           <div className="mb-6 md:mb-0">
             <Link href="/" className="flex items-center space-x-2">
               <span className="text-primary text-2xl font-bold">마실</span>
             </Link>
-            <p className="text-muted-foreground mt-2 max-w-md text-sm">
+            <p className="text-muted-foreground mt-2 max-w-md text-sm break-keep">
               마케터들의 가벼운 마실길, 함께 배우고 성장하는 커뮤니티입니다.
             </p>
           </div>

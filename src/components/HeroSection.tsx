@@ -43,7 +43,7 @@ export default function HeroSection() {
         인사이트
       </motion.div>
 
-      <div className="z-10 container mx-auto mb-28 px-4 text-center">
+      <div className="sm:md-28 z-10 container mx-auto mb-52 px-4 text-center">
         <motion.div
           className="mx-auto max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ export default function HeroSection() {
           </p>
 
           <motion.div
-            className="flex flex-col justify-center gap-4 sm:flex-row"
+            className="flex flex-row justify-center gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}

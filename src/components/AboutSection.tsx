@@ -22,7 +22,7 @@ export default function AboutSection() {
         >
           <span className="tag">마실 소개</span>
           <h2>마실이란?</h2>
-          <p>
+          <p className="break-keep">
             '마실'은 이웃집에 가볍게 놀러가는 우리의 전통 문화입니다.
             <br className="hidden md:block" />
             마케터들이 부담 없이 모여 지식과 경험을 나누는 커뮤니티, 그것이 바로
@@ -66,19 +66,19 @@ export default function AboutSection() {
               variants={fadeIn}
             >
               <div className="feature-card h-full">
-                <div className={`tag`}>NEW</div>
+                {/* <div className={`tag`}>NEW</div> */}
                 <div className="bg-primary/10 text-primary mb-4 flex h-14 w-14 items-center justify-center rounded-full p-3">
                   {item.icon}
                 </div>
-                <h3 className="mb-2 text-lg font-bold text-white md:text-xl">
+                <h3 className="mb-2 text-lg font-bold md:text-xl">
                   {item.title}
                 </h3>
-                <p className="text-sm text-white/70 md:text-base">
+                <p className="text-sm break-keep opacity-70 md:text-base">
                   {item.description}
                 </p>
-                <div className="text-primary mt-4 text-sm font-medium">
+                {/* <div className="text-primary mt-4 text-sm font-medium">
                   자세히 보기 →
-                </div>
+                </div> */}
               </div>
             </motion.div>
           ))}

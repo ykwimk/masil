@@ -8,6 +8,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
+  --color-section: var(--section);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -44,6 +45,7 @@
   --radius: 0.625rem;
   --background: oklch(0.985 0.02 135);
   --foreground: oklch(0.2 0.02 135);
+  --section: oklch(0.9821 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -83,6 +85,10 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.container {
+  @apply max-w-[1160px] mx-auto px-4;
 }
 
 .gradient-bg {
@@ -151,9 +157,8 @@
   @apply text-sm text-muted-foreground mt-1 text-white;
 }
 
-
 .feature-card {
-  @apply relative overflow-hidden rounded-xl p-6 bg-black border border-primary/20 transition-all duration-300;
+  @apply relative overflow-hidden rounded-xl p-6 border-2 border-primary/20 transition-all duration-300;
 }
 
 .feature-card:hover {

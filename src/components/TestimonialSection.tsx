@@ -11,6 +11,7 @@ const testimonials = [
     author: '김지현',
     role: '브랜드 마케터',
     initials: '김',
+    isNew: true,
   },
   {
     quote:
@@ -18,6 +19,7 @@ const testimonials = [
     author: '이승우',
     role: '스타트업 마케팅 매니저',
     initials: '이',
+    isNew: false,
   },
   {
     quote:
@@ -25,6 +27,7 @@ const testimonials = [
     author: '박소연',
     role: '콘텐츠 마케터',
     initials: '박',
+    isNew: false,
   },
 ];
 
@@ -54,27 +57,29 @@ export default function TestimonialsSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="instructor-card"
             >
-              <div className="relative h-48 bg-gray-200 md:h-64">
-                <div className="tag">NEW</div>
-                <div className="absolute inset-0 flex items-center justify-center bg-black/5">
-                  <Avatar className="h-20 w-20 border-4 border-white md:h-24 md:w-24">
-                    <AvatarFallback className="bg-primary text-2xl text-white md:text-3xl">
-                      {testimonial.initials}
-                    </AvatarFallback>
-                  </Avatar>
+              <div className="border-primary/20 h-full rounded-xl border">
+                <div className="relative h-48 bg-gray-200 md:h-64">
+                  {testimonial.isNew && <div className="tag">NEW</div>}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/5">
+                    <Avatar className="h-20 w-20 border-4 border-white md:h-24 md:w-24">
+                      <AvatarFallback className="bg-primary text-2xl text-white md:text-3xl">
+                        {testimonial.initials}
+                      </AvatarFallback>
+                    </Avatar>
+                  </div>
                 </div>
-              </div>
-              <div className="content">
-                <h3 className="mb-1 text-lg font-bold md:text-xl">
-                  {testimonial.author}
-                </h3>
-                <p className="text-muted-foreground mb-3 text-xs md:mb-4 md:text-sm">
-                  {testimonial.role}
-                </p>
-                <Quote className="text-primary/30 mb-2 h-5 w-5 md:h-6 md:w-6" />
-                <p className="text-muted-foreground text-sm md:text-base">
-                  "{testimonial.quote}"
-                </p>
+                <div className="content">
+                  <h3 className="mb-1 text-lg font-bold md:text-xl">
+                    {testimonial.author}
+                  </h3>
+                  <p className="text-muted-foreground mb-3 text-xs break-keep md:mb-4 md:text-sm">
+                    {testimonial.role}
+                  </p>
+                  <Quote className="text-primary/30 mb-2 h-5 w-5 md:h-6 md:w-6" />
+                  <p className="text-muted-foreground text-sm md:text-base">
+                    "{testimonial.quote}"
+                  </p>
+                </div>
               </div>
             </motion.div>
           ))}
