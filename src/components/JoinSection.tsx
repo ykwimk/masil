@@ -8,6 +8,7 @@ import {
   Calendar,
   Users,
   FileText,
+  Instagram,
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 
@@ -146,27 +147,35 @@ export default function JoinSection() {
                     <div>
                       <h4 className="mb-1 font-medium">이메일</h4>
                       <a
-                        href="mailto:ygyu101710@gmail.com"
+                        href="mailto:masilcommunity@gmail.com"
                         className="hover:text-primary opacity-70 transition-colors"
                       >
-                        ygyu101710@gmail.com
+                        masilcommunity@gmail.com
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
                     <div className="bg-primary/20 rounded-full p-3">
-                      <MessageCircle className="text-primary h-6 w-6" />
+                      <Instagram className="text-primary h-6 w-6" />
                     </div>
                     <div>
-                      <h4 className="mb-1 font-medium">카카오톡 채널</h4>
-                      <p className="opacity-70">@마실커뮤니티</p>
+                      <h4 className="mb-1 font-medium">인스타그램</h4>
+                      <p className="opacity-70">
+                        <a
+                          href="https://instagram.com/masil_community"
+                          target="_blank"
+                          className="hover:text-primary opacity-70 transition-colors"
+                        >
+                          @masil_community
+                        </a>
+                      </p>
                     </div>
                   </div>
 
                   <div className="mt-4 border-t border-white/10 pt-4">
                     <p className="text-sm break-keep opacity-70">
-                      문의사항은 이메일 또는 카카오톡 채널로 연락주시면 빠르게
+                      문의사항은 이메일 또는 인스타그램 DM으로 연락주시면 빠르게
                       답변드리겠습니다. 평일 기준 24시간 이내 답변을 드립니다.
                     </p>
                   </div>

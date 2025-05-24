@@ -60,11 +60,11 @@ export default function Header() {
           </Link>
           <Button asChild>
             <Link
-              href="https://tally.so/r/your-form-id"
+              href="https://event-us.kr/masilcommunity/event/104957"
               target="_blank"
               rel="noopener noreferrer"
             >
-              신청하기
+              연사 신청하기
             </Link>
           </Button>
         </nav>
@@ -113,12 +113,12 @@ export default function Header() {
             </Link>
             <Button asChild className="w-full">
               <Link
-                href="https://tally.so/r/your-form-id"
+                href="https://event-us.kr/masilcommunity/event/104957"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                신청하기
+                연사 신청하기
               </Link>
             </Button>
           </nav>

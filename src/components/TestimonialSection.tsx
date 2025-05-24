@@ -2,7 +2,6 @@
 
 import { Quote } from 'lucide-react';
 import { motion } from 'motion/react';
-import { Avatar, AvatarFallback } from '../components/ui/avatar';
 
 const testimonials = [
   {
@@ -59,13 +58,18 @@ export default function TestimonialsSection() {
             >
               <div className="border-primary/20 h-full rounded-xl border">
                 <div className="relative h-48 bg-gray-200 md:h-64">
-                  {testimonial.isNew && <div className="tag">NEW</div>}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/5">
-                    <Avatar className="h-20 w-20 border-4 border-white md:h-24 md:w-24">
-                      <AvatarFallback className="bg-primary text-2xl text-white md:text-3xl">
-                        {testimonial.initials}
-                      </AvatarFallback>
-                    </Avatar>
+                  {testimonial.isNew && <div className="tag z-20">NEW</div>}
+                  <div className="absolute inset-0 flex items-center justify-center bg-[#eef6ee]">
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        backgroundImage: `url('/images/profile.png')`,
+                        backgroundSize: 'contain',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="content">

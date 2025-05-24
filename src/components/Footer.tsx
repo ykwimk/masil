@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Instagram, Linkedin, Twitter } from 'lucide-react';
+import { Instagram, Youtube } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -18,7 +18,7 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-end">
             <div className="mb-4 flex space-x-4">
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/masil_community"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -27,22 +27,13 @@ export default function Footer() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://yotube.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Twitter"
+                aria-label="Youtube"
               >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
+                <Youtube className="h-5 w-5" />
               </a>
             </div>
             <p className="text-muted-foreground text-sm">

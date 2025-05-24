@@ -74,16 +74,21 @@ export default function HeroSection() {
               size="lg"
               className="rounded-full px-6 py-5 text-sm sm:px-8 sm:py-6 sm:text-base"
             >
-              <Link href="#join">마실 참여하기</Link>
+              <Link
+                href="https://event-us.kr/masilcommunity/event/104957"
+                target="_blank"
+              >
+                연사 참여하기
+              </Link>
             </Button>
-            <Button
+            {/* <Button
               asChild
               variant="outline"
               size="lg"
               className="rounded-full border-white px-6 py-5 text-sm text-white sm:px-8 sm:py-6 sm:text-base"
             >
               <Link href="#about">더 알아보기</Link>
-            </Button>
+            </Button> */}
           </motion.div>
         </motion.div>
       </div>
