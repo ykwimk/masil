@@ -2,31 +2,60 @@
 
 import { Quote } from 'lucide-react';
 import { motion } from 'motion/react';
+import { Avatar, AvatarFallback } from './ui/avatar';
 
-const testimonials = [
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  initials: string;
+  isTag: boolean;
+  imageUrl: string;
+}
+
+const testimonials: Testimonial[] = [
   {
     quote:
-      '마케팅 고민, 더 이상 혼자 끙끙 앓지 않게 됐어요. 마실에서 만난 분들과 함께 문제를 해결하는 과정이 정말 값져요.',
-    author: '김지현',
-    role: '브랜드 마케터',
+      '마케터들이 자신의 이야기를 더 가치 있게 말할 수 있도록, 그 시작을 함께 하고 싶었습니다.',
+    author: '김여규',
+    role: 'BX 라이터',
     initials: '김',
-    isNew: true,
+    isTag: true,
+    imageUrl: '/images/img-profile1.png',
   },
   {
-    quote:
-      '실무에서 바로 적용할 수 있는 인사이트가 가득해요. 이론이 아닌 실제 경험에서 나온 조언들이 큰 도움이 됩니다.',
-    author: '이승우',
-    role: '스타트업 마케팅 매니저',
+    quote: '매력을 디자인하는 챠밍아티스트입니다.',
+    author: '이지영',
+    role: '콘텐츠 마케터',
     initials: '이',
-    isNew: false,
+    isTag: false,
+    imageUrl: '/images/img-profile2.png',
+  },
+  {
+    quote: '기록하고 해석하며, 진심이 닿는 마케팅을 만듭니다.',
+    author: '김주은',
+    role: '콘텐츠 마케터',
+    initials: '김',
+    isTag: false,
+    imageUrl: '/images/img-profile3.png',
   },
   {
     quote:
       '마실에서 만난 분들과 협업 프로젝트도 진행하게 됐어요. 단순한 네트워킹을 넘어 실질적인 관계로 발전했습니다.',
-    author: '박소연',
+    author: '김도형',
     role: '콘텐츠 마케터',
-    initials: '박',
-    isNew: false,
+    initials: '김',
+    isTag: false,
+    imageUrl: '/images/img-profile4.png',
+  },
+  {
+    quote:
+      '생각은 실행으로, 실행은 결과로 증명하는 마케터입니다. 마음껏 시도하며 반짝이는 결과들을 만들고 있어요.',
+    author: '권정하',
+    role: '마케터',
+    initials: '권',
+    isTag: false,
+    imageUrl: '/images/img-profile5.png',
   },
 ];
 
@@ -58,18 +87,23 @@ export default function TestimonialsSection() {
             >
               <div className="border-primary/20 h-full rounded-xl border">
                 <div className="relative h-48 bg-gray-200 md:h-64">
-                  {testimonial.isNew && <div className="tag z-20">NEW</div>}
+                  {testimonial.isTag && <div className="tag z-20">모임장</div>}
                   <div className="absolute inset-0 flex items-center justify-center bg-[#eef6ee]">
-                    <div
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        backgroundImage: `url('/images/profile.png')`,
-                        backgroundSize: 'contain',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                      }}
-                    />
+                    <Avatar className="h-48 w-48 border-4 border-white md:h-56 md:w-56">
+                      <AvatarFallback className="bg-primary text-2xl text-white md:text-3xl">
+                        <div
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            backgroundImage: `url(${testimonial.imageUrl})`,
+                            backgroundSize: '150%',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundColor: 'white',
+                          }}
+                        />
+                      </AvatarFallback>
+                    </Avatar>
                   </div>
                 </div>
                 <div className="content">
