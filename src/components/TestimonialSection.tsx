@@ -40,8 +40,7 @@ const testimonials: Testimonial[] = [
     imageUrl: '/images/img-profile3.png',
   },
   {
-    quote:
-      '마실에서 만난 분들과 협업 프로젝트도 진행하게 됐어요. 단순한 네트워킹을 넘어 실질적인 관계로 발전했습니다.',
+    quote: '분석력 있는 Creative를 지향하는 마케터 김도형 입니다.',
     author: '김도형',
     role: '콘텐츠 마케터',
     initials: '김',
@@ -114,7 +113,7 @@ export default function TestimonialsSection() {
                     {testimonial.role}
                   </p>
                   <Quote className="text-primary/30 mb-2 h-5 w-5 md:h-6 md:w-6" />
-                  <p className="text-muted-foreground text-sm md:text-base">
+                  <p className="text-muted-foreground text-sm break-keep md:text-base">
                     "{testimonial.quote}"
                   </p>
                 </div>
