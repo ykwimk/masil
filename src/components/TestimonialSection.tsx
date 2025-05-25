@@ -24,12 +24,13 @@ const testimonials: Testimonial[] = [
     imageUrl: '/images/img-profile1.png',
   },
   {
-    quote: '매력을 디자인하는 챠밍아티스트입니다.',
-    author: '이지영',
-    role: '콘텐츠 마케터',
-    initials: '이',
+    quote:
+      '생각은 실행으로, 실행은 결과로 증명하는 마케터입니다. 마음껏 시도하며 반짝이는 결과들을 만들고 있어요.',
+    author: '권정하',
+    role: '마케터',
+    initials: '권',
     isTag: false,
-    imageUrl: '/images/img-profile2.png',
+    imageUrl: '/images/img-profile5.png',
   },
   {
     quote: '기록하고 해석하며, 진심이 닿는 마케팅을 만듭니다.',
@@ -40,21 +41,20 @@ const testimonials: Testimonial[] = [
     imageUrl: '/images/img-profile3.png',
   },
   {
+    quote: '매력을 디자인하는 챠밍아티스트입니다.',
+    author: '이지영',
+    role: '콘텐츠 마케터',
+    initials: '이',
+    isTag: false,
+    imageUrl: '/images/img-profile2.png',
+  },
+  {
     quote: '분석력 있는 Creative를 지향하는 마케터 김도형 입니다.',
     author: '김도형',
     role: '콘텐츠 마케터',
     initials: '김',
     isTag: false,
     imageUrl: '/images/img-profile4.png',
-  },
-  {
-    quote:
-      '생각은 실행으로, 실행은 결과로 증명하는 마케터입니다. 마음껏 시도하며 반짝이는 결과들을 만들고 있어요.',
-    author: '권정하',
-    role: '마케터',
-    initials: '권',
-    isTag: false,
-    imageUrl: '/images/img-profile5.png',
   },
 ];
 

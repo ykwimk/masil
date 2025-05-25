@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { Button } from './ui/button';
+import { Logo } from './shared/Logo';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -29,10 +30,7 @@ export default function Header() {
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-primary text-2xl font-bold">마실</span>
-        </Link>
-
+        <Logo />
         <nav className="hidden items-center space-x-8 md:flex">
           <Link
             href="#about"

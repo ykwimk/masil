@@ -10,7 +10,7 @@ export default function HeroSection() {
       <div className="gradient-bg absolute inset-0"></div>
 
       {/* Floating tags */}
-      <motion.div
+      {/* <motion.div
         className="floating-tag absolute top-[30%] left-[15%] hidden sm:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -41,7 +41,7 @@ export default function HeroSection() {
         transition={{ delay: 1.1 }}
       >
         인사이트
-      </motion.div>
+      </motion.div> */}
 
       <div className="sm:md-28 z-10 container mx-auto mb-52 px-4 text-center">
         <motion.div

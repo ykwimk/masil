@@ -3,6 +3,7 @@
 
 @theme {
   --font-pretendard: var(--font-pretendard);
+  --font-hakgyoansimMulgyeol: var(--font-hakgyoansimMulgyeol);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

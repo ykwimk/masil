@@ -18,7 +18,7 @@ export default function JoinSection() {
       <div className="gradient-bg absolute inset-0"></div>
 
       {/* Floating elements */}
-      <motion.div
+      {/* <motion.div
         className="floating-tag absolute top-[20%] left-[10%] hidden md:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -33,7 +33,7 @@ export default function JoinSection() {
         transition={{ delay: 0.7 }}
       >
         네트워킹
-      </motion.div>
+      </motion.div> */}
 
       <div className="relative z-10 container mx-auto px-4">
         <motion.div
