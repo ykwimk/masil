@@ -62,7 +62,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              연사 신청하기
+              신청하기
             </Link>
           </Button>
         </nav>

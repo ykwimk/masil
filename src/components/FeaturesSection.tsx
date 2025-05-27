@@ -14,10 +14,15 @@ export default function FeaturesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="tag">특별한 경험</span>
-          <h2>마실에서 만나는 특별한 경험</h2>
+          <span className="tag">마실 소개</span>
+          <h2>마실이란?</h2>
           <p className="break-keep opacity-70">
-            마케터로서 성장하는 데 필요한 모든 것을 마실에서 경험해보세요
+            커리어 실패와 번아웃의 순간을 다시 해보는 용기로 바꾸는{' '}
+            <strong>마케터 커뮤니티</strong>입니다.
+            <br />
+            이웃집에 가볍게 놀러가는 우리의 전통 문화 ‘마실’처럼
+            <br />
+            부담 없이 모여 지식과 경험을 나누고 액션까지 함께 만들고 있어요!
           </p>
         </motion.div>
 
@@ -37,8 +42,7 @@ export default function FeaturesSection() {
                   alt="마실 커뮤니티 활동"
                   width={400}
                   height={400}
-                  layout="responsive"
-                  // className="rounded-xl shadow-xl"
+                  className="h-auto w-full"
                 />
               </div>
             </div>
@@ -52,13 +56,15 @@ export default function FeaturesSection() {
             className="order-1 space-y-6 md:space-y-8 lg:order-2"
           >
             <div className="space-y-4">
-              <h3 className="text-xl font-bold md:text-2xl">
-                함께 성장하는 마케터 커뮤니티
-              </h3>
+              <h3 className="text-xl font-bold md:text-2xl">마실 1기 활동</h3>
               <p className="text-sm break-keep opacity-70 md:text-base">
-                마실은 단순한 네트워킹을 넘어 실질적인 성장을 추구합니다. 다양한
-                배경을 가진 마케터들이 모여 서로의 경험과 지식을 나누며 함께
-                성장합니다.
+                <span className="highlighted">
+                  하이아웃풋클럽(HOC) 마케터 와니
+                </span>
+                님과 함께하는 세미나를 기획하고 준비했습니다.
+                <br />
+                급박한 시간 속에서도 하나하나 함께 문제를 해결하며 조금 더
+                단단해질 수 있었습니다.
               </p>
             </div>
 
@@ -66,22 +72,19 @@ export default function FeaturesSection() {
               {[
                 {
                   title: '정기 모임',
-                  description: '매월 다양한 주제로 진행되는 오프라인 모임',
+                  description: '온/오프라인 모임을 통한 인사이트 공유',
                 },
                 {
-                  title: '온라인 커뮤니티',
-                  description:
-                    '언제 어디서나 질문하고 도움을 받을 수 있는 공간',
+                  title: '세미나 기획',
+                  description: '세미나 주제 선정 및 연사 섭외',
                 },
                 {
-                  title: '스터디 그룹',
-                  description:
-                    '관심사가 비슷한 마케터들과 함께 깊이 있는 주제 탐구',
+                  title: '콘텐츠 제작',
+                  description: '홍보 콘텐츠(카드뉴스, 릴스, 스레드 등) 제작',
                 },
                 {
-                  title: '멘토링 기회',
-                  description:
-                    '경험 많은 선배 마케터들에게 직접 조언을 구할 수 있는 기회',
+                  title: '따뜻한 공감',
+                  description: '실무와 커리어에 대한 고민 나눔',
                 },
               ].map((feature, index) => (
                 <div

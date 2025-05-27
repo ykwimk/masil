@@ -43,7 +43,7 @@ export default function HeroSection() {
         인사이트
       </motion.div> */}
 
-      <div className="sm:md-28 z-10 container mx-auto mb-52 px-4 text-center">
+      <div className="sm:md-28 z-10 container mx-auto mb-44 px-4 text-center">
         <motion.div
           className="mx-auto max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
@@ -51,16 +51,16 @@ export default function HeroSection() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="mb-4 text-3xl leading-tight font-bold text-white sm:mb-6 sm:text-4xl md:text-6xl">
-            마케팅, 혼자 하지 말고
+            실패를 나누고,
+            <br className="block md:hidden" /> 성장을 함께하는
             <br />
-            <span className="text-primary">같이 마실 나가요</span>
+            <span className="text-primary">마케터 커뮤니티 ‘마실’</span>
           </h1>
 
           <p className="mx-auto mb-6 max-w-2xl text-base text-white/80 sm:mb-8 sm:text-lg md:text-xl">
-            브랜딩, 퍼포먼스, 인사이트... 혼자 고민하던 마케터들을 위한 진짜
-            마실.
-            <br className="hidden sm:block" />
-            함께 배우고, 나누고, 성장하는 커뮤니티입니다.
+            마케팅에 진심인 ‘마실’ 멤버들의 첫번째 실험,
+            <br />
+            <strong>연사 초청 세미나에 여러분을 초대합니다.</strong>
           </p>
 
           <motion.div
@@ -78,7 +78,7 @@ export default function HeroSection() {
                 href="https://event-us.kr/masilcommunity/event/104957"
                 target="_blank"
               >
-                연사 참여하기
+                세미나 참가하기
               </Link>
             </Button>
             {/* <Button

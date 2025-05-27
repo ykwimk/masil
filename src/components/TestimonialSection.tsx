@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { Quote } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Avatar, AvatarFallback } from './ui/avatar';
@@ -11,6 +12,7 @@ interface Testimonial {
   initials: string;
   isTag: boolean;
   imageUrl: string;
+  linkUrl: string;
 }
 
 const testimonials: Testimonial[] = [
@@ -22,6 +24,7 @@ const testimonials: Testimonial[] = [
     initials: '김',
     isTag: true,
     imageUrl: '/images/img-profile1.png',
+    linkUrl: 'https://www.naver.com',
   },
   {
     quote:
@@ -31,6 +34,7 @@ const testimonials: Testimonial[] = [
     initials: '권',
     isTag: false,
     imageUrl: '/images/img-profile5.png',
+    linkUrl: 'https://www.naver.com',
   },
   {
     quote: '기록하고 해석하며, 진심이 닿는 마케팅을 만듭니다.',
@@ -39,6 +43,7 @@ const testimonials: Testimonial[] = [
     initials: '김',
     isTag: false,
     imageUrl: '/images/img-profile3.png',
+    linkUrl: 'https://www.naver.com',
   },
   {
     quote: '매력을 디자인하는 챠밍아티스트입니다.',
@@ -47,6 +52,7 @@ const testimonials: Testimonial[] = [
     initials: '이',
     isTag: false,
     imageUrl: '/images/img-profile2.png',
+    linkUrl: 'https://www.naver.com',
   },
   {
     quote: '분석력 있는 Creative를 지향하는 마케터 김도형 입니다.',
@@ -55,6 +61,7 @@ const testimonials: Testimonial[] = [
     initials: '김',
     isTag: false,
     imageUrl: '/images/img-profile4.png',
+    linkUrl: 'https://www.naver.com',
   },
 ];
 
@@ -69,9 +76,13 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="tag">멤버 후기</span>
-          <h2>마실 멤버들의 이야기</h2>
-          <p>마실에서 함께한 마케터들이 들려주는 진솔한 경험담</p>
+          <span className="tag">멤버 소개</span>
+          <h2>마실 1기 멤버를 소개합니다!</h2>
+          <p>
+            마실의 첫번째 도전을 만들어낸 멤버들입니다.
+            <br />
+            클릭해서 더 자세히 만나보세요. 커피챗 환영입니다!
+          </p>
         </motion.div>
 
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -84,40 +95,48 @@ export default function TestimonialsSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="instructor-card"
             >
-              <div className="border-primary/20 h-full rounded-xl border">
-                <div className="relative h-48 bg-gray-200 md:h-64">
-                  {testimonial.isTag && <div className="tag z-20">모임장</div>}
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#eef6ee]">
-                    <Avatar className="h-48 w-48 border-4 border-white md:h-56 md:w-56">
-                      <AvatarFallback className="bg-primary text-2xl text-white md:text-3xl">
-                        <div
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            backgroundImage: `url(${testimonial.imageUrl})`,
-                            backgroundSize: '150%',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundColor: 'white',
-                          }}
-                        />
-                      </AvatarFallback>
-                    </Avatar>
+              <Link
+                href={testimonial.linkUrl}
+                target="_blank"
+                className="h-full"
+              >
+                <div className="border-primary/20 h-full rounded-xl border">
+                  <div className="relative h-48 bg-gray-200 md:h-64">
+                    {testimonial.isTag && (
+                      <div className="tag z-20">모임장</div>
+                    )}
+                    <div className="absolute inset-0 flex items-center justify-center bg-[#eef6ee]">
+                      <Avatar className="h-48 w-48 border-4 border-white md:h-56 md:w-56">
+                        <AvatarFallback className="bg-primary text-2xl text-white md:text-3xl">
+                          <div
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              backgroundImage: `url(${testimonial.imageUrl})`,
+                              backgroundSize: '150%',
+                              backgroundPosition: 'center',
+                              backgroundRepeat: 'no-repeat',
+                              backgroundColor: 'white',
+                            }}
+                          />
+                        </AvatarFallback>
+                      </Avatar>
+                    </div>
+                  </div>
+                  <div className="content">
+                    <h3 className="mb-1 text-lg font-bold md:text-xl">
+                      {testimonial.author}
+                    </h3>
+                    <p className="text-muted-foreground mb-3 text-xs break-keep md:mb-4 md:text-sm">
+                      {testimonial.role}
+                    </p>
+                    <Quote className="text-primary/30 mb-2 h-5 w-5 md:h-6 md:w-6" />
+                    <p className="text-muted-foreground text-sm break-keep md:text-base">
+                      "{testimonial.quote}"
+                    </p>
                   </div>
                 </div>
-                <div className="content">
-                  <h3 className="mb-1 text-lg font-bold md:text-xl">
-                    {testimonial.author}
-                  </h3>
-                  <p className="text-muted-foreground mb-3 text-xs break-keep md:mb-4 md:text-sm">
-                    {testimonial.role}
-                  </p>
-                  <Quote className="text-primary/30 mb-2 h-5 w-5 md:h-6 md:w-6" />
-                  <p className="text-muted-foreground text-sm break-keep md:text-base">
-                    "{testimonial.quote}"
-                  </p>
-                </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>

@@ -11,7 +11,7 @@ export default function HomePage() {
     <main className="flex min-h-screen flex-col">
       <Header />
       <HeroSection />
-      <AboutSection />
+      {/* <AboutSection /> */}
       <FeaturesSection />
       <TestimonialsSection />
       <JoinSection />
