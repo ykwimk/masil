@@ -116,7 +116,7 @@ export default function Header() {
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                연사 신청하기
+                신청하기
               </Link>
             </Button>
           </nav>

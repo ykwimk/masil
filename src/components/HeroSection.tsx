@@ -43,7 +43,7 @@ export default function HeroSection() {
         인사이트
       </motion.div> */}
 
-      <div className="sm:md-28 z-10 container mx-auto mb-44 px-4 text-center">
+      <div className="sm:md-28 z-10 container mx-auto mb-12 px-4 text-center">
         <motion.div
           className="mx-auto max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
@@ -58,7 +58,7 @@ export default function HeroSection() {
           </h1>
 
           <p className="mx-auto mb-6 max-w-2xl text-base text-white/80 sm:mb-8 sm:text-lg md:text-xl">
-            마케팅에 진심인 ‘마실’ 멤버들의 첫번째 실험,
+            마케팅에 진심인 마실 멤버들의 첫번째 실험,
             <br />
             <strong>연사 초청 세미나에 여러분을 초대합니다.</strong>
           </p>
@@ -94,7 +94,7 @@ export default function HeroSection() {
       </div>
 
       {/* Stats */}
-      <div className="absolute right-0 bottom-8 left-0 px-4">
+      {/* <div className="absolute right-0 bottom-8 left-0 px-4">
         <motion.div
           className="stats-container mx-auto max-w-4xl"
           initial={{ opacity: 0, y: 20 }}
@@ -118,7 +118,7 @@ export default function HeroSection() {
             <div className="stat-label text-white/70">파트너</div>
           </div>
         </motion.div>
-      </div>
+      </div> */}
     </section>
   );
 }

@@ -4,11 +4,12 @@ import { motion } from 'motion/react';
 import {
   ArrowRight,
   Mail,
-  Calendar,
-  Users,
-  FileText,
   Instagram,
   Youtube,
+  BadgeCheck,
+  HelpCircle,
+  Users2,
+  Sprout,
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 
@@ -76,7 +77,7 @@ export default function JoinSection() {
                   <div className="mb-8 space-y-4">
                     <div className="flex items-center gap-3">
                       <div className="mt-1 rounded-full bg-white/20 p-2">
-                        <Calendar className="h-5 w-5 text-white" />
+                        <BadgeCheck className="h-5 w-5 text-white" />
                       </div>
                       <div>
                         <h4 className="font-medium text-white">
@@ -90,7 +91,7 @@ export default function JoinSection() {
 
                     <div className="flex items-center gap-3">
                       <div className="mt-1 rounded-full bg-white/20 p-2">
-                        <Users className="h-5 w-5 text-white" />
+                        <HelpCircle className="h-5 w-5 text-white" />
                       </div>
                       <div>
                         <h4 className="font-medium text-white">
@@ -104,7 +105,7 @@ export default function JoinSection() {
 
                     <div className="flex items-center gap-3">
                       <div className="mt-1 rounded-full bg-white/20 p-2">
-                        <FileText className="h-5 w-5 text-white" />
+                        <Users2 className="h-5 w-5 text-white" />
                       </div>
                       <div>
                         <h4 className="font-medium text-white">
@@ -118,7 +119,7 @@ export default function JoinSection() {
 
                     <div className="flex items-center gap-3">
                       <div className="mt-1 rounded-full bg-white/20 p-2">
-                        <FileText className="h-5 w-5 text-white" />
+                        <Sprout className="h-5 w-5 text-white" />
                       </div>
                       <div>
                         <h4 className="font-medium text-white">

@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="bg-section py-16 md:py-20">
+    <section id="features" className="bg-white py-16 md:py-20">
       <div className="container mx-auto px-4">
         <motion.div
           className="section-title"
@@ -14,15 +14,14 @@ export default function FeaturesSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="tag">마실 소개</span>
+          <span className="tag">소개</span>
           <h2>마실이란?</h2>
           <p className="break-keep opacity-70">
             커리어 실패와 번아웃의 순간을 다시 해보는 용기로 바꾸는{' '}
             <strong>마케터 커뮤니티</strong>입니다.
             <br />
-            이웃집에 가볍게 놀러가는 우리의 전통 문화 ‘마실’처럼
-            <br />
-            부담 없이 모여 지식과 경험을 나누고 액션까지 함께 만들고 있어요!
+            가볍게 와서 진심을 나누고 다시 해보는 힘을 얻어가는 곳, 그게
+            마실이에요.
           </p>
         </motion.div>
 
@@ -57,14 +56,18 @@ export default function FeaturesSection() {
           >
             <div className="space-y-4">
               <h3 className="text-xl font-bold md:text-2xl">마실 1기 활동</h3>
+
               <p className="text-sm break-keep opacity-70 md:text-base">
+                첫 실험은{' '}
                 <span className="highlighted">
                   하이아웃풋클럽(HOC) 마케터 와니
                 </span>
-                님과 함께하는 세미나를 기획하고 준비했습니다.
+                님과 함께한 연사 세미나 기획이었습니다.
                 <br />
-                급박한 시간 속에서도 하나하나 함께 문제를 해결하며 조금 더
-                단단해질 수 있었습니다.
+                주제 선정부터 섭외, 진행까지 모든 과정을 실무자들이 직접
+                실행했습니다.
+                <br />
+                그리고 그 과정 속에서, 마실은 이런 활동들을 함께 경험했습니다.
               </p>
             </div>
 
@@ -80,7 +83,7 @@ export default function FeaturesSection() {
                 },
                 {
                   title: '콘텐츠 제작',
-                  description: '홍보 콘텐츠(카드뉴스, 릴스, 스레드 등) 제작',
+                  description: '홍보 콘텐츠 제작\n(카드뉴스, 릴스, 스레드 등)',
                 },
                 {
                   title: '따뜻한 공감',
@@ -95,7 +98,12 @@ export default function FeaturesSection() {
                     {feature.title}
                   </h4>
                   <p className="text-xs break-keep opacity-70 md:text-sm">
-                    {feature.description}
+                    {feature.description.split('\n').map((line, idx) => (
+                      <span key={idx}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
                   </p>
                 </div>
               ))}

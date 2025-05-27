@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import JoinSection from '@/components/JoinSection';
+import PartnersSection from '@/components/PartnersSection';
 import TestimonialsSection from '@/components/TestimonialSection';
 
 export default function HomePage() {
@@ -14,6 +15,7 @@ export default function HomePage() {
       {/* <AboutSection /> */}
       <FeaturesSection />
       <TestimonialsSection />
+      <PartnersSection />
       <JoinSection />
       <Footer />
     </main>
