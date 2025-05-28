@@ -20,7 +20,7 @@ const testimonials: Testimonial[] = [
     quote:
       '마케터들이 자신의 이야기를 더 가치 있게 말할 수 있도록, 그 시작을 함께 하고 싶었습니다.',
     author: '김여규',
-    role: 'BX 라이터',
+    role: '커뮤니티 마케터',
     initials: '김',
     isTag: true,
     imageUrl: '/images/img-profile1.png',
@@ -55,7 +55,7 @@ const testimonials: Testimonial[] = [
     linkUrl: 'https://www.naver.com',
   },
   {
-    quote: '분석력 있는 Creative를 지향하는 마케터 김도형 입니다.',
+    quote: '분석력 있는 Creative를 지향하는 마케터 입니다.',
     author: '김도형',
     role: '콘텐츠 마케터',
     initials: '김',
@@ -132,7 +132,7 @@ export default function TestimonialsSection() {
                     </p>
                     <Quote className="text-primary/30 mb-2 h-5 w-5 md:h-6 md:w-6" />
                     <p className="text-muted-foreground text-sm break-keep md:text-base">
-                      "{testimonial.quote}"
+                      {testimonial.quote}
                     </p>
                   </div>
                 </div>

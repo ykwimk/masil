@@ -24,7 +24,7 @@ export default function Header() {
     <header
       className={cn(
         'fixed top-0 right-0 left-0 z-50 transition-all duration-300',
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? 'bg-white/90 shadow-sm backdrop-blur-md'
           : 'bg-transparent',
       )}
@@ -61,6 +61,11 @@ export default function Header() {
               href="https://event-us.kr/masilcommunity/event/105246"
               target="_blank"
               rel="noopener noreferrer"
+              className={
+                isScrolled
+                  ? ''
+                  : 'bg-transparent text-transparent hover:text-white'
+              }
             >
               세미나 참가하기
             </Link>
@@ -73,7 +78,11 @@ export default function Header() {
           className="md:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          {isMobileMenuOpen ? (
+            <X />
+          ) : (
+            <Menu className={isScrolled ? '' : 'text-white'} />
+          )}
         </Button>
       </div>
 
