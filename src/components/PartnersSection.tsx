@@ -31,7 +31,10 @@ export default function PartnersSection() {
   ];
 
   return (
-    <section className="border-b border-gray-100 bg-white py-12 md:py-16">
+    <section
+      id="partners"
+      className="border-b border-gray-100 bg-white py-16 md:py-20"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           className="section-title mb-8 text-center"

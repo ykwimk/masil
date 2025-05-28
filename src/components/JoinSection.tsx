@@ -137,7 +137,7 @@ export default function JoinSection() {
                     className="text-primary bg-white px-6 hover:bg-white/90"
                   >
                     <a
-                      href="https://event-us.kr/masilcommunity/event/104957"
+                      href="https://event-us.kr/masilcommunity/event/105246"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2"

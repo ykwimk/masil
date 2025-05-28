@@ -33,36 +33,36 @@ export default function Header() {
         <Logo />
         <nav className="hidden items-center space-x-8 md:flex">
           <Link
-            href="#about"
+            href="#features"
             className="text-foreground/80 hover:text-primary transition-colors"
           >
             소개
           </Link>
           <Link
-            href="#features"
-            className="text-foreground/80 hover:text-primary transition-colors"
-          >
-            특징
-          </Link>
-          <Link
             href="#testimonials"
             className="text-foreground/80 hover:text-primary transition-colors"
           >
-            후기
+            멤버
+          </Link>
+          <Link
+            href="#partners"
+            className="text-foreground/80 hover:text-primary transition-colors"
+          >
+            파트너스
           </Link>
           <Link
             href="#join"
             className="text-foreground/80 hover:text-primary transition-colors"
           >
-            참여하기
+            함께하기
           </Link>
           <Button asChild>
             <Link
-              href="https://event-us.kr/masilcommunity/event/104957"
+              href="https://event-us.kr/masilcommunity/event/105246"
               target="_blank"
               rel="noopener noreferrer"
             >
-              신청하기
+              세미나 참가하기
             </Link>
           </Button>
         </nav>
@@ -82,41 +82,41 @@ export default function Header() {
         <div className="bg-white p-4 shadow-lg md:hidden">
           <nav className="flex flex-col space-y-4">
             <Link
-              href="#about"
+              href="#features"
               className="text-foreground/80 hover:text-primary py-2 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               소개
             </Link>
             <Link
-              href="#features"
-              className="text-foreground/80 hover:text-primary py-2 transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              특징
-            </Link>
-            <Link
               href="#testimonials"
               className="text-foreground/80 hover:text-primary py-2 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              후기
+              멤버
+            </Link>
+            <Link
+              href="#partners"
+              className="text-foreground/80 hover:text-primary py-2 transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              파트너스
             </Link>
             <Link
               href="#join"
               className="text-foreground/80 hover:text-primary py-2 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              참여하기
+              함께하기
             </Link>
             <Button asChild className="w-full">
               <Link
-                href="https://event-us.kr/masilcommunity/event/104957"
+                href="https://event-us.kr/masilcommunity/event/105246"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                신청하기
+                세미나 참가하기
               </Link>
             </Button>
           </nav>

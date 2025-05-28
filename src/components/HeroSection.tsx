@@ -75,7 +75,7 @@ export default function HeroSection() {
               className="rounded-full px-6 py-5 text-sm sm:px-8 sm:py-6 sm:text-base"
             >
               <Link
-                href="https://event-us.kr/masilcommunity/event/104957"
+                href="https://event-us.kr/masilcommunity/event/105246"
                 target="_blank"
               >
                 세미나 참가하기

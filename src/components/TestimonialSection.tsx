@@ -76,7 +76,7 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <span className="tag">멤버 소개</span>
+          <span className="tag">멤버</span>
           <h2>마실 1기 멤버를 소개합니다!</h2>
           <p>
             마실의 첫번째 도전을 만들어낸 멤버들입니다.
