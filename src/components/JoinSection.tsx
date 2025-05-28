@@ -197,7 +197,7 @@ export default function JoinSection() {
                       <h4 className="mb-1 font-medium">유튜브</h4>
                       <p className="opacity-70">
                         <a
-                          href="https://youtube.com"
+                          href="https://www.youtube.com/@masil_community"
                           target="_blank"
                           className="hover:text-primary opacity-70 transition-colors"
                         >
