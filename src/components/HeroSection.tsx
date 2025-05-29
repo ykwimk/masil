@@ -6,7 +6,7 @@ import { Button } from '../components/ui/button';
 
 export default function HeroSection() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black pt-16">
+    <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-black pt-16">
       <div className="gradient-bg absolute inset-0"></div>
 
       {/* Floating tags */}
