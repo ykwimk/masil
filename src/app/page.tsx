@@ -9,7 +9,7 @@ import TestimonialsSection from '@/components/TestimonialSection';
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex min-h-screen flex-col overflow-hidden">
       <Header />
       <HeroSection />
       {/* <AboutSection /> */}
