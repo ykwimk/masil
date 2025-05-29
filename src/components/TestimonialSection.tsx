@@ -20,7 +20,7 @@ const testimonials: Testimonial[] = [
     quote:
       '마케터들이 자신의 이야기를 더 가치 있게 말할 수 있도록, 그 시작을 함께 하고 싶었습니다.',
     author: '김여규',
-    role: '커뮤니티 마케터',
+    role: '브랜드 커뮤니티 마케터',
     initials: '김',
     isTag: true,
     imageUrl: '/images/img-profile1.png',
