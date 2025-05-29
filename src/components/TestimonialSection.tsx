@@ -24,7 +24,8 @@ const testimonials: Testimonial[] = [
     initials: '김',
     isTag: true,
     imageUrl: '/images/img-profile1.png',
-    linkUrl: 'https://www.naver.com',
+    linkUrl:
+      'https://kacykim.notion.site/2026661084028079879ae2bed4aec198?pvs=4',
   },
   {
     quote:
@@ -34,7 +35,8 @@ const testimonials: Testimonial[] = [
     initials: '권',
     isTag: false,
     imageUrl: '/images/img-profile5.png',
-    linkUrl: 'https://www.naver.com',
+    linkUrl:
+      'https://purrfect-teller-734.notion.site/1fb15ca40074802eab0cc60ca91de1ec?pvs=4',
   },
   {
     quote: '기록하고 해석하며, 진심이 닿는 마케팅을 만듭니다.',
@@ -43,7 +45,8 @@ const testimonials: Testimonial[] = [
     initials: '김',
     isTag: false,
     imageUrl: '/images/img-profile3.png',
-    linkUrl: 'https://www.naver.com',
+    linkUrl:
+      'https://heisley.notion.site/1facc1fde979801abcefe3424a4a0f09?pvs=4',
   },
   {
     quote: '매력을 디자인하는 챠밍아티스트입니다.',
@@ -52,7 +55,8 @@ const testimonials: Testimonial[] = [
     initials: '이',
     isTag: false,
     imageUrl: '/images/img-profile2.png',
-    linkUrl: 'https://www.naver.com',
+    linkUrl:
+      'https://heisley.notion.site/1facc1fde9798051a012d1a35f7ca4eb?pvs=4',
   },
   {
     quote: '분석력 있는 Creative를 지향하는 마케터 입니다.',
@@ -61,7 +65,8 @@ const testimonials: Testimonial[] = [
     initials: '김',
     isTag: false,
     imageUrl: '/images/img-profile4.png',
-    linkUrl: 'https://www.naver.com',
+    linkUrl:
+      'https://heisley.notion.site/1facc1fde979804d9755e3b5160f9f20?pvs=4',
   },
 ];
 
