@@ -24,14 +24,14 @@ export default function PartnersSection() {
       url: 'https://www.instagram.com/dalsam2023',
     },
     {
-      name: '그룹바이',
-      logo: '/images/partners-logo2.svg',
-      url: 'https://groupby.kr',
-    },
-    {
       name: '위올워크',
       logo: '/images/partners-logo4.png',
       url: 'https://www.weallwork.kr',
+    },
+    {
+      name: '그룹바이',
+      logo: '/images/partners-logo2.svg',
+      url: 'https://groupby.kr',
     },
   ];
 
