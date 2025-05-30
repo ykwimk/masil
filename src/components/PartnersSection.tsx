@@ -28,6 +28,11 @@ export default function PartnersSection() {
       logo: '/images/partners-logo2.svg',
       url: 'https://groupby.kr',
     },
+    {
+      name: '위올워크',
+      logo: '/images/partners-logo4.png',
+      url: 'https://www.weallwork.kr',
+    },
   ];
 
   return (
@@ -50,32 +55,34 @@ export default function PartnersSection() {
           </p>
         </motion.div>
 
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
-          {partners.map((partner, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="flex items-center justify-center"
-            >
-              <Link href={partner.url} target="_blank">
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={300}
-                  height={300}
-                  className={cn(
-                    'partner-logo h-auto object-contain',
-                    partner.name === '달샘'
-                      ? 'max-h-14 w-28 md:max-h-16 md:w-32 lg:w-40'
-                      : 'max-h-8 w-20 md:max-h-10 md:w-24 lg:w-36',
-                  )}
-                />
-              </Link>
-            </motion.div>
-          ))}
+        <div className="mx-auto px-4 md:max-w-3xl">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
+            {partners.map((partner, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                className="flex items-center justify-center"
+              >
+                <Link href={partner.url} target="_blank">
+                  <Image
+                    src={partner.logo}
+                    alt={partner.name}
+                    width={300}
+                    height={300}
+                    className={cn(
+                      'partner-logo h-auto object-contain',
+                      partner.name === '달샘'
+                        ? 'max-h-14 w-28 md:max-h-16 md:w-32 lg:w-40'
+                        : 'max-h-8 w-28 md:max-h-10 md:w-24 lg:w-36',
+                    )}
+                  />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
