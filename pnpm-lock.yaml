@@ -69,7 +69,7 @@ importers:
         specifier: ^5
         version: 5.9.2
 
-  apps/web:
+  apps/landing:
     dependencies:
       '@radix-ui/react-avatar':
         specifier: ^1.1.9
