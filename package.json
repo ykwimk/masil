@@ -5,7 +5,9 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "landing": "pnpm --filter landing dev",
+    "web": "pnpm --filter web dev"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
