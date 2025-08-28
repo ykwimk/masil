@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: '마실 | 마케터의 가벼운 마실길',
     description:
       '마케터들을 위한 가벼운 커뮤니티, 마실에서 함께 성장하고 배우며 인사이트를 나눠보세요.',
-    url: 'https://masil-web.vercel.app',
+    url: 'https://masil-landing.vercel.app',
     siteName: '마실',
     images: [
       {
