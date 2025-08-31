@@ -1,12 +1,5 @@
-import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface PostCardProps {
   post: {
@@ -14,24 +7,32 @@ interface PostCardProps {
     title: string;
     description: string;
     author: string;
+    tags: string[];
   };
 }
-
 export function PostCard({ post }: PostCardProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{post.title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground">{post.description}</p>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <span className="text-sm text-muted-foreground">{post.author}</span>
-        <Button asChild size="sm">
-          <Link href={`/posts/${post.id}`}>Read More</Link>
-        </Button>
-      </CardFooter>
-    </Card>
+    <article key={post.id} className="masonry-item">
+      <Card className="hover:border-primary/30 transition-colors">
+        <CardContent>
+          <div className="mb-2 flex flex-wrap gap-2">
+            {post.tags.slice(0, 3).map((t) => (
+              <span key={t} className="badge">
+                #{t}
+              </span>
+            ))}
+          </div>
+          <h3 className="text-lg leading-snug font-semibold">
+            <Link href={`/posts/${post.id}`}>{post.title}</Link>
+          </h3>
+          <p className="text-muted-foreground mt-2 text-sm">
+            {post.description}
+          </p>
+          <div className="text-muted-foreground mt-3 text-xs">
+            by. {post.author}
+          </div>
+        </CardContent>
+      </Card>
+    </article>
   );
 }
