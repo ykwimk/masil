@@ -2,20 +2,11 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useScrollHeader } from '@masil/hooks';
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const { isScrolled } = useScrollHeader({ threshold: 10 });
 
   return (
     <header
