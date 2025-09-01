@@ -26,13 +26,13 @@ export function Header() {
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <nav className="flex items-center gap-1">
-            <Button asChild variant="ghost">
-              <Link href="/posts">포스트</Link>
-            </Button>
-            <Button asChild variant="ghost">
-              <Link href="/login">로그인</Link>
-            </Button>
+          <nav className="flex items-center gap-8">
+            <Link
+              href="/login"
+              className="text-foreground/90 hover:text-primary transition-colors"
+            >
+              로그인
+            </Link>
           </nav>
         </div>
       </div>

@@ -113,7 +113,7 @@
   @apply inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary;
 }
 .navlink {
-  @apply rounded-md px-2.5 py-2 text-foreground/80 hover:bg-accent hover:text-accent-foreground;
+  @apply font-semibold rounded-md px-2.5 py-2 text-foreground/80 hover:bg-sidebar-accent;
 }
 
 /* --- Home only theme & hero --- */
