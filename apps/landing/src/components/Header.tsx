@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import { useScrollHeader } from '@masil/hooks';
 import { cn } from '../lib/utils';
 import { Button } from './ui/button';
 import { Logo } from './shared/Logo';
-import { useScrollHeader } from '@masil/hooks';
 
 export default function Header() {
   const { isScrolled } = useScrollHeader({ threshold: 10 });

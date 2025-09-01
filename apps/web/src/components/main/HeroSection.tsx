@@ -4,7 +4,7 @@ export function HeroSection() {
   return (
     <section className="relative bg-black">
       <div className="gradient-bg absolute inset-0"></div>
-      <div className="container py-8 md:pt-32 md:pb-16">
+      <div className="container pt-24 pb-6 md:pt-32 md:pb-16">
         <div className="flex items-end justify-between">
           <div>
             <h1 className="text-2xl font-extrabold tracking-tight text-white md:text-3xl">
