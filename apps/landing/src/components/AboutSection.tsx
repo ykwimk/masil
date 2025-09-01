@@ -23,7 +23,7 @@ export default function AboutSection() {
           <span className="tag">마실 소개</span>
           <h2>마실이란?</h2>
           <p className="break-keep">
-            '마실'은 이웃집에 가볍게 놀러가는 우리의 전통 문화입니다.
+            &apos;마실&apos;은 이웃집에 가볍게 놀러가는 우리의 전통 문화입니다.
             <br className="hidden md:block" />
             마케터들이 부담 없이 모여 지식과 경험을 나누는 커뮤니티, 그것이 바로
             마실입니다.
