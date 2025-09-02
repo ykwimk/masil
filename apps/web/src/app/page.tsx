@@ -2,7 +2,13 @@ import { HeroSection } from '@/components/main/HeroSection';
 import { SideNavigation } from '@/components/main/SideNavigation';
 import { PostsSection } from '@/components/main/PostsSection';
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: Promise<{ tag?: string }>;
+}) {
+  const query = (await searchParams) ?? {};
+  const selectedTag = query.tag;
   return (
     <div>
       <HeroSection />
@@ -10,9 +16,9 @@ export default function Home() {
         <div className="container py-6 md:py-10">
           <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)]">
             {/* 좌측 내비 */}
-            <SideNavigation />
+            <SideNavigation selectedTag={selectedTag} />
             {/* 중앙 포스트들 */}
-            <PostsSection />
+            <PostsSection selectedTag={selectedTag} />
           </div>
         </div>
       </section>
