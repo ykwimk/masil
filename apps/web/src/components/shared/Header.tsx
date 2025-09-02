@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
+import { useScrollHeader } from '@masil/hooks';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { useScrollHeader } from '@masil/hooks';
 import { Logo } from './Logo';
 
 export function Header() {

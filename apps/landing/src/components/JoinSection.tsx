@@ -182,6 +182,7 @@ export default function JoinSection() {
                           href="https://instagram.com/masil_community"
                           target="_blank"
                           className="hover:text-primary opacity-70 transition-colors"
+                          rel="noreferrer"
                         >
                           @masil_community
                         </a>
@@ -200,6 +201,7 @@ export default function JoinSection() {
                           href="https://www.youtube.com/@masil_community"
                           target="_blank"
                           className="hover:text-primary opacity-70 transition-colors"
+                          rel="noreferrer"
                         >
                           @masil_community
                         </a>

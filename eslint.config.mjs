@@ -12,6 +12,18 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  {
+    ignores: [
+      '**/node_modules/**',
+      '**/.next/**',
+      '**/out/**',
+      '**/build/**',
+      '**/dist/**',
+      '**/coverage/**',
+      '**/next-env.d.ts',
+    ],
+  },
   ...compat.config({
     extends: [
       'eslint:recommended',
@@ -20,7 +32,6 @@ const eslintConfig = [
       'plugin:jsx-a11y/recommended',
       'plugin:@typescript-eslint/recommended',
       'plugin:prettier/recommended',
-      'next/core-web-vitals',
     ],
     parser: '@typescript-eslint/parser',
     plugins: ['import'],
@@ -40,31 +51,11 @@ const eslintConfig = [
             'unknown',
           ],
           pathGroups: [
-            {
-              pattern: 'react',
-              group: 'builtin',
-              position: 'before',
-            },
-            {
-              pattern: 'react/**',
-              group: 'builtin',
-              position: 'before',
-            },
-            {
-              pattern: 'next',
-              group: 'builtin',
-              position: 'after',
-            },
-            {
-              pattern: 'next/**',
-              group: 'builtin',
-              position: 'after',
-            },
-            {
-              pattern: 'public/**',
-              group: 'unknown',
-              position: 'before',
-            },
+            { pattern: 'react', group: 'builtin', position: 'before' },
+            { pattern: 'react/**', group: 'builtin', position: 'before' },
+            { pattern: 'next', group: 'builtin', position: 'after' },
+            { pattern: 'next/**', group: 'builtin', position: 'after' },
+            { pattern: 'public/**', group: 'unknown', position: 'before' },
           ],
           pathGroupsExcludedImportTypes: ['react', 'next'],
           warnOnUnassignedImports: true,
@@ -73,17 +64,14 @@ const eslintConfig = [
       'react-hooks/exhaustive-deps': 'off',
       'react/display-name': 'off',
       'react/no-unescaped-entities': 'off',
+      'react/react-in-jsx-scope': 'off',
       'jsx-a11y/anchor-is-valid': 'off',
       'jsx-a11y/interactive-supports-focus': 'off',
       'jsx-a11y/click-events-have-key-events': 'off',
       'jsx-a11y/no-static-element-interactions': 'off',
       'jsx-a11y/label-has-associated-control': [
         'error',
-        {
-          required: {
-            some: ['nesting', 'id'],
-          },
-        },
+        { required: { some: ['nesting', 'id'] } },
       ],
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
