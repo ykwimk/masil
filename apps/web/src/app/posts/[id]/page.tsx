@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { FEEDS } from '@/lib/mock';
+import { POSTS } from '@/lib/mock';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -8,7 +8,7 @@ interface PageProps {
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { id } = await props.params;
-  const post = FEEDS.find((p) => p.id === id);
+  const post = POSTS.find((p) => p.id === id);
   if (!post) return { title: '게시물을 찾을 수 없어요' };
 
   return {
@@ -25,7 +25,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
 export default async function PostDetail(props: PageProps) {
   const { id } = await props.params;
-  const post = FEEDS.find((p) => p.id === id);
+  const post = POSTS.find((p) => p.id === id);
   if (!post) return notFound();
 
   return (

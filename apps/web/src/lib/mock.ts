@@ -1,4 +1,4 @@
-export interface Feeds {
+export interface Posts {
   id: string;
   title: string;
   description: string;
@@ -6,7 +6,7 @@ export interface Feeds {
   tags: string[];
 }
 
-export const FEEDS: Feeds[] = [
+export const POSTS: Posts[] = [
   {
     id: 'm1',
     title: '8월 퍼포먼스 캠페인 리포트 — ROAS 142% 상승 요인 분석',

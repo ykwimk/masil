@@ -1,6 +1,6 @@
 import { HeroSection } from '@/components/main/HeroSection';
 import { SideNavigation } from '@/components/main/SideNavigation';
-import { FeedSection } from '@/components/main/FeedSection';
+import { PostsSection } from '@/components/main/PostsSection';
 
 export default function Home() {
   return (
@@ -11,8 +11,8 @@ export default function Home() {
           <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)]">
             {/* 좌측 내비 */}
             <SideNavigation />
-            {/* 중앙 피드 */}
-            <FeedSection />
+            {/* 중앙 포스트들 */}
+            <PostsSection />
           </div>
         </div>
       </section>

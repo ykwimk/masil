@@ -1,10 +1,10 @@
 import { PostCard } from './PostCard';
-import { FEEDS } from '@/lib/mock';
+import { POSTS } from '@/lib/mock';
 
-export function FeedSection() {
+export function PostsSection() {
   return (
     <div className="masonry">
-      {FEEDS.map((post) => (
+      {POSTS.map((post) => (
         <PostCard key={post.id} post={post} />
       ))}
     </div>
