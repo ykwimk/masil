@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { listPosts } from '@/lib/data';
+import { getListPosts } from '@/lib/data';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -7,6 +7,6 @@ export async function GET(request: Request) {
   const limit = Number(searchParams.get('limit') || '10');
   const offset = Number(searchParams.get('offset') || '0');
 
-  const result = await listPosts({ tag, limit, offset });
+  const result = await getListPosts({ tag, limit, offset });
   return NextResponse.json(result);
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { POSTS } from '@/lib/mock';
+import { getPostById } from '@/lib/data';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -8,7 +8,8 @@ interface PageProps {
 
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { id } = await props.params;
-  const post = POSTS.find((p) => p.id === id);
+  const { post } = await getPostById(id);
+
   if (!post) return { title: '게시물을 찾을 수 없어요' };
 
   return {
@@ -25,7 +26,8 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
 export default async function PostDetail(props: PageProps) {
   const { id } = await props.params;
-  const post = POSTS.find((p) => p.id === id);
+  const { post } = await getPostById(id);
+
   if (!post) return notFound();
 
   return (
@@ -49,10 +51,13 @@ export default async function PostDetail(props: PageProps) {
         <div className="container py-8">
           <article className="prose-custom">
             <p className="text-foreground/80">{post.description}</p>
-            <p className="text-foreground/70">
-              본문 콘텐츠는 곧 제공될 예정입니다. 데이터 소스 연결 후 실제 글
-              내용과 이미지를 보여줍니다.
-            </p>
+            {post.content ? (
+              <div className="text-foreground/80 whitespace-pre-wrap">
+                {post.content}
+              </div>
+            ) : (
+              <p className="text-foreground/70">본문 콘텐츠가 아직 없습니다.</p>
+            )}
           </article>
         </div>
       </section>

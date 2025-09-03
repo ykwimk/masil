@@ -27,6 +27,6 @@ export interface ListPostsParams {
 export interface ListPostsResult {
   posts: Post[];
   total: number;
-  source: 'supabase' | 'mock';
+  source: 'remote' | 'mock';
   error?: string;
 }

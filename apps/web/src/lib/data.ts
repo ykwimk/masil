@@ -1,8 +1,9 @@
 import { POSTS as MOCK_POSTS } from './mock';
 import { getSupabaseClient } from './supabase';
-import type { ListPostsParams } from './types';
+import type { ListPostsParams, Post } from './types';
 
-export async function listPosts({
+// 게시물 목록
+export async function getListPosts({
   tag,
   limit = 10,
   offset = 0,
@@ -50,6 +51,34 @@ export async function listPosts({
   return {
     posts: data ?? [],
     total: count ?? data?.length ?? 0,
-    source: 'supabase',
+    source: 'remote',
   };
+}
+
+// ID로 게시물 조회
+export async function getPostById(id: string): Promise<{
+  post: Post | null;
+  source: 'remote' | 'mock';
+  error?: string;
+}> {
+  const supabase = await getSupabaseClient();
+
+  if (!supabase) {
+    const post = MOCK_POSTS.find((p) => p.id === id) ?? null;
+    return { post, source: 'mock' } as const;
+  }
+
+  const { data, error } = await supabase
+    .from('posts')
+    .select('*')
+    .filter('id', 'eq', id)
+    .filter('status', 'eq', 'published')
+    .maybeSingle();
+
+  if (error) {
+    const post = MOCK_POSTS.find((p) => p.id === id) ?? null;
+    return { post, source: 'mock', error: error.message } as const;
+  }
+
+  return { post: data ?? null, source: 'remote' } as const;
 }
