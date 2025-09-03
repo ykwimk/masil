@@ -1,12 +1,6 @@
-export interface Posts {
-  id: string;
-  title: string;
-  description: string;
-  author: string;
-  tags: string[];
-}
+import type { Post } from './types';
 
-export const POSTS: Posts[] = [
+export const POSTS: Post[] = [
   {
     id: 'm1',
     title: '8월 퍼포먼스 캠페인 리포트 — ROAS 142% 상승 요인 분석',

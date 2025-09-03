@@ -1,0 +1,32 @@
+export interface QueryResult<T> {
+  data: T[] | null;
+  error: { message: string } | null;
+  count: number | null;
+  status: number;
+  statusText: string;
+}
+
+export interface Post {
+  id: string; // id
+  title: string; // 제목
+  description: string; // 요약
+  author: string; // 작성자
+  tags: string[]; // 태그
+  content?: string | null; // 본문(마크다운)
+  created_at?: string | null; // 생성일
+  updated_at?: string | null; // 수정일
+  status?: 'draft' | 'published' | null; // 상태
+}
+
+export interface ListPostsParams {
+  tag?: string;
+  limit?: number;
+  offset?: number;
+}
+
+export interface ListPostsResult {
+  posts: Post[];
+  total: number;
+  source: 'supabase' | 'mock';
+  error?: string;
+}
