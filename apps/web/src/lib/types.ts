@@ -12,10 +12,10 @@ export interface Post {
   description: string; // 요약
   author: string; // 작성자
   tags: string[]; // 태그
-  content?: string | null; // 본문(마크다운)
-  created_at?: string | null; // 생성일
+  content: string | null; // 본문(마크다운)
+  created_at: string | null; // 생성일
   updated_at?: string | null; // 수정일
-  status?: 'draft' | 'published' | null; // 상태
+  status: 'draft' | 'published' | null; // 상태
 }
 
 export interface ListPostsParams {
