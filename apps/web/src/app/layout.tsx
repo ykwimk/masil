@@ -5,6 +5,7 @@ import { Footer } from '@/components/shared/Footer';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://masil-web.vercel.app'),
   title: '마실 | 마케터의 가벼운 마실길',
   description:
     '마케터들을 위한 가벼운 커뮤니티, 마실에서 함께 성장하고 배우며 인사이트를 나눠보세요.',
