@@ -8,6 +8,8 @@ export const POSTS: Post[] = [
       '크리에이티브 다변화와 상위 퍼널 예산 재배분이 핵심 레버였습니다. 검색/브랜드 키워드 조합의 기여도를 함께 정리했습니다.',
     author: '운영팀',
     tags: ['퍼포먼스', '리포트', '예산배분'],
+    status: 'published',
+    created_at: '2024-08-31T10:00:00Z',
   },
   {
     id: '2',
@@ -16,6 +18,8 @@ export const POSTS: Post[] = [
       '브랜드 보이스 가이드를 간결하게 재정의하고 캠페인 전/후 사용자 인식 변화를 리서치로 확인했습니다.',
     author: '브랜딩팀',
     tags: ['브랜딩', '메시지', '리서치'],
+    status: 'published',
+    created_at: '2024-08-25T14:30:00Z',
   },
   {
     id: '3',
@@ -24,6 +28,8 @@ export const POSTS: Post[] = [
       '훅 3종 × 카피 3종 매트릭스를 구성해 조회 유지율과 전환율의 상관을 확인했습니다. 놀라운 포인트는…',
     author: '콘텐츠팀',
     tags: ['콘텐츠', '크리에이티브', '실험'],
+    status: 'published',
+    created_at: '2024-08-20T09:15:00Z',
   },
   {
     id: '4',
@@ -32,6 +38,8 @@ export const POSTS: Post[] = [
       'CTA 배치와 폼 필드 축소만으로 전환율 1.7배 향상. 히트맵/스크롤맵 지표도 함께 공유합니다.',
     author: '그로스팀',
     tags: ['그로스', '전환', '온드채널'],
+    status: 'published',
+    created_at: '2024-08-15T11:45:00Z',
   },
   {
     id: '5',
@@ -40,6 +48,8 @@ export const POSTS: Post[] = [
       '파트너 브랜드와의 협업 포맷/타임라인/성과지표(리드·참여·리퍼럴)를 함께 설계해 보았습니다.',
     author: '파트너십',
     tags: ['캠페인', '협업', '리드'],
+    status: 'published',
+    created_at: '2024-08-10T13:20:00Z',
   },
   {
     id: '6',
@@ -48,5 +58,7 @@ export const POSTS: Post[] = [
       '라스트 클릭의 착시를 줄이기 위해 터치포인트 뎁스를 가중 평균으로 반영했습니다. 간단한 읽을거리 버전.',
     author: '데이터팀',
     tags: ['데이터', '어트리뷰션', '인사이트'],
+    status: 'published',
+    created_at: '2024-08-05T15:00:00Z',
   },
 ];
