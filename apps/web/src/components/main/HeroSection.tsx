@@ -1,6 +1,8 @@
-import { TAGS } from '@/lib/constants';
+import { getTags } from '@/lib/data';
 
-export function HeroSection() {
+export async function HeroSection() {
+  const { tags } = await getTags();
+
   return (
     <section className="relative bg-black">
       <div className="gradient-bg absolute inset-0"></div>
@@ -16,7 +18,7 @@ export function HeroSection() {
           </div>
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
-          {TAGS.map((tag) => (
+          {tags.map((tag) => (
             <span key={tag} className="badge">
               #{tag}
             </span>

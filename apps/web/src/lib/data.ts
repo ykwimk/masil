@@ -1,3 +1,4 @@
+import 'server-only';
 import { POSTS as MOCK_POSTS } from './mock';
 import { getSupabaseClient } from './supabase';
 import type { ListPostsParams, Post } from './types';
@@ -81,4 +82,34 @@ export async function getPostById(id: string): Promise<{
   }
 
   return { post: data ?? null, source: 'remote' } as const;
+}
+
+// 태그 목록
+export async function getTags(): Promise<{
+  tags: string[];
+  error?: string;
+}> {
+  const supabase = await getSupabaseClient();
+
+  if (!supabase) {
+    return {
+      tags: [],
+      error: 'supabase_not_configured',
+    };
+  }
+
+  const { data, error } = await supabase
+    .from('tags')
+    .select('name,is_active')
+    .order('name', { ascending: true });
+
+  if (error) {
+    return { tags: [], error: error.message };
+  }
+
+  const activeTags = (data ?? [])
+    .filter((tag: any) => tag.is_active !== false)
+    .map((tag: any) => tag.name);
+
+  return { tags: activeTags };
 }
