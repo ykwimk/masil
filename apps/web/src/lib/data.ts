@@ -1,6 +1,6 @@
 import 'server-only';
 import { POSTS as MOCK_POSTS } from './mock';
-import { getSupabaseClient } from './supabase';
+import { getSupabasePublicClient } from './db/public';
 import type { ListPostsParams, Post } from './types';
 
 // 게시물 목록
@@ -9,7 +9,7 @@ export async function getListPosts({
   limit = 10,
   offset = 0,
 }: ListPostsParams) {
-  const supabase = await getSupabaseClient();
+  const supabase = await getSupabasePublicClient();
 
   if (!supabase) {
     const filteredMockPosts = (
@@ -62,7 +62,7 @@ export async function getPostById(id: string): Promise<{
   source: 'remote' | 'mock';
   error?: string;
 }> {
-  const supabase = await getSupabaseClient();
+  const supabase = await getSupabasePublicClient();
 
   if (!supabase) {
     const post = MOCK_POSTS.find((p) => p.id === id) ?? null;
@@ -89,7 +89,7 @@ export async function getTags(): Promise<{
   tags: string[];
   error?: string;
 }> {
-  const supabase = await getSupabaseClient();
+  const supabase = await getSupabasePublicClient();
 
   if (!supabase) {
     return {

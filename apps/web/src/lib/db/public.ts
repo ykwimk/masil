@@ -1,11 +1,11 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-type SupabaseClientLike = Pick<SupabaseClient, 'from'>;
+type SupabasePublicLike = Pick<SupabaseClient, 'from'>;
 
-let client: SupabaseClientLike | null = null;
+let publicClient: SupabasePublicLike | null = null;
 
-export async function getSupabaseClient(): Promise<SupabaseClientLike | null> {
-  if (client) return client;
+export async function getSupabasePublicClient(): Promise<SupabasePublicLike | null> {
+  if (publicClient) return publicClient;
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
@@ -15,12 +15,12 @@ export async function getSupabaseClient(): Promise<SupabaseClientLike | null> {
   try {
     const supabase = await import('@supabase/supabase-js');
 
-    client = supabase.createClient(url, key, {
+    publicClient = supabase.createClient(url, key, {
       auth: { persistSession: false },
     });
   } catch {
     return null;
   }
 
-  return client;
+  return publicClient;
 }
