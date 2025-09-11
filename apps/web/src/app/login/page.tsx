@@ -1,7 +1,9 @@
+import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { LoginButton } from '@/components/login/LoginButton';
 import { safeRedirect } from '@/lib/utils';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default async function LoginPage({
   searchParams,
@@ -12,20 +14,29 @@ export default async function LoginPage({
   const redirectTo = safeRedirect(from);
   const session = await getServerSession(authOptions);
 
-  return (
-    <div className="bg-white">
-      <section className="container pt-24 pb-16 md:pt-32">
-        <h1 className="text-2xl font-extrabold tracking-tight md:text-3xl">
-          {session?.user ? '계정' : '로그인'}
-        </h1>
-        <p className="text-muted-foreground mt-2">
-          {session?.user
-            ? '로그아웃하거나 계정으로 이동하세요.'
-            : 'Google 계정으로 로그인할 수 있습니다.'}
-        </p>
+  if (session?.user) {
+    return redirect('/');
+  }
 
-        <div className="mt-6 flex gap-3">
-          <LoginButton signedIn={!!session?.user} redirectTo={redirectTo} />
+  return (
+    <div className="h-full bg-white">
+      <section className="container border-t bg-white pt-24 pb-8 md:pt-32">
+        <div className="container py-8">
+          <div className="mx-auto w-full max-w-md">
+            <Card>
+              <CardContent className="text-center">
+                <h1 className="text-2xl font-extrabold tracking-tight md:text-3xl">
+                  로그인
+                </h1>
+                <p className="text-muted-foreground mt-2 mb-7">
+                  Google 계정으로 로그인할 수 있습니다.
+                </p>
+                <div className="space-y-4">
+                  <LoginButton redirectTo={redirectTo} />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
     </div>

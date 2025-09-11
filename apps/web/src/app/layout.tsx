@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { hakgyoansimMulgyeol, pretendard } from '@masil/ui/styles/fonts';
 import { Header } from '@/components/shared/Header';
 import { Footer } from '@/components/shared/Footer';
+import { AuthProvider } from '@/providers/AuthProvider';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -47,11 +48,13 @@ export default function RootLayout({
       <body
         className={`${pretendard.variable} ${hakgyoansimMulgyeol.variable} font-sans antialiased`}
       >
-        <div className="relative flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <AuthProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
