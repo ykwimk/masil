@@ -4,7 +4,7 @@ import { SideNavigation } from '@/components/main/SideNavigation';
 import { SideNavigationSkeleton } from '@/components/main/SideNavigationSkeleton';
 import { PostsSection } from '@/components/main/PostsSection';
 
-export default async function Home({
+export default async function HomePage({
   searchParams,
 }: {
   searchParams?: Promise<{ tag?: string }>;

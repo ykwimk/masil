@@ -24,7 +24,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   };
 }
 
-export default async function PostDetail(props: PageProps) {
+export default async function PostDetailPage(props: PageProps) {
   const { id } = await props.params;
   const { post } = await getPostById(id);
 
