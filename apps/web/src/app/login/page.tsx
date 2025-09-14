@@ -8,9 +8,9 @@ import { Card, CardContent } from '@/components/ui/card';
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ from?: string }>;
+  searchParams?: Promise<{ from?: string; error?: string }>;
 }) {
-  const { from } = (await searchParams) ?? {};
+  const { from, error } = (await searchParams) ?? {};
   const redirectTo = safeRedirect(from);
   const session = await getServerSession(authOptions);
 
@@ -28,9 +28,15 @@ export default async function LoginPage({
                 <h1 className="text-2xl font-extrabold tracking-tight md:text-3xl">
                   로그인
                 </h1>
-                <p className="text-muted-foreground mt-2 mb-7">
-                  Google 계정으로 로그인할 수 있습니다.
-                </p>
+                {error ? (
+                  <p className="mt-2 mb-7 text-sm text-red-600">
+                    Gmail 주소로만 로그인할 수 있어요.
+                  </p>
+                ) : (
+                  <p className="text-muted-foreground mt-2 mb-7">
+                    Google 계정으로 로그인할 수 있습니다.
+                  </p>
+                )}
                 <div className="space-y-4">
                   <LoginButton redirectTo={redirectTo} />
                 </div>

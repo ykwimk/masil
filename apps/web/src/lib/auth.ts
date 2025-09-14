@@ -27,14 +27,21 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  session: { strategy: 'jwt' },
+  session: {
+    strategy: 'jwt',
+    updateAge: 5 * 60,
+  },
   callbacks: {
     async signIn({ account, profile }) {
       if (account?.provider === 'google') {
         const verified = (profile as any)?.email_verified;
-        return verified === true;
+        const email = profile?.email?.toLowerCase();
+
+        if (!verified) return false;
+        if (!email || !email.endsWith('@gmail.com')) return false;
+        return true;
       }
-      return true;
+      return false;
     },
     async jwt({ token, user }) {
       const now = Math.floor(Date.now() / 1000);
@@ -55,9 +62,13 @@ export const authOptions: NextAuthOptions = {
               .select('role')
               .eq('email', token.email)
               .maybeSingle();
+
             if (!error && data?.role) {
               token.role = data.role;
             } else {
+              await admin
+                .from('profiles')
+                .insert({ email: token.email, role: 'user' });
               token.role = token.role || 'user';
             }
             token.roleFetchedAt = now;
@@ -79,5 +90,6 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: '/login',
+    error: '/login',
   },
 };
