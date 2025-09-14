@@ -1,4 +1,4 @@
-import { getMyPosts, setPostStatus } from '@/app/editor/actions';
+import { getMyPosts, setPostStatus, deletePost } from '@/app/editor/actions';
 import { Button } from '@/components/ui/button';
 
 export default async function MyPosts() {
@@ -50,6 +50,16 @@ export default async function MyPosts() {
                   발행하기
                 </Button>
               )}
+            </form>
+            <form action={deletePost}>
+              <input type="hidden" name="id" value={post.id} />
+              <Button
+                type="submit"
+                variant="destructive"
+                className="cursor-pointer"
+              >
+                삭제
+              </Button>
             </form>
           </div>
         ))}

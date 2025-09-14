@@ -8,10 +8,11 @@ export default async function EditorPage({
   searchParams?: Promise<{
     created?: string;
     updated?: string;
+    deleted?: string;
     error?: string;
   }>;
 }) {
-  const { created, updated, error } = (await searchParams) ?? {};
+  const { created, updated, deleted, error } = (await searchParams) ?? {};
   const session = await getServerSession(authOptions);
 
   return (
@@ -36,6 +37,11 @@ export default async function EditorPage({
         {updated && (
           <div className="mt-4 rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
             게시글 상태가 업데이트되었습니다.
+          </div>
+        )}
+        {deleted && (
+          <div className="mt-4 rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+            게시글이 삭제되었습니다.
           </div>
         )}
         <div className="mt-6 flex items-center gap-3">
