@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getMyPosts, setPostStatus, deletePost } from '@/app/editor/actions';
 import { Button } from '@/components/ui/button';
 
@@ -51,6 +52,14 @@ export default async function MyPosts() {
                 </Button>
               )}
             </form>
+            <Button
+              asChild={post.status !== 'published'}
+              variant="outline"
+              className="cursor-pointer"
+              disabled={post.status === 'published'}
+            >
+              <Link href={`/editor/${post.id}`}>수정</Link>
+            </Button>
             <form action={deletePost}>
               <input type="hidden" name="id" value={post.id} />
               <Button
