@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import MyPosts from '@/components/editor/MyPosts';
@@ -48,12 +49,12 @@ export default async function EditorPage({
           </div>
         )}
         <div className="mt-6 flex items-center gap-3">
-          <a
+          <Link
             href="/editor/new"
             className="bg-primary inline-flex items-center rounded-md px-4 py-2 text-white shadow-sm transition hover:opacity-90"
           >
             새 글 작성
-          </a>
+          </Link>
         </div>
         <div className="text-muted-foreground mt-8 text-sm">
           발행되지 않은 초안은 공개 페이지에서 보이지 않아요.
