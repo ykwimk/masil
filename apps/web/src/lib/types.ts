@@ -27,6 +27,5 @@ export interface ListPostsParams {
 export interface ListPostsResult {
   posts: Post[];
   total: number;
-  source: 'remote' | 'mock';
   error?: string;
 }

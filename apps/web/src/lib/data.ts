@@ -1,5 +1,4 @@
 import 'server-only';
-import { POSTS as MOCK_POSTS } from './mock';
 import { getSupabasePublicClient } from './db/public';
 import type { ListPostsParams, Post } from './types';
 
@@ -10,15 +9,10 @@ export async function getListPosts({
   offset = 0,
 }: ListPostsParams) {
   const supabase = await getSupabasePublicClient();
-
   if (!supabase) {
-    const filteredMockPosts = (
-      tag ? MOCK_POSTS.filter((p) => p.tags.includes(tag)) : MOCK_POSTS
-    ).filter((p) => (p.status ? p.status === 'published' : true));
     return {
-      posts: filteredMockPosts.slice(offset, offset + limit),
-      total: filteredMockPosts.length,
-      source: 'mock' as const,
+      posts: [],
+      total: 0,
     };
   }
 
@@ -38,13 +32,9 @@ export async function getListPosts({
   const { data, count, error } = await query.range(offset, offset + limit - 1);
 
   if (error) {
-    const filtered = (
-      tag ? MOCK_POSTS.filter((p) => p.tags.includes(tag)) : MOCK_POSTS
-    ).filter((p) => (p.status ? p.status === 'published' : true));
     return {
-      posts: filtered.slice(offset, offset + limit),
-      total: filtered.length,
-      source: 'mock',
+      posts: [],
+      total: 0,
       error: error.message,
     };
   }
@@ -52,23 +42,16 @@ export async function getListPosts({
   return {
     posts: data ?? [],
     total: count ?? data?.length ?? 0,
-    source: 'remote',
   };
 }
 
 // ID로 게시물 조회
 export async function getPostById(id: string): Promise<{
   post: Post | null;
-  source: 'remote' | 'mock';
   error?: string;
 }> {
   const supabase = await getSupabasePublicClient();
-
-  if (!supabase) {
-    const idNum = Number(id);
-    const post = MOCK_POSTS.find((post) => post.id === idNum) ?? null;
-    return { post, source: 'mock' } as const;
-  }
+  if (!supabase) return { post: null };
 
   const idNum = Number(id);
   const { data, error } = await supabase
@@ -79,11 +62,10 @@ export async function getPostById(id: string): Promise<{
     .maybeSingle();
 
   if (error) {
-    const post = MOCK_POSTS.find((post) => post.id === idNum) ?? null;
-    return { post, source: 'mock', error: error.message } as const;
+    return { post: null, error: error.message } as const;
   }
 
-  return { post: data ?? null, source: 'remote' } as const;
+  return { post: data ?? null } as const;
 }
 
 // 태그 목록
@@ -92,7 +74,6 @@ export async function getTags(): Promise<{
   error?: string;
 }> {
   const supabase = await getSupabasePublicClient();
-
   if (!supabase) {
     return {
       tags: [],
