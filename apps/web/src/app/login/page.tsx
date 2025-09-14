@@ -8,10 +8,14 @@ import { Card, CardContent } from '@/components/ui/card';
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ from?: string; error?: string }>;
+  searchParams?: Promise<{
+    from?: string;
+    error?: string;
+    callbackUrl?: string;
+  }>;
 }) {
-  const { from, error } = (await searchParams) ?? {};
-  const redirectTo = safeRedirect(from);
+  const { from, error, callbackUrl } = (await searchParams) ?? {};
+  const redirectTo = safeRedirect(from ?? callbackUrl);
   const session = await getServerSession(authOptions);
 
   if (session?.user) {

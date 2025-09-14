@@ -4,7 +4,7 @@ export default withAuth({
   callbacks: {
     authorized: ({ token, req }) => {
       const pathname = req.nextUrl.pathname;
-      if (pathname.startsWith('/admin')) {
+      if (pathname.startsWith('/editor')) {
         return token?.role === 'admin' || token?.role === 'editor';
       }
       return true;
@@ -16,5 +16,5 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/editor/:path*'],
 };
