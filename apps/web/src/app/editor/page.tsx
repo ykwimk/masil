@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import MyPosts from '@/components/editor/MyPosts';
+import { ROLE_LABELS } from '@/lib/constants';
 
 export default async function EditorPage({
   searchParams,
@@ -14,6 +15,8 @@ export default async function EditorPage({
 }) {
   const { created, updated, deleted, error } = (await searchParams) ?? {};
   const session = await getServerSession(authOptions);
+  const role = session?.user?.role ?? 'user';
+  const roleLabel = ROLE_LABELS[role];
 
   return (
     <div className="bg-white">
@@ -22,7 +25,7 @@ export default async function EditorPage({
           에디터
         </h1>
         <p className="text-muted-foreground mt-2">
-          {session?.user?.email} / role: {session?.user?.role ?? 'user'}
+          {session?.user?.email} / {roleLabel}
         </p>
         {created && (
           <div className="mt-4 rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">

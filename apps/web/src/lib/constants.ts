@@ -7,3 +7,9 @@ export const TAGS = [
   '데이터',
   '캠페인',
 ];
+
+export const ROLE_LABELS = {
+  admin: '관리자',
+  editor: '에디터',
+  user: '사용자',
+} as const;
