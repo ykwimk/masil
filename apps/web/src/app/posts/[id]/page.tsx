@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPostById } from '@/lib/data';
+import { sanitizeHtmlFragment } from '@/lib/sanitize';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -52,9 +53,12 @@ export default async function PostDetailPage(props: PageProps) {
           <article className="prose-custom">
             <p className="text-foreground/80">{post.description}</p>
             {post.content ? (
-              <div className="text-foreground/80 whitespace-pre-wrap">
-                {post.content}
-              </div>
+              <div
+                className="prose-custom mt-4"
+                dangerouslySetInnerHTML={{
+                  __html: sanitizeHtmlFragment(post.content),
+                }}
+              />
             ) : (
               <p className="text-foreground/70">본문 콘텐츠가 아직 없습니다.</p>
             )}

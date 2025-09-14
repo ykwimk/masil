@@ -18,3 +18,29 @@ export function safeRedirect(input?: string) {
     return '/';
   }
 }
+
+export function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, ' ');
+}
+
+export function summarize(text: string, len = 140): string {
+  const clean = stripHtml(text).replace(/\s+/g, ' ').trim();
+
+  if (clean.length <= len) return clean;
+  return clean.slice(0, len - 1) + '…';
+}
+
+export function parseTags(input: string | null | undefined): string[] {
+  if (!input) return [];
+
+  return Array.from(
+    new Set(
+      input
+        .split(/[,\s]+/)
+        .map((t) => t.trim())
+        .filter(Boolean)
+        .map((t) => (t.length > 30 ? t.slice(0, 30) : t))
+        .map((t) => t.toLowerCase()),
+    ),
+  );
+}

@@ -3,53 +3,44 @@
 @import "@masil/ui/styles/base.css";
 @plugin "tailwindcss-animate";
 
-/* 간결한 본문 가독성을 위한 경량 타이포그래피 (web 전용) */
-.prose-custom {
-  @apply leading-7 text-[15px];
-}
-.prose-custom h2 {
-  @apply mt-8 text-2xl font-bold;
-}
-.prose-custom h3 {
-  @apply mt-6 text-xl font-semibold;
-}
-.prose-custom p { @apply my-4; }
-.prose-custom ul { @apply my-4 list-disc pl-5; }
-.prose-custom blockquote {
-  @apply my-6 border-l-4 border-primary/30 bg-primary/5 p-4 text-[15px] text-foreground/80;
-}
-/* --- Home only theme & hero (web 전용) --- */
-.home-theme {
-  /* 메인 화면 전용 톤: 완전한 화이트 베이스 + 모던 그린 포인트 */
-  --background: oklch(1 0 0);
-  --section: oklch(0.995 0 0);
-  --foreground: oklch(0.2 0.02 135);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 135);
-  --primary: oklch(0.72 0.14 145);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.985 0.005 135);
-  --secondary-foreground: oklch(0.28 0.02 135);
-  --accent: oklch(0.86 0.12 145);
-  --accent-foreground: oklch(0.16 0.02 135);
-  --border: oklch(0.92 0.01 135);
-  --input: oklch(0.96 0.01 135);
-  --ring: oklch(0.67 0.12 145);
-}
-
-.home-hero {
-  position: relative;
-  isolation: isolate;
-  background: radial-gradient(
-      60% 60% at 85% 20%, color-mix(in oklch, var(--primary), transparent 96%), transparent
-    ),
-    radial-gradient(
-      50% 50% at 10% 60%, color-mix(in oklch, var(--accent), transparent 98%), transparent
-    ),
-    var(--color-background, var(--background));
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* Masonry feed */
 .masonry {
   column-gap: 1.5rem; /* 24px */
 }
@@ -197,40 +188,132 @@
   }
 }
 
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+/* Typography preset for editor and article content */
+.prose-custom {
+  color: var(--foreground);
+  line-height: 1.75;
 }
+.prose-custom :first-child { margin-top: 0; }
+.prose-custom :last-child { margin-bottom: 0; }
+
+.prose-custom h1 {
+  font-size: 1.875rem; /* text-3xl */
+  line-height: 2.25rem;
+  font-weight: 800;
+  margin: 1.25em 0 0.5em;
+}
+.prose-custom h2 {
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 2rem;
+  font-weight: 700;
+  margin: 1.2em 0 0.5em;
+}
+.prose-custom h3 {
+  font-size: 1.25rem; /* text-xl */
+  line-height: 1.75rem;
+  font-weight: 700;
+  margin: 1.1em 0 0.5em;
+}
+.prose-custom h4,
+.prose-custom h5,
+.prose-custom h6 {
+  font-weight: 700;
+  margin: 1em 0 0.4em;
+}
+
+.prose-custom p { margin: 0.9em 0; }
+.prose-custom ul,
+.prose-custom ol { margin: 0.9em 0; padding-left: 1.25rem; }
+.prose-custom ul { list-style: disc; }
+.prose-custom ol { list-style: decimal; }
+.prose-custom li { margin: 0.25em 0; }
+
+/* Tiptap task list */
+.prose-custom ul[data-type='taskList'] { list-style: none; padding-left: 0; }
+.prose-custom ul[data-type='taskList'] li { display: flex; align-items: flex-start; margin: 0.4em 0; }
+.prose-custom ul[data-type='taskList'] li > label { margin-right: 0.5rem; line-height: 1.25rem; }
+.prose-custom ul[data-type='taskList'] li > div { flex: 1 1 auto; }
+
+.prose-custom blockquote {
+  border-left: 4px solid var(--muted-foreground);
+  color: color-mix(in oklch, var(--foreground), transparent 35%);
+  margin: 1.2em 0;
+  padding: 0.25em 1rem;
+  font-style: italic;
+}
+
+.prose-custom code {
+  background: color-mix(in oklch, var(--muted), transparent 20%);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem; /* rounded-md */
+  padding: 0.125rem 0.375rem; /* px-1.5 py-0.5 */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9em;
+}
+.prose-custom pre {
+  background: #0d1117; /* GitHub Dark */
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow: auto;
+}
+.prose-custom pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/* Highlight (형광펜) */
+.prose-custom mark {
+  background: color-mix(in oklch, var(--primary), white 85%);
+  color: inherit;
+  padding: 0.05rem 0.2rem;
+  border-radius: 0.2rem;
+}
+
+.prose-custom a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+.prose-custom hr { border-color: var(--border); margin: 1.5em 0; }
+
+/* Tiptap specifics */
+.ProseMirror:focus { outline: none; }
+.prose-custom .is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: color-mix(in oklch, var(--foreground), transparent 55%);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Highlight.js (lowlight) GitHub Dark-like theme */
+.prose-custom code.hljs, .prose-custom pre code {
+  color: #c9d1d9;
+}
+.prose-custom .hljs-comment,
+.prose-custom .hljs-quote { color: #8b949e; }
+.prose-custom .hljs-variable,
+.prose-custom .hljs-template-variable,
+.prose-custom .hljs-attribute,
+.prose-custom .hljs-tag,
+.prose-custom .hljs-name,
+.prose-custom .hljs-regexp,
+.prose-custom .hljs-link,
+.prose-custom .hljs-name,
+.prose-custom .hljs-selector-id,
+.prose-custom .hljs-selector-class { color: #79c0ff; }
+.prose-custom .hljs-number,
+.prose-custom .hljs-meta,
+.prose-custom .hljs-built_in,
+.prose-custom .hljs-builtin-name,
+.prose-custom .hljs-literal,
+.prose-custom .hljs-type,
+.prose-custom .hljs-params { color: #a5d6ff; }
+.prose-custom .hljs-string,
+.prose-custom .hljs-symbol,
+.prose-custom .hljs-bullet { color: #7ee787; }
+.prose-custom .hljs-title,
+.prose-custom .hljs-section { color: #d2a8ff; }
+.prose-custom .hljs-keyword,
+.prose-custom .hljs-selector-tag { color: #ff7b72; }
+.prose-custom .hljs-emphasis { font-style: italic; }
+.prose-custom .hljs-strong { font-weight: 700; }
