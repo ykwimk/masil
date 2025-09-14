@@ -35,9 +35,9 @@ export default async function PostDetailPage(props: PageProps) {
     <div className="bg-white">
       <section className="container pt-24 pb-6 md:pt-32">
         <div className="mb-3 flex flex-wrap gap-2">
-          {post.tags.map((t) => (
-            <span key={t} className="badge">
-              #{t}
+          {post.tags.map((tag: string) => (
+            <span key={tag} className="badge">
+              #{tag}
             </span>
           ))}
         </div>
