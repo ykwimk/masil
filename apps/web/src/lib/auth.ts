@@ -1,23 +1,7 @@
+import 'server-only';
 import GoogleProvider from 'next-auth/providers/google';
 import { getSupabaseAdminClient } from '@/lib/db/admin';
 import type { NextAuthOptions } from 'next-auth';
-import type { DefaultSession } from 'next-auth';
-
-declare module 'next-auth' {
-  interface Session extends DefaultSession {
-    user: DefaultSession['user'] & {
-      role?: 'admin' | 'editor' | 'user';
-    };
-  }
-}
-
-declare module 'next-auth/jwt' {
-  interface JWT {
-    role?: 'admin' | 'editor' | 'user';
-    emailVerified?: boolean;
-    roleFetchedAt?: number;
-  }
-}
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -65,10 +49,15 @@ export const authOptions: NextAuthOptions = {
 
             if (!error && data?.role) {
               token.role = data.role;
-            } else {
+            } else if (!error && !data) {
               await admin
                 .from('profiles')
-                .insert({ email: token.email, role: 'user' });
+                .upsert(
+                  { email: token.email, role: 'user' },
+                  { onConflict: 'email' },
+                );
+              token.role = token.role || 'user';
+            } else {
               token.role = token.role || 'user';
             }
             token.roleFetchedAt = now;

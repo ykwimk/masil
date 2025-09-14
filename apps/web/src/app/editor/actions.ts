@@ -5,7 +5,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { getSupabaseAdminClient } from '@/lib/db/admin';
 import { parseTags, summarize } from '@/lib/utils';
-import { Post } from '@/lib/types';
+import { Post } from '@/types';
 
 // 새 글 작성
 export async function createPost(formData: FormData) {
@@ -67,6 +67,7 @@ export async function setPostStatus(formData: FormData) {
   const formId = String(formData.get('id') || '').trim();
   const idNum = Number(formId);
   const formStatus = String(formData.get('status') || '').trim();
+  const status = formStatus === 'published' ? 'draft' : 'published';
 
   const allowed = ['draft', 'published'] as const;
   if (!Number.isInteger(idNum) || !allowed.includes(formStatus as any)) {
@@ -76,7 +77,6 @@ export async function setPostStatus(formData: FormData) {
   const admin = await getSupabaseAdminClient();
   if (!admin) return redirect('/editor?error=db_unavailable');
 
-  const status = formStatus === 'draft' ? 'published' : 'draft';
   let query = admin.from('posts').update({ status }).eq('id', idNum);
 
   if (role !== 'admin') {

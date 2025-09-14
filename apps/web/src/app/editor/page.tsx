@@ -84,7 +84,6 @@ export default async function EditorPage({
                       <Button
                         type="submit"
                         name="status"
-                        value="draft"
                         variant="outline"
                         className="cursor-pointer"
                       >
@@ -94,7 +93,6 @@ export default async function EditorPage({
                       <Button
                         type="submit"
                         name="status"
-                        value="published"
                         className="cursor-pointer"
                       >
                         발행하기

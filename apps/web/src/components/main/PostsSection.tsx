@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Spinner } from '@/components/ui/spinner';
+import { Post } from '@/types';
 import { PostCard } from './PostCard';
-import type { Post } from '@/lib/types';
 
 const PAGE_SIZE = 6;
 

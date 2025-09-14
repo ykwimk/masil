@@ -1,6 +1,6 @@
 import 'server-only';
+import { ListPostsParams, Post } from '@/types';
 import { getSupabasePublicClient } from './db/public';
-import type { ListPostsParams, Post } from './types';
 
 // 게시물 목록
 export async function getListPosts({
@@ -30,7 +30,6 @@ export async function getListPosts({
   query = query.filter('status', 'eq', 'published');
 
   const { data, count, error } = await query.range(offset, offset + limit - 1);
-
   if (error) {
     return {
       posts: [],
@@ -85,7 +84,6 @@ export async function getTags(): Promise<{
     .from('tags')
     .select('name,is_active')
     .order('name', { ascending: true });
-
   if (error) {
     return { tags: [], error: error.message };
   }

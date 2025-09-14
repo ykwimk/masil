@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPostById } from '@/lib/data';
-import { sanitizeHtmlFragment } from '@/lib/sanitize';
+import { sanitizeHtmlFragment } from '@/lib/utils';
 
 interface PageProps {
   params: Promise<{ id: string }>;
