@@ -5,7 +5,7 @@ export default withAuth({
     authorized: ({ token, req }) => {
       const pathname = req.nextUrl.pathname;
       if (pathname.startsWith('/admin')) {
-        return token?.role === 'admin';
+        return token?.role === 'admin' || token?.role === 'editor';
       }
       return true;
     },
