@@ -65,19 +65,21 @@ export async function getPostById(id: string): Promise<{
   const supabase = await getSupabasePublicClient();
 
   if (!supabase) {
-    const post = MOCK_POSTS.find((p) => p.id === id) ?? null;
+    const idNum = Number(id);
+    const post = MOCK_POSTS.find((post) => post.id === idNum) ?? null;
     return { post, source: 'mock' } as const;
   }
 
+  const idNum = Number(id);
   const { data, error } = await supabase
     .from('posts')
     .select('*')
-    .filter('id', 'eq', id)
+    .filter('id', 'eq', Number.isFinite(idNum) ? idNum : id)
     .filter('status', 'eq', 'published')
     .maybeSingle();
 
   if (error) {
-    const post = MOCK_POSTS.find((p) => p.id === id) ?? null;
+    const post = MOCK_POSTS.find((post) => post.id === idNum) ?? null;
     return { post, source: 'mock', error: error.message } as const;
   }
 

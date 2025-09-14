@@ -7,7 +7,7 @@ export interface QueryResult<T> {
 }
 
 export interface Post {
-  id: string; // id
+  id: number; // id
   title: string; // 제목
   description: string; // 요약
   author: string; // 작성자
@@ -15,7 +15,7 @@ export interface Post {
   content?: string | null; // 본문(마크다운)
   created_at: string | null; // 생성일
   updated_at?: string | null; // 수정일
-  status: 'draft' | 'published' | null; // 상태
+  status: 'draft' | 'published'; // 포스트 상태
 }
 
 export interface ListPostsParams {

@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 interface PostCardProps {
   post: {
-    id: string;
+    id: number;
     title: string;
     description: string;
     author: string;
