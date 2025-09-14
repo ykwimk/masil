@@ -13,7 +13,7 @@ interface InitialValues {
 }
 
 interface PostEditorFormProps {
-  id: number;
+  id?: number | string;
   initialValues?: InitialValues;
   submitLabel?: string;
   isShowPublishToggle?: boolean;
@@ -40,6 +40,9 @@ export function PostEditorForm({
       {id !== undefined && <input type="hidden" name="id" value={id} />}
       <div className="space-y-2">
         <label htmlFor="title" className="block text-sm font-medium">
+          <span className="mr-1 text-red-600" aria-hidden>
+            *
+          </span>
           제목
         </label>
         <input
@@ -54,12 +57,16 @@ export function PostEditorForm({
       </div>
       <div className="space-y-2">
         <label htmlFor="tags" className="block text-sm font-medium">
+          <span className="mr-1 text-red-600" aria-hidden>
+            *
+          </span>
           태그(쉼표 또는 공백으로 구분)
         </label>
         <input
           id="tags"
           name="tags"
           type="text"
+          required
           placeholder="ex) 그로스, 데이터, 브랜딩, 스타트업"
           defaultValue={tagsDefault}
           className="focus:ring-primary w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2"
@@ -80,6 +87,9 @@ export function PostEditorForm({
       </div>
       <div className="space-y-2">
         <label htmlFor="content" className="block text-sm font-medium">
+          <span className="mr-1 text-red-600" aria-hidden>
+            *
+          </span>
           컨텐츠
         </label>
         <TiptapEditor initialHTML={initialValues?.content} onChange={setHtml} />

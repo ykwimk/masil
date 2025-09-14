@@ -24,7 +24,7 @@ export default async function NewPostPage() {
         </p>
         <Card>
           <CardContent className="p-6">
-            <PostEditorForm action={createPost} />
+            <PostEditorForm onAction={createPost} />
           </CardContent>
         </Card>
       </section>
