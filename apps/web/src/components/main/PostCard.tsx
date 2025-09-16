@@ -6,7 +6,7 @@ interface PostCardProps {
     id: number;
     title: string;
     description: string;
-    author: string;
+    nickname: string;
     tags: string[];
   };
 }
@@ -29,7 +29,7 @@ export function PostCard({ post }: PostCardProps) {
             {post.description}
           </p>
           <div className="text-muted-foreground mt-3 text-xs">
-            by. {post.author}
+            by. {post.nickname}
           </div>
         </CardContent>
       </Card>

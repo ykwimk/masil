@@ -10,7 +10,8 @@ export interface Post {
   id: number; // id
   title: string; // 제목
   description: string; // 요약
-  author: string; // 작성자
+  nickname: string; // 작성자 닉네임
+  email: string; // 작성자 이메일
   tags: string[]; // 태그
   content?: string | null; // 본문(마크다운)
   created_at: string | null; // 생성일

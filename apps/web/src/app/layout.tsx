@@ -3,6 +3,7 @@ import { hakgyoansimMulgyeol, pretendard } from '@masil/ui/styles/fonts';
 import { Header } from '@/components/shared/Header';
 import { Footer } from '@/components/shared/Footer';
 import { AuthProvider } from '@/providers/AuthProvider';
+import NicknameModal from '@/components/shared/NicknameModal';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -54,6 +55,7 @@ export default function RootLayout({
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
+          <NicknameModal />
         </AuthProvider>
       </body>
     </html>

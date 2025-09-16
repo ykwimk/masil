@@ -18,9 +18,12 @@ export async function getListPosts({
 
   let query = supabase
     .from('posts')
-    .select('id,title,description,author,tags,created_at,updated_at,status', {
-      count: 'exact',
-    })
+    .select(
+      'id,title,description,nickname,email,tags,created_at,updated_at,status',
+      {
+        count: 'exact',
+      },
+    )
     .order('created_at', { ascending: false });
 
   if (tag) {

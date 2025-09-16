@@ -32,12 +32,23 @@ export async function createPost(formData: FormData) {
   const admin = await getSupabaseAdminClient();
   if (!admin) return redirect('/editor?error=db_unavailable');
 
+  let nickname: string = session.user?.nickname ?? '유저';
+  if (!nickname) {
+    const { data } = await admin
+      .from('profiles')
+      .select('nickname')
+      .eq('email', session.user.email)
+      .maybeSingle();
+    nickname = data?.nickname ?? '유저';
+  }
+
   const insertPayload: any = {
     title,
     description,
     content,
     tags,
-    author: session.user.email,
+    nickname,
+    email: session.user.email,
     status,
   };
 
@@ -80,7 +91,7 @@ export async function setPostStatus(formData: FormData) {
   let query = admin.from('posts').update({ status }).eq('id', idNum);
 
   if (role !== 'admin') {
-    query = query.eq('author', email);
+    query = query.eq('email', email);
   }
 
   const { error } = await query;
@@ -110,7 +121,7 @@ export async function deletePost(formData: FormData) {
 
   let query = admin.from('posts').delete().eq('id', idNum);
   if (role !== 'admin') {
-    query = query.eq('author', email);
+    query = query.eq('email', email);
   }
 
   const { error } = await query;
@@ -162,7 +173,7 @@ export async function updatePost(formData: FormData) {
 
   let query = admin.from('posts').update(updatePayload).eq('id', idNum);
   if (role !== 'admin') {
-    query = query.eq('author', email);
+    query = query.eq('email', email);
   }
 
   const { error } = await query;
@@ -184,7 +195,7 @@ export async function getMyPosts() {
       const { data } = await admin
         .from('posts')
         .select('id,title,created_at,status')
-        .eq('author', email)
+        .eq('email', email)
         .order('created_at', { ascending: false });
 
       myPosts = data ?? [];
@@ -212,10 +223,10 @@ export async function getPostEditorById(id: string) {
   const idNum = Number(id);
   let selectQuery = admin
     .from('posts')
-    .select('id,title,description,tags,content,author,status')
+    .select('id,title,description,tags,content,nickname,email,status')
     .eq('id', Number.isInteger(idNum) ? idNum : id);
   if (role !== 'admin') {
-    selectQuery = selectQuery.eq('author', email);
+    selectQuery = selectQuery.eq('email', email);
   }
 
   const { data, error } = await selectQuery.single();

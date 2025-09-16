@@ -45,7 +45,7 @@ export default async function PostDetailPage(props: PageProps) {
           {post.title}
         </h1>
         <div className="text-muted-foreground mt-2 text-sm">
-          by. {post.author}
+          by. {post.nickname}
         </div>
       </section>
       <section className="border-t">

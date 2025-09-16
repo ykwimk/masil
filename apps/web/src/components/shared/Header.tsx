@@ -14,7 +14,6 @@ export function Header() {
   const { isScrolled } = useScrollHeader({ threshold: 10 });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const { status } = useSession();
-
   const isAuthed = status === 'authenticated';
 
   return (

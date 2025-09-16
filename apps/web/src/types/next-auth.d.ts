@@ -4,6 +4,7 @@ declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: DefaultSession['user'] & {
       role?: 'admin' | 'editor' | 'user';
+      nickname?: string | null;
     };
   }
 }
@@ -13,5 +14,6 @@ declare module 'next-auth/jwt' {
     role?: 'admin' | 'editor' | 'user';
     emailVerified?: boolean;
     roleFetchedAt?: number;
+    nickname?: string | null;
   }
 }

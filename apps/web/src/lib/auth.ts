@@ -23,14 +23,42 @@ export const authOptions: NextAuthOptions = {
 
         if (!verified) return false;
         if (!email || !email.endsWith('@gmail.com')) return false;
-        return true;
+
+        const admin = await getSupabaseAdminClient();
+        if (admin) {
+          const { data, error } = await admin
+            .from('profiles')
+            .select('email,nickname')
+            .eq('email', email)
+            .maybeSingle();
+
+          if (error) return false;
+
+          if (!data) {
+            const { error: upsertError } = await admin
+              .from('profiles')
+              .upsert(
+                { email, role: 'user', nickname: null },
+                { onConflict: 'email' },
+              );
+
+            if (upsertError) {
+              console.error('upsert error:', upsertError);
+              return false;
+            }
+          }
+          return true;
+        }
       }
       return false;
     },
     async jwt({ token, user }) {
       const now = Math.floor(Date.now() / 1000);
       const isNeedsRefresh =
-        !!user || !token.roleFetchedAt || now - token.roleFetchedAt > 300;
+        !!user ||
+        !token.roleFetchedAt ||
+        now - token.roleFetchedAt > 300 ||
+        token.nickname == null;
 
       if (!token.email) {
         token.role = 'user';
@@ -43,19 +71,22 @@ export const authOptions: NextAuthOptions = {
           try {
             const { data, error } = await admin
               .from('profiles')
-              .select('role')
+              .select('role,nickname')
               .eq('email', token.email)
               .maybeSingle();
 
             if (!error && data?.role) {
               token.role = data.role;
+              token.nickname = data.nickname ?? null;
             } else if (!error && !data) {
-              await admin
-                .from('profiles')
-                .upsert(
-                  { email: token.email, role: 'user' },
-                  { onConflict: 'email' },
-                );
+              await admin.from('profiles').upsert(
+                {
+                  email: token.email,
+                  role: 'user',
+                  nickname: token.nickname ?? null,
+                },
+                { onConflict: 'email' },
+              );
               token.role = token.role || 'user';
             } else {
               token.role = token.role || 'user';
@@ -73,6 +104,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.role = token.role || 'user';
+        session.user.nickname = token.nickname ?? null;
       }
       return session;
     },
