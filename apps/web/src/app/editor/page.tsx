@@ -48,6 +48,9 @@ export default async function EditorPage({
             게시글이 삭제되었습니다.
           </div>
         )}
+        <div className="text-muted-foreground mt-8 text-lg font-semibold">
+          ※ 발행되지 않은 초안은 공개 페이지에서 보이지 않아요.
+        </div>
         <div className="mt-6 flex items-center gap-3">
           <Link
             href="/editor/new"
@@ -55,9 +58,6 @@ export default async function EditorPage({
           >
             새 글 작성
           </Link>
-        </div>
-        <div className="text-muted-foreground mt-8 text-sm">
-          발행되지 않은 초안은 공개 페이지에서 보이지 않아요.
         </div>
         {/* 내 글 목록 */}
         <MyPosts />
