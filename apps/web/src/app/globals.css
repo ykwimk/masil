@@ -41,6 +41,10 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+body {
+  @apply bg-white;
+}
+
 .masonry {
   column-gap: 1.5rem; /* 24px */
 }
