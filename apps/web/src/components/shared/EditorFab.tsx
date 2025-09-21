@@ -1,15 +1,19 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 export default function EditorFab() {
   const { status, data } = useSession();
+  const pathname = usePathname();
 
+  if (pathname.startsWith('/editor')) return null;
   if (status !== 'authenticated') return null;
 
   const role = data?.user?.role ?? 'user';
   const isAdminRole = role === 'admin' || role === 'editor';
+
   if (!isAdminRole) return null;
 
   return (
