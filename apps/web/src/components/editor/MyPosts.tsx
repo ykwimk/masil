@@ -14,7 +14,20 @@ export default async function MyPosts() {
 
   return (
     <div className="mt-8">
-      <h2 className="mb-3 text-lg font-semibold">내 글 목록</h2>
+      <div className="mt-6 mb-4 flex items-center justify-between gap-3">
+        <div>
+          <h2 className="mb-1 text-xl font-bold">내 글 목록</h2>
+          <div className="text-muted-foreground text-sm">
+            ※ 발행되지 않은 초안은 공개 페이지에서 보이지 않아요.
+          </div>
+        </div>
+        <Link
+          href="/editor/new"
+          className="bg-primary inline-flex items-center rounded-md px-3 py-2 text-sm text-white shadow-sm transition hover:opacity-90"
+        >
+          새 글 작성
+        </Link>
+      </div>
       <div className="divide-y rounded-md border">
         {myPosts.map((post) => (
           <div key={post.id} className="flex flex-wrap items-center gap-3 p-3">
