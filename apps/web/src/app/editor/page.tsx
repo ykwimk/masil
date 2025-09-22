@@ -3,21 +3,14 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import MyPosts from '@/components/editor/MyPosts';
 import { ROLE_LABELS } from '@/lib/constants';
+import { getMyPosts } from '@/app/editor/actions';
 
-export default async function EditorPage({
-  searchParams,
-}: {
-  searchParams?: Promise<{
-    created?: string;
-    updated?: string;
-    deleted?: string;
-    error?: string;
-  }>;
-}) {
-  const { created, updated, deleted, error } = (await searchParams) ?? {};
+export default async function EditorPage() {
   const session = await getServerSession(authOptions);
   const role = session?.user?.role ?? 'user';
   const roleLabel = ROLE_LABELS[role];
+
+  const myPosts = await getMyPosts();
 
   return (
     <div className="bg-white">
@@ -28,28 +21,22 @@ export default async function EditorPage({
         <p className="text-muted-foreground mt-2">
           {session?.user?.email} / {roleLabel}
         </p>
-        {created && (
-          <div className="mt-4 rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
-            새 글이 저장되었습니다.
-          </div>
-        )}
-        {error && (
-          <div className="mt-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            오류가 발생했어요. 다시 시도해 주세요.
-          </div>
-        )}
-        {updated && (
-          <div className="mt-4 rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
-            게시글 상태가 업데이트되었습니다.
-          </div>
-        )}
-        {deleted && (
-          <div className="mt-4 rounded-md border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
-            게시글이 삭제되었습니다.
-          </div>
-        )}
         {/* 내 글 목록 */}
-        <MyPosts />
+        <div className="mt-6 mb-4 flex items-center justify-between gap-3">
+          <div>
+            <h2 className="mb-1 text-xl font-bold">내 글 목록</h2>
+            <div className="text-muted-foreground text-sm">
+              ※ 발행되지 않은 초안은 공개 페이지에서 보이지 않아요.
+            </div>
+          </div>
+          <Link
+            href="/editor/new"
+            className="bg-primary inline-flex items-center rounded-md px-3 py-2 text-sm text-white shadow-sm transition hover:opacity-90"
+          >
+            새 글 작성
+          </Link>
+        </div>
+        <MyPosts myPosts={myPosts} />
       </section>
     </div>
   );

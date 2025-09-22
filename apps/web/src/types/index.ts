@@ -6,6 +6,8 @@ export interface QueryResult<T> {
   statusText: string;
 }
 
+export type ResponseStatusType = 'success' | 'error';
+
 export interface Post {
   id: number; // id
   title: string; // 제목

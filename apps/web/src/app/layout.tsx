@@ -5,6 +5,7 @@ import { Footer } from '@/components/shared/Footer';
 import { AuthProvider } from '@/providers/AuthProvider';
 import NicknameModal from '@/components/shared/NicknameModal';
 import EditorFab from '@/components/shared/EditorFab';
+import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -58,6 +59,7 @@ export default function RootLayout({
           </div>
           <EditorFab />
           <NicknameModal />
+          <Toaster position="top-center" />
         </AuthProvider>
       </body>
     </html>

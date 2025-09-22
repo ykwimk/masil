@@ -23,14 +23,14 @@ export async function createPost(formData: FormData) {
   const descriptionInput = String(formData.get('description') || '').trim();
 
   if (!title || !content) {
-    return redirect('/editor?error=missing_fields');
+    return redirect('/editor');
   }
 
   const description = descriptionInput || summarize(content, 160);
   const status = isPublish ? 'published' : 'draft';
 
   const admin = await getSupabaseAdminClient();
-  if (!admin) return redirect('/editor?error=db_unavailable');
+  if (!admin) return redirect('/editor');
 
   let nickname: string = session.user?.nickname ?? '유저';
   if (!nickname) {
@@ -59,75 +59,74 @@ export async function createPost(formData: FormData) {
     .single();
 
   if (error) {
-    return redirect('/editor?error=insert_failed');
+    return redirect('/editor');
   }
 
-  return redirect('/editor?created=1');
+  return redirect('/editor');
 }
 
 // 게시글 상태 변경 (draft <-> published)
-export async function setPostStatus(formData: FormData) {
+export async function setPostStatus(
+  id: number,
+  currentStatus: 'draft' | 'published',
+) {
   const session = await getServerSession(authOptions);
   const role = session?.user?.role ?? 'user';
   const email = session?.user?.email ?? null;
 
   if (!email || !['admin', 'editor'].includes(role)) {
-    return redirect('/login?callbackUrl=%2Feditor');
+    return { ok: false, error: 'unauthorized' } as const;
   }
 
-  const formId = String(formData.get('id') || '').trim();
-  const idNum = Number(formId);
-  const formStatus = String(formData.get('status') || '').trim();
-  const status = formStatus === 'published' ? 'draft' : 'published';
-
-  const allowed = ['draft', 'published'] as const;
-  if (!Number.isInteger(idNum) || !allowed.includes(formStatus as any)) {
-    return redirect('/editor?error=invalid_params');
+  if (
+    !Number.isInteger(id) ||
+    !['draft', 'published'].includes(currentStatus)
+  ) {
+    return { ok: false, error: 'invalid_params' } as const;
   }
 
   const admin = await getSupabaseAdminClient();
-  if (!admin) return redirect('/editor?error=db_unavailable');
+  if (!admin) return { ok: false, error: 'db_unavailable' } as const;
 
-  let query = admin.from('posts').update({ status }).eq('id', idNum);
+  const nextStatus = currentStatus === 'published' ? 'draft' : 'published';
 
+  let query = admin.from('posts').update({ status: nextStatus }).eq('id', id);
   if (role !== 'admin') {
     query = query.eq('email', email);
   }
 
   const { error } = await query;
-  if (error) return redirect('/editor?error=update_failed');
+  if (error) return { ok: false, error: 'update_failed' } as const;
 
-  return redirect('/editor?updated=1');
+  return { ok: true, status: nextStatus } as const;
 }
 
 // 게시글 삭제
-export async function deletePost(formData: FormData) {
+export async function deletePost(id: number) {
   const session = await getServerSession(authOptions);
   const role = session?.user?.role ?? 'user';
   const email = session?.user?.email ?? null;
 
   if (!email || !['admin', 'editor'].includes(role)) {
-    return redirect('/login?callbackUrl=%2Feditor');
+    return { ok: false, error: 'unauthorized' } as const;
   }
 
-  const formId = String(formData.get('id') || '').trim();
-  const idNum = Number(formId);
-  if (!Number.isInteger(idNum)) {
-    return redirect('/editor?error=invalid_params');
+  if (!Number.isInteger(id)) {
+    return { ok: false, error: 'invalid_params' } as const;
   }
 
   const admin = await getSupabaseAdminClient();
-  if (!admin) return redirect('/editor?error=db_unavailable');
+  if (!admin) return { ok: false, error: 'db_unavailable' } as const;
 
-  let query = admin.from('posts').delete().eq('id', idNum);
+  let query = admin.from('posts').delete().eq('id', id);
   if (role !== 'admin') {
     query = query.eq('email', email);
   }
 
   const { error } = await query;
-  if (error) return redirect('/editor?error=delete_failed');
+  if (error) return { ok: false, error: 'delete_failed' } as const;
 
-  return redirect('/editor?deleted=1');
+  return { ok: true } as const;
 }
 
 // 게시글 수정
@@ -149,17 +148,17 @@ export async function updatePost(formData: FormData) {
   const descriptionInput = String(formData.get('description') || '').trim();
 
   if (!Number.isInteger(idNum)) {
-    return redirect('/editor?error=invalid_params');
+    return redirect('/editor');
   }
 
   if (!title || !content) {
-    return redirect('/editor?error=missing_fields');
+    return redirect('/editor');
   }
 
   const description = descriptionInput || summarize(content, 160);
 
   const admin = await getSupabaseAdminClient();
-  if (!admin) return redirect('/editor?error=db_unavailable');
+  if (!admin) return redirect('/editor');
 
   const updatePayload: any = {
     title,
@@ -177,9 +176,9 @@ export async function updatePost(formData: FormData) {
   }
 
   const { error } = await query;
-  if (error) return redirect('/editor?error=update_failed');
+  if (error) return redirect('/editor');
 
-  return redirect('/editor?updated=1');
+  return redirect('/editor');
 }
 
 // 내 글 목록 불러오기
@@ -218,7 +217,7 @@ export async function getPostEditorById(id: string) {
   }
 
   const admin = await getSupabaseAdminClient();
-  if (!admin) return redirect('/editor?error=db_unavailable');
+  if (!admin) return redirect('/editor');
 
   const idNum = Number(id);
   let selectQuery = admin
@@ -230,7 +229,7 @@ export async function getPostEditorById(id: string) {
   }
 
   const { data, error } = await selectQuery.single();
-  if (error || !data) return redirect('/editor?error=not_found');
+  if (error || !data) return redirect('/editor');
 
   return data;
 }

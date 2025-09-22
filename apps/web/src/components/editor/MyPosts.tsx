@@ -1,11 +1,89 @@
-import Link from 'next/link';
-import { getMyPosts, setPostStatus, deletePost } from '@/app/editor/actions';
-import { Button } from '@/components/ui/button';
+'use client';
 
-export default async function MyPosts() {
-  const myPosts = await getMyPosts();
+import { useCallback, useState } from 'react';
+import { toast } from 'sonner';
+import { deletePost, setPostStatus } from '@/app/editor/actions';
+import MyPostItem from './MyPostItem';
+import type { Post } from '@/types';
 
-  if (myPosts.length <= 0)
+type MyPost = Pick<Post, 'id' | 'title' | 'created_at' | 'status'>;
+
+export default function MyPosts({ myPosts }: { myPosts: MyPost[] }) {
+  const [posts, setPosts] = useState<MyPost[]>(myPosts);
+  const [pending, setPending] = useState<Set<number>>(() => new Set());
+
+  const handleSetPendingFlag = useCallback((id: number, isFlag: boolean) => {
+    setPending((prev) => {
+      const next = new Set(prev);
+      if (isFlag) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  }, []);
+
+  const onToggleStatus = useCallback(
+    async (id: number) => {
+      const target = posts.find((post) => post.id === id);
+      if (!target) return;
+
+      const targetStatus = target.status;
+      const changeStatus = targetStatus === 'published' ? 'draft' : 'published';
+
+      handleSetPendingFlag(id, true);
+      setPosts((prev) =>
+        prev.map((post) =>
+          post.id === id ? { ...post, status: changeStatus } : post,
+        ),
+      );
+
+      try {
+        const res = await setPostStatus(id, targetStatus);
+        if (!res?.ok) {
+          setPosts((prev) =>
+            prev.map((post) =>
+              post.id === id ? { ...post, status: targetStatus } : post,
+            ),
+          );
+          toast.error('오류가 발생했어요. 다시 시도해 주세요.');
+        } else {
+          const message =
+            changeStatus === 'published'
+              ? '게시글이 발행되었습니다.'
+              : '게시글 발행이 취소되었습니다.';
+          toast.success('게시글 상태가 업데이트되었습니다.');
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
+      handleSetPendingFlag(id, false);
+    },
+    [posts, handleSetPendingFlag],
+  );
+
+  const onDeletePost = useCallback(
+    async (id: number) => {
+      handleSetPendingFlag(id, true);
+      setPosts((prev) => prev.filter((post) => post.id !== id));
+
+      try {
+        const res = await deletePost(id);
+        if (!res?.ok) {
+          setPosts(posts);
+          toast.error('삭제에 실패했어요. 다시 시도해 주세요.');
+        } else {
+          toast.success('게시글이 삭제되었습니다.');
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
+      handleSetPendingFlag(id, false);
+    },
+    [posts, handleSetPendingFlag],
+  );
+
+  if (posts.length <= 0)
     return (
       <div className="text-muted-foreground pt-24 text-center text-xl font-semibold">
         내 작성한 포스트가 없어요 😅
@@ -13,79 +91,16 @@ export default async function MyPosts() {
     );
 
   return (
-    <div className="mt-8">
-      <div className="mt-6 mb-4 flex items-center justify-between gap-3">
-        <div>
-          <h2 className="mb-1 text-xl font-bold">내 글 목록</h2>
-          <div className="text-muted-foreground text-sm">
-            ※ 발행되지 않은 초안은 공개 페이지에서 보이지 않아요.
-          </div>
-        </div>
-        <Link
-          href="/editor/new"
-          className="bg-primary inline-flex items-center rounded-md px-3 py-2 text-sm text-white shadow-sm transition hover:opacity-90"
-        >
-          새 글 작성
-        </Link>
-      </div>
-      <div className="divide-y rounded-md border">
-        {myPosts.map((post) => (
-          <div key={post.id} className="flex flex-wrap items-center gap-3 p-3">
-            <div className="min-w-0 flex-1">
-              <div className="truncate font-medium">{post.title}</div>
-              <div className="text-muted-foreground mt-0.5 text-xs">
-                {post.created_at
-                  ? new Date(post.created_at).toLocaleString()
-                  : ''}
-              </div>
-            </div>
-            <span
-              className={`rounded-full px-2 py-0.5 text-xs ${
-                post.status === 'published'
-                  ? 'bg-green-100 text-green-700'
-                  : 'bg-gray-100 text-gray-700'
-              }`}
-            >
-              {post.status === 'published' ? '발행됨' : '초안'}
-            </span>
-            <form action={setPostStatus}>
-              <input type="hidden" name="id" value={post.id} />
-              <input type="hidden" name="status" value={post.status} />
-              {post.status === 'published' ? (
-                <Button
-                  type="submit"
-                  variant="outline"
-                  className="cursor-pointer"
-                >
-                  발행 취소
-                </Button>
-              ) : (
-                <Button type="submit" className="cursor-pointer">
-                  발행하기
-                </Button>
-              )}
-            </form>
-            <Button
-              asChild={post.status !== 'published'}
-              variant="outline"
-              className="cursor-pointer"
-              disabled={post.status === 'published'}
-            >
-              <Link href={`/editor/${post.id}`}>수정</Link>
-            </Button>
-            <form action={deletePost}>
-              <input type="hidden" name="id" value={post.id} />
-              <Button
-                type="submit"
-                variant="destructive"
-                className="cursor-pointer"
-              >
-                삭제
-              </Button>
-            </form>
-          </div>
-        ))}
-      </div>
+    <div className="mt-2 divide-y rounded-md border">
+      {posts.map((post) => (
+        <MyPostItem
+          key={post.id}
+          post={post}
+          disabled={pending.has(post.id)}
+          onToggleStatus={onToggleStatus}
+          onDeletePost={onDeletePost}
+        />
+      ))}
     </div>
   );
 }
