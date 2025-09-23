@@ -110,3 +110,14 @@ export function sanitizeHtmlFragment(input: string): string {
     },
   });
 }
+
+export function parseBoundedInt(
+  value: string | null,
+  def: number,
+  min: number,
+  max: number,
+) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return def;
+  return Math.max(min, Math.min(Math.trunc(number), max));
+}
