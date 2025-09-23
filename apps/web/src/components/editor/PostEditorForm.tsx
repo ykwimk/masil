@@ -57,9 +57,6 @@ export function PostEditorForm({
         <Label title="태그" required>
           <TagSelector initialTags={initialTags} />
         </Label>
-        <p className="text-muted-foreground mt-1 text-xs">
-          등록된 태그를 검색해 선택하세요.
-        </p>
       </div>
       <div className="space-y-2">
         <Label title="요약" htmlFor="description">

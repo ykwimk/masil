@@ -13,9 +13,13 @@ import TagsDropdownList from './TagsDropdownList';
 
 interface TagSelectorProps {
   initialTags: string[];
+  maxSelected?: number;
 }
 
-export default function TagSelector({ initialTags = [] }: TagSelectorProps) {
+export default function TagSelector({
+  initialTags = [],
+  maxSelected = 5,
+}: TagSelectorProps) {
   const listboxId = useId();
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -26,6 +30,7 @@ export default function TagSelector({ initialTags = [] }: TagSelectorProps) {
   const [open, setOpen] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isComposing, setIsComposing] = useState<boolean>(false);
+  const isLimitedLength = selectedTags.length >= maxSelected;
 
   const suggestions = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -47,12 +52,13 @@ export default function TagSelector({ initialTags = [] }: TagSelectorProps) {
     (tag: string) => {
       if (!tag) return;
       if (selectedTags.includes(tag)) return;
+      if (isLimitedLength) return;
 
       setSelectedTags((prev) => [...prev, tag]);
       resetQuery();
       setOpen(false);
     },
-    [resetQuery, selectedTags],
+    [selectedTags, isLimitedLength, resetQuery],
   );
 
   const handleRemoveTag = useCallback((tag: string) => {
@@ -60,6 +66,7 @@ export default function TagSelector({ initialTags = [] }: TagSelectorProps) {
   }, []);
 
   const handleEnter = useCallback(() => {
+    if (isLimitedLength) return;
     if (suggestions.length > 0) {
       const pickTag =
         suggestions[Math.max(0, Math.min(activeIndex, suggestions.length - 1))];
@@ -75,7 +82,7 @@ export default function TagSelector({ initialTags = [] }: TagSelectorProps) {
       (tag) => tag.toLowerCase() === normalizedQuery,
     );
     if (findTag) handleAddTag(findTag);
-  }, [suggestions, activeIndex, handleAddTag, query, allTags]);
+  }, [suggestions, activeIndex, query, allTags, isLimitedLength, handleAddTag]);
 
   const handleBackspace = useCallback(() => {
     if (query === '' && selectedTags.length > 0) {
@@ -84,11 +91,12 @@ export default function TagSelector({ initialTags = [] }: TagSelectorProps) {
   }, [query, selectedTags, handleRemoveTag]);
 
   const handleArrowDown = useCallback(() => {
+    if (isLimitedLength) return;
     if (!open) setOpen(true);
     if (suggestions.length > 0) {
       setActiveIndex((i) => (i + 1) % suggestions.length);
     }
-  }, [open, suggestions.length]);
+  }, [open, suggestions.length, isLimitedLength]);
 
   const handleArrowUp = useCallback(() => {
     if (suggestions.length > 0) {
@@ -197,26 +205,30 @@ export default function TagSelector({ initialTags = [] }: TagSelectorProps) {
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
-            setOpen(true);
+            if (!isLimitedLength) setOpen(true);
             setActiveIndex(0);
           }}
-          onFocus={() => setOpen(true)}
+          onFocus={() => !isLimitedLength && setOpen(true)}
           onKeyDown={onKeyDown}
           onCompositionStart={() => setIsComposing(true)}
           onCompositionEnd={(e) => {
             setIsComposing(false);
             setQuery((e.target as HTMLInputElement).value);
           }}
-          placeholder="태그를 검색해 선택하세요"
+          placeholder={
+            selectedTags.length > 0 ? '' : '태그를 검색해 선택하세요'
+          }
           className="placeholder:text-muted-foreground/70 min-w-[180px] flex-1 border-0 p-0 text-sm outline-none"
           aria-label="태그 검색"
           role="combobox"
           aria-expanded={open}
           aria-controls={listboxId}
           aria-autocomplete="list"
+          aria-disabled={isLimitedLength}
+          title={isLimitedLength ? '최대 5개까지 선택할 수 있어요' : undefined}
         />
       </div>
-      {open && suggestions.length > 0 && (
+      {open && !isLimitedLength && suggestions.length > 0 && (
         <TagsDropdownList
           listboxId={listboxId}
           suggestions={suggestions}
@@ -225,6 +237,13 @@ export default function TagSelector({ initialTags = [] }: TagSelectorProps) {
           onAddTag={handleAddTag}
         />
       )}
+      <p
+        className={`text-muted-foreground mt-2 text-xs ${isLimitedLength && 'text-red-500'}`}
+      >
+        {isLimitedLength
+          ? '최대 5개까지 선택할 수 있어요.'
+          : '등록된 태그를 검색해 선택하세요.'}
+      </p>
     </div>
   );
 }
