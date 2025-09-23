@@ -11,15 +11,15 @@ import {
 import TagChip from './TagChip';
 import TagsDropdownList from './TagsDropdownList';
 
-interface TagSelectorProps {
+interface TagsSelectorProps {
   initialTags: string[];
   maxSelected?: number;
 }
 
-export default function TagSelector({
+export default function TagsSelector({
   initialTags = [],
   maxSelected = 5,
-}: TagSelectorProps) {
+}: TagsSelectorProps) {
   const listboxId = useId();
 
   const containerRef = useRef<HTMLDivElement | null>(null);

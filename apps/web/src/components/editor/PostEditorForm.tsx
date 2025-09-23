@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
-import { TiptapEditor } from '@/components/editor/TiptapEditor';
-import TagSelector from '@/components/editor/TagSelector';
+import TagsSelector from '@/components/editor/tags/TagsSelector';
 import { Label } from '@/components/ui/label';
+import { TiptapEditor } from '@/components/editor/tiptap/TiptapEditor';
 
 interface InitialValues {
   title?: string;
@@ -55,7 +55,7 @@ export function PostEditorForm({
       </div>
       <div className="space-y-2">
         <Label title="태그" required>
-          <TagSelector initialTags={initialTags} />
+          <TagsSelector initialTags={initialTags} />
         </Label>
       </div>
       <div className="space-y-2">
