@@ -18,7 +18,7 @@ export async function createPost(formData: FormData) {
 
   const title = String(formData.get('title') || '').trim();
   const content = String(formData.get('content') || '').trim();
-  const tags = parseTags(String(formData.get('tags') || ''));
+  const tags = parseTags(formData.getAll('tags').map(String));
   const isPublish = String(formData.get('publish') || '') === 'on';
   const descriptionInput = String(formData.get('description') || '').trim();
 
@@ -51,6 +51,13 @@ export async function createPost(formData: FormData) {
     email: session.user.email,
     status,
   };
+
+  if (tags && tags.length > 0) {
+    await admin.from('tags').upsert(
+      tags.map((name: string) => ({ name, is_active: true })),
+      { onConflict: 'name' },
+    );
+  }
 
   const { error } = await admin
     .from('posts')
@@ -144,7 +151,7 @@ export async function updatePost(formData: FormData) {
 
   const title = String(formData.get('title') || '').trim();
   const content = String(formData.get('content') || '').trim();
-  const tags = parseTags(String(formData.get('tags') || ''));
+  const tags = parseTags(formData.getAll('tags').map(String));
   const descriptionInput = String(formData.get('description') || '').trim();
 
   if (!Number.isInteger(idNum)) {
@@ -169,6 +176,13 @@ export async function updatePost(formData: FormData) {
 
   const isPublish = String(formData.get('publish') || '') === 'on';
   if (isPublish) updatePayload.status = 'published';
+
+  if (tags && tags.length > 0) {
+    await admin.from('tags').upsert(
+      tags.map((name: string) => ({ name, is_active: true })),
+      { onConflict: 'name' },
+    );
+  }
 
   let query = admin.from('posts').update(updatePayload).eq('id', idNum);
   if (role !== 'admin') {

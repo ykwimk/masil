@@ -43,6 +43,21 @@ export default function TagsSelector({
     return limitedList;
   }, [allTags, selectedTags, query]);
 
+  const isCanCreate = useMemo(() => {
+    if (isLimitedLength) return false;
+
+    const trimmedQuery = query.trim();
+    if (!trimmedQuery) return false;
+
+    const isExists = allTags.some(
+      (tag) => tag.toLowerCase() === trimmedQuery.toLowerCase(),
+    );
+    const isExistsSelected = selectedTags.some(
+      (tag) => tag.toLowerCase() === trimmedQuery.toLowerCase(),
+    );
+    return !isExists && !isExistsSelected;
+  }, [query, isLimitedLength, allTags, selectedTags]);
+
   const resetQuery = useCallback(() => {
     setQuery('');
     setActiveIndex(0);
@@ -50,11 +65,12 @@ export default function TagsSelector({
 
   const handleAddTag = useCallback(
     (tag: string) => {
-      if (!tag) return;
-      if (selectedTags.includes(tag)) return;
+      const name = tag.trim().replace(/\s+/g, ' ');
+      if (!name) return;
+      if (selectedTags.includes(name)) return;
       if (isLimitedLength) return;
 
-      setSelectedTags((prev) => [...prev, tag]);
+      setSelectedTags((prev) => [...prev, name]);
       resetQuery();
       setOpen(false);
     },
@@ -67,22 +83,27 @@ export default function TagsSelector({
 
   const handleEnter = useCallback(() => {
     if (isLimitedLength) return;
-    if (suggestions.length > 0) {
-      const pickTag =
-        suggestions[Math.max(0, Math.min(activeIndex, suggestions.length - 1))];
+    const total = suggestions.length + (isCanCreate ? 1 : 0);
+    if (total === 0) return;
 
-      handleAddTag(pickTag);
+    if (isCanCreate && activeIndex === 0) {
+      const newTag = query.trim();
+      if (newTag) handleAddTag(newTag);
       return;
     }
 
-    const normalizedQuery = query.trim().toLowerCase();
-    if (!normalizedQuery) return;
-
-    const findTag = allTags.find(
-      (tag) => tag.toLowerCase() === normalizedQuery,
-    );
-    if (findTag) handleAddTag(findTag);
-  }, [suggestions, activeIndex, query, allTags, isLimitedLength, handleAddTag]);
+    const idx = activeIndex - (isCanCreate ? 1 : 0);
+    const bounded = Math.max(0, Math.min(idx, suggestions.length - 1));
+    const pickTag = suggestions[bounded];
+    if (pickTag) handleAddTag(pickTag);
+  }, [
+    isLimitedLength,
+    suggestions,
+    isCanCreate,
+    activeIndex,
+    query,
+    handleAddTag,
+  ]);
 
   const handleBackspace = useCallback(() => {
     if (query === '' && selectedTags.length > 0) {
@@ -93,16 +114,18 @@ export default function TagsSelector({
   const handleArrowDown = useCallback(() => {
     if (isLimitedLength) return;
     if (!open) setOpen(true);
-    if (suggestions.length > 0) {
-      setActiveIndex((i) => (i + 1) % suggestions.length);
+    const total = suggestions.length + (isCanCreate ? 1 : 0);
+    if (total > 0) {
+      setActiveIndex((i) => (i + 1) % total);
     }
-  }, [open, suggestions.length, isLimitedLength]);
+  }, [open, suggestions.length, isLimitedLength, isCanCreate]);
 
   const handleArrowUp = useCallback(() => {
-    if (suggestions.length > 0) {
-      setActiveIndex((i) => (i - 1 + suggestions.length) % suggestions.length);
+    const total = suggestions.length + (isCanCreate ? 1 : 0);
+    if (total > 0) {
+      setActiveIndex((i) => (i - 1 + total) % total);
     }
-  }, [suggestions.length]);
+  }, [suggestions.length, isCanCreate]);
 
   const onKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -187,10 +210,13 @@ export default function TagsSelector({
 
   return (
     <div ref={containerRef} className="relative">
+      {selectedTags.map((t) => (
+        <input key={`hidden-${t}`} type="hidden" name="tags" value={t} />
+      ))}
       <input
         type="text"
-        name="tags"
-        value={selectedTags.join(', ')}
+        name="tagsRequired"
+        value={selectedTags.length > 0 ? '1' : ''}
         readOnly
         className="sr-only"
         aria-hidden
@@ -228,13 +254,21 @@ export default function TagsSelector({
           title={isLimitedLength ? '최대 5개까지 선택할 수 있어요' : undefined}
         />
       </div>
-      {open && !isLimitedLength && suggestions.length > 0 && (
+      {open && !isLimitedLength && (suggestions.length > 0 || isCanCreate) && (
         <TagsDropdownList
           listboxId={listboxId}
           suggestions={suggestions}
           activeIndex={activeIndex}
+          isCanCreate={isCanCreate}
+          createLabel={
+            query.trim() ? `+ "${query.trim()}" 새 태그 추가` : undefined
+          }
           setActiveIndex={setActiveIndex}
           onAddTag={handleAddTag}
+          onCreateTag={() => {
+            const newTag = query.trim();
+            if (newTag) handleAddTag(newTag);
+          }}
         />
       )}
       <p

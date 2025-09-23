@@ -31,17 +31,16 @@ export function summarize(text: string, len = 140): string {
   return clean.slice(0, len - 1) + '…';
 }
 
-export function parseTags(input: string | null | undefined): string[] {
+export function parseTags(input: string[]): string[] {
   if (!input) return [];
 
   return Array.from(
     new Set(
       input
-        .split(/[,\s]+/)
-        .map((t) => t.trim())
+        .map((tag) => tag.trim().replace(/\s+/g, ' '))
         .filter(Boolean)
-        .map((t) => (t.length > 30 ? t.slice(0, 30) : t))
-        .map((t) => t.toLowerCase()),
+        .map((tag) => (tag.length > 30 ? tag.slice(0, 30) : tag))
+        .map((tag) => tag.toLowerCase()),
     ),
   );
 }
