@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { TiptapEditor } from '@/components/editor/TiptapEditor';
+import TagSelector from '@/components/editor/TagSelector';
+import { Label } from '@/components/ui/label';
 
 interface InitialValues {
   title?: string;
@@ -31,69 +33,54 @@ export function PostEditorForm({
 
   const [html, setHtml] = useState<string>(initialValues?.content ?? '');
 
-  const tagsDefault = Array.isArray(initialValues?.tags)
-    ? (initialValues?.tags as string[]).join(', ')
-    : ((initialValues?.tags as string | undefined) ?? '');
+  const initialTags: string[] = Array.isArray(initialValues?.tags)
+    ? initialValues?.tags
+    : (initialValues?.tags?.split(/[,\s]+/).filter(Boolean) ?? []);
 
   return (
     <form action={onAction} className="space-y-6">
       {id !== undefined && <input type="hidden" name="id" value={id} />}
       <div className="space-y-2">
-        <label htmlFor="title" className="block text-sm font-medium">
-          <span className="mr-1 text-red-600" aria-hidden>
-            *
-          </span>
-          제목
-        </label>
-        <input
-          id="title"
-          name="title"
-          type="text"
-          required
-          placeholder="포스트 제목"
-          defaultValue={initialValues?.title ?? ''}
-          className="focus:ring-primary w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2"
-        />
+        <Label title="제목" htmlFor="title" required>
+          <input
+            id="title"
+            name="title"
+            type="text"
+            required
+            placeholder="포스트 제목"
+            defaultValue={initialValues?.title ?? ''}
+            className="focus:ring-primary w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2"
+          />
+        </Label>
       </div>
       <div className="space-y-2">
-        <label htmlFor="tags" className="block text-sm font-medium">
-          <span className="mr-1 text-red-600" aria-hidden>
-            *
-          </span>
-          태그(쉼표 또는 공백으로 구분)
-        </label>
-        <input
-          id="tags"
-          name="tags"
-          type="text"
-          required
-          placeholder="ex) 그로스, 데이터, 브랜딩, 스타트업"
-          defaultValue={tagsDefault}
-          className="focus:ring-primary w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2"
-        />
+        <Label title="태그" required>
+          <TagSelector initialTags={initialTags} />
+        </Label>
+        <p className="text-muted-foreground mt-1 text-xs">
+          등록된 태그를 검색해 선택하세요.
+        </p>
       </div>
       <div className="space-y-2">
-        <label htmlFor="description" className="block text-sm font-medium">
-          요약(선택)
-        </label>
-        <input
-          id="description"
-          name="description"
-          type="text"
-          placeholder="리스트에 보일 간단한 설명 (미입력 시 본문에서 자동 생성)"
-          defaultValue={initialValues?.description ?? ''}
-          className="focus:ring-primary w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2"
-        />
+        <Label title="요약" htmlFor="description">
+          <input
+            id="description"
+            name="description"
+            type="text"
+            placeholder="리스트에 보일 간단한 설명 (미입력 시 본문에서 자동 생성)"
+            defaultValue={initialValues?.description ?? ''}
+            className="focus:ring-primary w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2"
+          />
+        </Label>
       </div>
       <div className="space-y-2">
-        <label htmlFor="content" className="block text-sm font-medium">
-          <span className="mr-1 text-red-600" aria-hidden>
-            *
-          </span>
-          컨텐츠
-        </label>
-        <TiptapEditor initialHTML={initialValues?.content} onChange={setHtml} />
-        <input type="hidden" id="content" name="content" value={html} />
+        <Label title="컨텐츠" htmlFor="content" required>
+          <TiptapEditor
+            initialHTML={initialValues?.content}
+            onChange={setHtml}
+          />
+          <input type="hidden" id="content" name="content" value={html} />
+        </Label>
       </div>
       {isShowPublishToggle && (
         <div className="flex items-center gap-2">

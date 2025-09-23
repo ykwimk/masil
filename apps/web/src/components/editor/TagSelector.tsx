@@ -1,0 +1,230 @@
+'use client';
+
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import TagChip from './TagChip';
+import TagsDropdownList from './TagsDropdownList';
+
+interface TagSelectorProps {
+  initialTags: string[];
+}
+
+export default function TagSelector({ initialTags = [] }: TagSelectorProps) {
+  const listboxId = useId();
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const [allTags, setAllTags] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>(initialTags);
+  const [query, setQuery] = useState<string>('');
+  const [open, setOpen] = useState<boolean>(false);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [isComposing, setIsComposing] = useState<boolean>(false);
+
+  const suggestions = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+    const remainingTags = allTags.filter((tag) => !selectedTags.includes(tag));
+    const list = normalizedQuery
+      ? remainingTags.filter((t) => t.toLowerCase().includes(normalizedQuery))
+      : remainingTags;
+    const limitedList = list.slice(0, 10);
+
+    return limitedList;
+  }, [allTags, selectedTags, query]);
+
+  const resetQuery = useCallback(() => {
+    setQuery('');
+    setActiveIndex(0);
+  }, []);
+
+  const handleAddTag = useCallback(
+    (tag: string) => {
+      if (!tag) return;
+      if (selectedTags.includes(tag)) return;
+
+      setSelectedTags((prev) => [...prev, tag]);
+      resetQuery();
+      setOpen(false);
+    },
+    [resetQuery, selectedTags],
+  );
+
+  const handleRemoveTag = useCallback((tag: string) => {
+    setSelectedTags((prev) => prev.filter((t) => t !== tag));
+  }, []);
+
+  const handleEnter = useCallback(() => {
+    if (suggestions.length > 0) {
+      const pickTag =
+        suggestions[Math.max(0, Math.min(activeIndex, suggestions.length - 1))];
+
+      handleAddTag(pickTag);
+      return;
+    }
+
+    const normalizedQuery = query.trim().toLowerCase();
+    if (!normalizedQuery) return;
+
+    const findTag = allTags.find(
+      (tag) => tag.toLowerCase() === normalizedQuery,
+    );
+    if (findTag) handleAddTag(findTag);
+  }, [suggestions, activeIndex, handleAddTag, query, allTags]);
+
+  const handleBackspace = useCallback(() => {
+    if (query === '' && selectedTags.length > 0) {
+      handleRemoveTag(selectedTags[selectedTags.length - 1]);
+    }
+  }, [query, selectedTags, handleRemoveTag]);
+
+  const handleArrowDown = useCallback(() => {
+    if (!open) setOpen(true);
+    if (suggestions.length > 0) {
+      setActiveIndex((i) => (i + 1) % suggestions.length);
+    }
+  }, [open, suggestions.length]);
+
+  const handleArrowUp = useCallback(() => {
+    if (suggestions.length > 0) {
+      setActiveIndex((i) => (i - 1 + suggestions.length) % suggestions.length);
+    }
+  }, [suggestions.length]);
+
+  const onKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      const nativeAny = e.nativeEvent;
+      if (isComposing || nativeAny?.isComposing) return;
+
+      switch (e.key) {
+        case 'Enter':
+          e.preventDefault();
+          handleEnter();
+          break;
+        case 'Backspace':
+          if (query === '' && selectedTags.length > 0) e.preventDefault();
+          handleBackspace();
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          handleArrowDown();
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          handleArrowUp();
+          break;
+        case 'Escape':
+          if (open) {
+            e.preventDefault();
+            setOpen(false);
+          }
+          break;
+      }
+    },
+    [
+      isComposing,
+      open,
+      query,
+      selectedTags.length,
+      handleEnter,
+      handleBackspace,
+      handleArrowDown,
+      handleArrowUp,
+    ],
+  );
+
+  const fetchTags = useCallback(async (signal: AbortSignal) => {
+    const res = await fetch('/api/tags', { cache: 'no-store', signal });
+    if (!res.ok) return [];
+
+    const data = await res.json();
+    return Array.isArray(data?.tags) ? data.tags : [];
+  }, []);
+
+  const loadTags = useCallback(
+    async (signal: AbortSignal) => {
+      try {
+        const tags = await fetchTags(signal);
+        setAllTags(tags);
+      } catch (err: any) {
+        if (err?.name === 'AbortError') return;
+        setAllTags([]);
+      }
+    },
+    [fetchTags],
+  );
+
+  useEffect(() => {
+    const controller = new AbortController();
+    loadTags(controller.signal);
+
+    return () => controller.abort();
+  }, [loadTags]);
+
+  useEffect(() => {
+    const onClickOutside = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      if (!containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', onClickOutside);
+    return () => document.removeEventListener('mousedown', onClickOutside);
+  }, []);
+
+  return (
+    <div ref={containerRef} className="relative">
+      <input
+        type="text"
+        name="tags"
+        value={selectedTags.join(', ')}
+        readOnly
+        className="sr-only"
+        aria-hidden
+        required
+      />
+      <div className="flex flex-wrap gap-2 rounded-md border px-3 py-2">
+        {selectedTags.map((t) => (
+          <TagChip key={t} tag={t} onRemoveTag={handleRemoveTag} />
+        ))}
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setOpen(true);
+            setActiveIndex(0);
+          }}
+          onFocus={() => setOpen(true)}
+          onKeyDown={onKeyDown}
+          onCompositionStart={() => setIsComposing(true)}
+          onCompositionEnd={(e) => {
+            setIsComposing(false);
+            setQuery((e.target as HTMLInputElement).value);
+          }}
+          placeholder="태그를 검색해 선택하세요"
+          className="placeholder:text-muted-foreground/70 min-w-[180px] flex-1 border-0 p-0 text-sm outline-none"
+          aria-label="태그 검색"
+          role="combobox"
+          aria-expanded={open}
+          aria-controls={listboxId}
+          aria-autocomplete="list"
+        />
+      </div>
+      {open && suggestions.length > 0 && (
+        <TagsDropdownList
+          listboxId={listboxId}
+          suggestions={suggestions}
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
+          onAddTag={handleAddTag}
+        />
+      )}
+    </div>
+  );
+}
