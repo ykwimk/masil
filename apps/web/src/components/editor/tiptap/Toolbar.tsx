@@ -185,6 +185,15 @@ export default function Toolbar({ editor }: ToolbarProps) {
     }
   };
 
+  const setAlign = (align: 'left' | 'center' | 'right' | 'justify') => () => {
+    const chain = editor.chain().focus();
+    if (editor.isActive('image')) {
+      chain.updateAttributes('image', { textAlign: align }).run();
+    } else {
+      chain.setTextAlign(align).run();
+    }
+  };
+
   return (
     <div className="flex flex-wrap gap-2">
       <input
@@ -389,33 +398,25 @@ export default function Toolbar({ editor }: ToolbarProps) {
       <ToolbarGroup label="정렬">
         <ToolbarButton
           active={editor.isActive({ textAlign: 'left' })}
-          onClick={toggle(() =>
-            editor.chain().focus().setTextAlign('left').run(),
-          )}
+          onClick={setAlign('left')}
         >
           좌
         </ToolbarButton>
         <ToolbarButton
           active={editor.isActive({ textAlign: 'center' })}
-          onClick={toggle(() =>
-            editor.chain().focus().setTextAlign('center').run(),
-          )}
+          onClick={setAlign('center')}
         >
           중
         </ToolbarButton>
         <ToolbarButton
           active={editor.isActive({ textAlign: 'right' })}
-          onClick={toggle(() =>
-            editor.chain().focus().setTextAlign('right').run(),
-          )}
+          onClick={setAlign('right')}
         >
           우
         </ToolbarButton>
         <ToolbarButton
           active={editor.isActive({ textAlign: 'justify' })}
-          onClick={toggle(() =>
-            editor.chain().focus().setTextAlign('justify').run(),
-          )}
+          onClick={setAlign('justify')}
         >
           양쪽
         </ToolbarButton>
