@@ -1,7 +1,7 @@
 import 'server-only';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-type SupabaseAdminLike = Pick<SupabaseClient, 'from'>;
+type SupabaseAdminLike = Pick<SupabaseClient, 'from' | 'storage'>;
 
 let adminClient: SupabaseAdminLike | null = null;
 

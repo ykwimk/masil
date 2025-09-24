@@ -268,6 +268,39 @@ body {
   padding: 0;
 }
 
+/* Images */
+.prose-custom img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.75rem 0;
+  border-radius: 0.375rem; /* rounded-md */
+}
+
+/* Tiptap image resizer */
+.prose-custom .tiptap-image-wrapper {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+.prose-custom .tiptap-image-resize-handle {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background: color-mix(in oklch, var(--primary), black 10%);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+  cursor: se-resize;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+}
+.prose-custom .tiptap-image-wrapper:hover .tiptap-image-resize-handle,
+.prose-custom .tiptap-image-wrapper.is-selected .tiptap-image-resize-handle {
+  opacity: 0.9;
+}
+
 /* Highlight (형광펜) */
 .prose-custom mark {
   background: color-mix(in oklch, var(--primary), white 85%);

@@ -1,3 +1,6 @@
+'use client';
+
+import { useRef, useState } from 'react';
 import { Editor } from '@tiptap/react';
 import ToolbarGroup from './ToolbarGroup';
 import ToolbarButton from './ToolbarButton';
@@ -33,6 +36,10 @@ const languageOptions = [
 ];
 
 export default function Toolbar({ editor }: ToolbarProps) {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+
   const toggle = (command: () => void) => () => command();
 
   const currentLanguage = (editor?.getAttributes('codeBlock')?.language ??
@@ -61,8 +68,132 @@ export default function Toolbar({ editor }: ToolbarProps) {
       .run();
   };
 
+  const getImageSizeFromFile = async (
+    file: File,
+  ): Promise<{
+    width: number;
+    height: number;
+  } | null> => {
+    try {
+      const bmp = await createImageBitmap(file);
+      const size = { width: bmp.width, height: bmp.height };
+      bmp.close?.();
+      return size;
+    } catch (e) {
+      console.error(e);
+    }
+
+    try {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.src = url;
+      await new Promise((res, rej) => {
+        img.onload = () => res(null);
+        img.onerror = rej;
+      });
+      const size = { width: img.naturalWidth, height: img.naturalHeight };
+      URL.revokeObjectURL(url);
+      return size;
+    } catch {
+      return null;
+    }
+  };
+
+  const getImageSizeFromUrl = async (
+    url: string,
+  ): Promise<{
+    width: number;
+    height: number;
+  } | null> => {
+    try {
+      const img = new Image();
+      img.decoding = 'async';
+      img.loading = 'eager';
+      img.src = url;
+      await new Promise((res, rej) => {
+        img.onload = () => res(null);
+        img.onerror = rej;
+      });
+      return { width: img.naturalWidth, height: img.naturalHeight };
+    } catch {
+      return null;
+    }
+  };
+
+  const insertImageByUrl = async () => {
+    const url = window.prompt('이미지 URL을 입력하세요', 'https://');
+    if (!url) return;
+    try {
+      const u = new URL(url);
+      if (u.protocol !== 'https:') throw new Error('invalid');
+    } catch {
+      alert('올바른 이미지 URL을 입력하세요.');
+      return;
+    }
+    const size = await getImageSizeFromUrl(url);
+    const attrs = size ? { width: size.width, height: size.height } : {};
+    editor
+      .chain()
+      .focus()
+      .setImage({ src: url, ...attrs })
+      .run();
+  };
+
+  const onPickFile = () => {
+    if (!fileInputRef.current) return;
+    fileInputRef.current.value = '';
+    fileInputRef.current.click();
+  };
+
+  const onFileChange: React.ChangeEventHandler<HTMLInputElement> = async (
+    e,
+  ) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      alert('이미지 파일만 업로드할 수 있어요.');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      alert('이미지 용량은 10MB 이하만 가능합니다.');
+      return;
+    }
+    try {
+      setIsUploading(true);
+      const size = await getImageSizeFromFile(file);
+      const body = new FormData();
+      body.append('file', file);
+
+      const res = await fetch('/api/upload', { method: 'POST', body });
+      if (!res.ok) throw new Error('업로드 실패');
+
+      const data = (await res.json()) as { url?: string; error?: string };
+      if (!data.url) throw new Error(data.error || '업로드 실패');
+
+      const attrs = size ? { width: size.width, height: size.height } : {};
+      editor
+        .chain()
+        .focus()
+        .setImage({ src: data.url, ...attrs })
+        .run();
+    } catch (err) {
+      console.error(err);
+      alert('이미지 업로드 중 오류가 발생했어요.');
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
+
   return (
     <div className="flex flex-wrap gap-2">
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={onFileChange}
+      />
       <ToolbarGroup label="블록">
         <ToolbarButton
           active={editor.isActive('paragraph')}
@@ -156,6 +287,12 @@ export default function Toolbar({ editor }: ToolbarProps) {
           onClick={toggle(() => editor.chain().focus().setHardBreak().run())}
         >
           줄바꿈
+        </ToolbarButton>
+      </ToolbarGroup>
+      <ToolbarGroup label="이미지">
+        <ToolbarButton onClick={insertImageByUrl}>이미지 링크</ToolbarButton>
+        <ToolbarButton onClick={onPickFile} disabled={isUploading}>
+          {isUploading ? '업로드 중…' : '파일 업로드'}
         </ToolbarButton>
       </ToolbarGroup>
       <ToolbarGroup label="인라인">

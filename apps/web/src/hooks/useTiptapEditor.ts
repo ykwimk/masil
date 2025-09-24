@@ -32,6 +32,7 @@ import cpp from 'highlight.js/lib/languages/cpp';
 import csharp from 'highlight.js/lib/languages/csharp';
 import kotlin from 'highlight.js/lib/languages/kotlin';
 import swift from 'highlight.js/lib/languages/swift';
+import ResizableImage from '@/components/editor/tiptap/extensions/ResizableImage';
 
 interface UseTiptapEditorProps {
   initialHTML?: string;
@@ -87,6 +88,12 @@ export function useTiptapEditor({
         codeBlock: false,
       }),
       CodeBlockLowlight.configure({ lowlight }),
+      ResizableImage.configure({
+        HTMLAttributes: {
+          loading: 'lazy',
+          decoding: 'async',
+        },
+      }),
       Underline,
       Highlight,
       Link.configure({
@@ -95,7 +102,7 @@ export function useTiptapEditor({
         linkOnPaste: true,
         HTMLAttributes: { rel: 'nofollow noopener noreferrer' },
       }),
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      TextAlign.configure({ types: ['heading', 'paragraph', 'image'] }),
       TaskList,
       TaskItem,
       Placeholder.configure({

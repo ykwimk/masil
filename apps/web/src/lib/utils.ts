@@ -45,6 +45,25 @@ export function parseTags(input: string[]): string[] {
   );
 }
 
+export function parseBoundedInt(
+  value: string | null,
+  def: number,
+  min: number,
+  max: number,
+) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return def;
+  return Math.max(min, Math.min(Math.trunc(number), max));
+}
+
+export function sanitizeFilename(name: string) {
+  return name.replace(/[^a-zA-Z0-9._-]/g, '_');
+}
+
+export function clamp(n: number, min: number, max: number) {
+  return Math.max(min, Math.min(n, max));
+}
+
 export function sanitizeHtmlFragment(input: string): string {
   return sanitizeHtml(input, {
     allowedTags: [
@@ -63,6 +82,7 @@ export function sanitizeHtmlFragment(input: string): string {
       'label',
       'input',
       'div',
+      'img',
       'h1',
       'h2',
       'h3',
@@ -76,6 +96,16 @@ export function sanitizeHtmlFragment(input: string): string {
     ],
     allowedAttributes: {
       a: ['href', 'name', 'target', 'rel'],
+      img: [
+        'src',
+        'alt',
+        'title',
+        'width',
+        'height',
+        'style',
+        'loading',
+        'decoding',
+      ],
       span: ['style', 'class'],
       code: ['class'],
       pre: ['class'],
@@ -91,6 +121,8 @@ export function sanitizeHtmlFragment(input: string): string {
       input: ['type', 'checked', 'disabled'],
     },
     allowedSchemes: ['http', 'https', 'mailto'],
+    // 이미지에는 http를 허용하지 않고 https, data 만 허용
+    allowedSchemesByTag: { img: ['https', 'data'] },
     allowedStyles: {
       p: { 'text-align': [/^(?:left|right|center|justify)$/] },
       h1: { 'text-align': [/^(?:left|right|center|justify)$/] },
@@ -100,6 +132,11 @@ export function sanitizeHtmlFragment(input: string): string {
       h5: { 'text-align': [/^(?:left|right|center|justify)$/] },
       h6: { 'text-align': [/^(?:left|right|center|justify)$/] },
       span: { 'text-align': [/^(?:left|right|center|justify)$/] },
+      img: {
+        display: [/^(?:block|inline|inline-block)$/],
+        'margin-left': [/^(?:auto|\d+px)$/],
+        'margin-right': [/^(?:auto|\d+px)$/],
+      },
     },
     transformTags: {
       a: sanitizeHtml.simpleTransform(
@@ -107,17 +144,27 @@ export function sanitizeHtmlFragment(input: string): string {
         { rel: 'nofollow noreferrer noopener' },
         true,
       ),
+      input: (tagName, attribs) => {
+        // 렌더링 시 입력 불가하도록 강제
+        const next = { ...attribs, disabled: 'disabled' } as Record<
+          string,
+          string
+        >;
+        return { tagName: 'input', attribs: next };
+      },
+    },
+    exclusiveFilter: (frame) => {
+      // data: 스킴은 안전한 비트맵 포맷만 허용 (svg 차단)
+      if (frame.tag === 'img') {
+        const src = frame.attribs?.src || '';
+        if (src.startsWith('data:')) {
+          const ok = /^data:image\/(png|jpeg|jpg|webp|gif|avif);base64,/i.test(
+            src,
+          );
+          return !ok; // ok가 아니면 제거
+        }
+      }
+      return false;
     },
   });
-}
-
-export function parseBoundedInt(
-  value: string | null,
-  def: number,
-  min: number,
-  max: number,
-) {
-  const number = Number(value);
-  if (!Number.isFinite(number)) return def;
-  return Math.max(min, Math.min(Math.trunc(number), max));
 }
