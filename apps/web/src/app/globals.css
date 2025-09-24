@@ -277,6 +277,31 @@ body {
   border-radius: 0.375rem; /* rounded-md */
 }
 
+/* Center/right aligned images when alignment is set on parent paragraph */
+.prose-custom
+  p:where([style*="text-align:center"], [style*="text-align: center"]) > img,
+.prose-custom
+  p:where([style*="text-align:center"], [style*="text-align: center"]) + img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.prose-custom
+  p:where([style*="text-align:right"], [style*="text-align: right"]) > img,
+.prose-custom
+  p:where([style*="text-align:right"], [style*="text-align: right"]) + img {
+  display: block;
+  margin-left: auto;
+}
+.prose-custom
+  p:where([style*="text-align:justify"], [style*="text-align: justify"]) > img,
+.prose-custom
+  p:where([style*="text-align:justify"], [style*="text-align: justify"]) + img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Tiptap image resizer */
 .prose-custom .tiptap-image-wrapper {
   position: relative;
