@@ -43,7 +43,7 @@ export function ConsentLogin({ redirectTo }: { redirectTo: string }) {
           </span>
         </label>
       </div>
-      <LoginButton redirectTo={redirectTo} />
+      <LoginButton redirectTo={redirectTo} disabled={!agree} />
     </div>
   );
 }

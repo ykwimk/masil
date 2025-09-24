@@ -4,13 +4,19 @@ import { signIn } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-export function LoginButton({ redirectTo }: { redirectTo: string }) {
+interface LoginButtonProps {
+  redirectTo: string;
+  disabled: boolean;
+}
+
+export function LoginButton({ redirectTo, disabled }: LoginButtonProps) {
   return (
     <Button
       variant="outline"
       className={cn('h-11 w-full cursor-pointer bg-white')}
       onClick={() => signIn('google', { callbackUrl: redirectTo })}
       aria-label="Google로 로그인"
+      disabled={disabled}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
