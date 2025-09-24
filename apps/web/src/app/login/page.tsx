@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { LoginButton } from '@/components/login/LoginButton';
+import { ConsentLogin } from '@/components/login/ConsentLogin';
 import { safeRedirect } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -42,7 +42,7 @@ export default async function LoginPage({
                   </p>
                 )}
                 <div className="space-y-4">
-                  <LoginButton redirectTo={redirectTo} />
+                  <ConsentLogin redirectTo={redirectTo} />
                 </div>
               </CardContent>
             </Card>

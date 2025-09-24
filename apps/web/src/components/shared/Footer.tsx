@@ -11,6 +11,21 @@ export function Footer() {
             <p className="text-muted-foreground mt-2 max-w-md text-sm break-keep">
               마케터들의 가벼운 마실길, 함께 배우고 성장하는 커뮤니티입니다.
             </p>
+            <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+              <a
+                href="/privacy"
+                className="text-muted-foreground hover:text-primary underline underline-offset-4"
+              >
+                개인정보처리방침
+              </a>
+              <span className="text-muted-foreground/50">•</span>
+              <a
+                href="/terms"
+                className="text-muted-foreground hover:text-primary underline underline-offset-4"
+              >
+                이용약관
+              </a>
+            </div>
           </div>
 
           <div className="flex flex-col items-center md:items-end">
