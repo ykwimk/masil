@@ -278,38 +278,25 @@ body {
 }
 
 /* Center/right aligned images when alignment is set on parent paragraph */
-.prose-custom p[style*="text-align:center"] > img,
-.prose-custom p[style*="text-align: center"] > img {
+.prose-custom
+  p:where([style*="text-align:center"], [style*="text-align: center"]) > img,
+.prose-custom
+  p:where([style*="text-align:center"], [style*="text-align: center"]) + img {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-.prose-custom p[style*="text-align:right"] > img,
-.prose-custom p[style*="text-align: right"] > img {
+.prose-custom
+  p:where([style*="text-align:right"], [style*="text-align: right"]) > img,
+.prose-custom
+  p:where([style*="text-align:right"], [style*="text-align: right"]) + img {
   display: block;
   margin-left: auto;
 }
-.prose-custom p[style*="text-align:justify"] > img,
-.prose-custom p[style*="text-align: justify"] > img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Image immediately following an aligned paragraph (common Tiptap HTML) */
-.prose-custom p[style*="text-align:center"] + img,
-.prose-custom p[style*="text-align: center"] + img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.prose-custom p[style*="text-align:right"] + img,
-.prose-custom p[style*="text-align: right"] + img {
-  display: block;
-  margin-left: auto;
-}
-.prose-custom p[style*="text-align:justify"] + img,
-.prose-custom p[style*="text-align: justify"] + img {
+.prose-custom
+  p:where([style*="text-align:justify"], [style*="text-align: justify"]) > img,
+.prose-custom
+  p:where([style*="text-align:justify"], [style*="text-align: justify"]) + img {
   display: block;
   margin-left: auto;
   margin-right: auto;

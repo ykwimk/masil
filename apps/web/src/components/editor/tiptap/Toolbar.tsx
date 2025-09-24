@@ -185,14 +185,15 @@ export default function Toolbar({ editor }: ToolbarProps) {
     }
   };
 
-  const setAlign = (align: 'left' | 'center' | 'right' | 'justify') => () => {
-    const chain = editor.chain().focus();
-    if (editor.isActive('image')) {
-      chain.updateAttributes('image', { textAlign: align }).run();
-    } else {
-      chain.setTextAlign(align).run();
-    }
-  };
+  const setAlign = (align: 'left' | 'center' | 'right' | 'justify') =>
+    toggle(() => {
+      const chain = editor.chain().focus();
+      if (editor.isActive('image')) {
+        chain.updateAttributes('image', { textAlign: align }).run();
+      } else {
+        chain.setTextAlign(align).run();
+      }
+    });
 
   return (
     <div className="flex flex-wrap gap-2">
