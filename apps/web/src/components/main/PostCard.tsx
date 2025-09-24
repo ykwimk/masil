@@ -1,35 +1,31 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import { Post } from '@/types';
 
 interface PostCardProps {
-  post: {
-    id: number;
-    title: string;
-    description: string;
-    nickname: string;
-    tags: string[];
-  };
+  post: Post;
 }
+
 export function PostCard({ post }: PostCardProps) {
+  const { id, title, description, nickname, tags } = post;
+
   return (
-    <article key={post.id} className="masonry-item">
+    <article key={id} className="masonry-item">
       <Card className="hover:border-primary/30 transition-colors">
         <CardContent>
-          <div className="mb-2 flex flex-wrap gap-2">
-            {post.tags.slice(0, 3).map((t) => (
-              <span key={t} className="badge">
-                #{t}
+          <h3 className="text-lg leading-snug font-semibold">
+            <Link href={`/posts/${id}`}>{title}</Link>
+          </h3>
+          <p className="text-muted-foreground mt-2 text-sm">{description}</p>
+          <div className="text-muted-foreground mt-3 text-xs">
+            by. {nickname}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span key={tag} className="badge">
+                #{tag}
               </span>
             ))}
-          </div>
-          <h3 className="text-lg leading-snug font-semibold">
-            <Link href={`/posts/${post.id}`}>{post.title}</Link>
-          </h3>
-          <p className="text-muted-foreground mt-2 text-sm">
-            {post.description}
-          </p>
-          <div className="text-muted-foreground mt-3 text-xs">
-            by. {post.nickname}
           </div>
         </CardContent>
       </Card>

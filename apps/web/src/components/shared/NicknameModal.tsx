@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 
 export default function NicknameModal() {
   const { status, data } = useSession();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [from, setFrom] = useState<string>('/');
 
