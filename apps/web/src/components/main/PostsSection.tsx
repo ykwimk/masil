@@ -103,11 +103,11 @@ export function PostsSection({ selectedTag }: { selectedTag?: string }) {
           <Spinner size={24} />
         </div>
       ) : (
-        <div className="masonry">
+        <ul className="masonry">
           {posts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
-        </div>
+        </ul>
       )}
       {!loading && posts.length === 0 && (
         <div className="text-muted-foreground pt-24 text-center text-xl font-semibold">
