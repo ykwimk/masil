@@ -127,7 +127,7 @@ importers:
         specifier: ^5
         version: 5.9.2
 
-  apps/reservation:
+  apps/launching:
     dependencies:
       '@masil/hooks':
         specifier: workspace:*
