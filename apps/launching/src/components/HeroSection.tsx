@@ -1,8 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { motion } from 'motion/react';
-import { Button } from './ui/button';
+import WaitListForm from './WaitListForm';
 
 export default function HeroSection() {
   return (
@@ -16,36 +15,25 @@ export default function HeroSection() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="mb-4 text-3xl leading-tight font-bold text-white sm:mb-6 sm:text-4xl md:text-6xl">
-            실패를 나누고,
-            <br className="block md:hidden" /> 성장을 함께하는
+            곧 만나요!
+            <br className="block md:hidden" /> 마케터 커뮤니티
             <br />
-            <span className="text-primary">마케터 커뮤니티 ‘마실’</span>
+            <span className="text-primary">‘마실’ 커밍순</span>
           </h1>
 
           <p className="mx-auto mb-6 max-w-2xl text-base text-white/80 sm:mb-8 sm:text-lg md:text-xl">
-            마케팅에 진심인 마실 멤버들의 첫번째 실험,
+            지금 사전예약하시면 런칭 소식을 가장 먼저 받아보실 수 있어요.
             <br />
-            <strong>연사 초청 세미나에 여러분을 초대합니다.</strong>
+            이메일을 남겨주시면 베타 오픈 소식을 보내드릴게요.
           </p>
 
           <motion.div
-            className="flex flex-row justify-center gap-4"
+            className="flex flex-col items-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <Button
-              asChild
-              size="lg"
-              className="rounded-full px-6 py-5 text-sm sm:px-8 sm:py-6 sm:text-base"
-            >
-              <Link
-                href="https://event-us.kr/masilcommunity/event/105246"
-                target="_blank"
-              >
-                세미나 참가하기
-              </Link>
-            </Button>
+            <WaitListForm />
           </motion.div>
         </motion.div>
       </div>

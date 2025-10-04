@@ -4,15 +4,15 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://masil-launching.vercel.app'),
-  title: '마실 | 마케터의 가벼운 마실길',
+  title: '마실 커뮤니티 | 사전예약',
   description:
-    '마케터들을 위한 가벼운 커뮤니티, 마실에서 함께 성장하고 배우며 인사이트를 나눠보세요.',
+    '마실 커뮤니티 런칭 알림을 가장 먼저 받아보세요. 이메일로 사전예약하고 소식을 놓치지 마세요.',
   keywords:
-    '마케팅, 마케팅 커뮤니티, 마케터 모임, 마케팅 인사이트, 마케팅 네트워킹, 마실',
+    '마실, 사전예약, 커밍순, 베타, 대기자 명단, 마케팅 커뮤니티, 런칭 알림',
   openGraph: {
-    title: '마실 | 마케터의 가벼운 마실길',
+    title: '마실 | 사전예약',
     description:
-      '마케터들을 위한 가벼운 커뮤니티, 마실에서 함께 성장하고 배우며 인사이트를 나눠보세요.',
+      '마실 커뮤니티 런칭 알림을 가장 먼저 받아보세요. 이메일로 사전예약하고 소식을 놓치지 마세요.',
     url: 'https://masil-launching.vercel.app',
     siteName: '마실',
     images: [
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: '마실 - 마케터의 가벼운 마실길',
+        alt: '마실 - 사전예약',
       },
     ],
     locale: 'ko_KR',
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '마실 | 마케터의 가벼운 마실길',
+    title: '마실 커뮤니티 | 사전예약',
     description:
-      '마케터들을 위한 가벼운 커뮤니티, 마실에서 함께 성장하고 배우며 인사이트를 나눠보세요.',
+      '마실 커뮤니티 런칭 알림을 가장 먼저 받아보세요. 이메일로 사전예약하고 소식을 놓치지 마세요.',
     images: ['/og-image.png'],
   },
 };
