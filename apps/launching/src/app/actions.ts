@@ -28,7 +28,7 @@ export async function handleAddToWaitList(
     };
   }
 
-  const header = await headers();
+  const header = headers();
   const userAgent = header.get('user-agent');
   const referer = header.get('referer');
 
