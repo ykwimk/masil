@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     '마실 커뮤니티 런칭 알림을 가장 먼저 받아보세요. 이메일로 사전예약하고 소식을 놓치지 마세요.',
   keywords:
-    '마실, 사전예약, 커밍순, 베타, 대기자 명단, 마케팅 커뮤니티, 런칭 알림',
+    '마실, 사전예약, 커밍순, 베타, 대기자 명단, 실험, 실험 커뮤니티, 런칭 알림',
   openGraph: {
     title: '마실 | 사전예약',
     description:
