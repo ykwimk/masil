@@ -10,6 +10,7 @@ Turborepo로 여러 애플리케이션과 패키지를 한 저장소에서 관�
 
 - `apps/web`: 커뮤니티 메인 웹 애플리케이션 (Next.js App Router)
 - `apps/landing`: 랜딩 페이지 애플리케이션
+- `apps/launching`: 커밍순 · 이메일 사전예약(웨이팅리스트) 페이지
 
 ### packages
 
@@ -26,6 +27,7 @@ Turborepo로 여러 애플리케이션과 패키지를 한 저장소에서 관�
 apps/
   web/       # 메인 웹앱
   landing/   # 랜딩 사이트
+  launching/ # 커밍순 · 사전예약 랜딩
 packages/
   ui/        # UI 유틸, 폰트, 스타일
   hooks/     # 공용 React 훅
@@ -61,6 +63,7 @@ pnpm install
   ```bash
   pnpm web      # apps/web만 개발 모드로 실행
   pnpm landing  # apps/landing만 개발 모드로 실행
+  pnpm launching # apps/launching만 개발 모드로 실행
   ```
 
 ### 빌드/린트/포맷
@@ -93,8 +96,8 @@ pnpm install
 - `pnpm format`: 포맷 수행
 - `pnpm web`: `apps/web` 개발 서버만 실행
 - `pnpm landing`: `apps/landing` 개발 서버만 실행
+- `pnpm launching`: `apps/launching` 개발 서버만 실행
 
 ## 🤝 기여
 
 - 이슈/PR 환영합니다. 패키지 변경 시 관련 앱에서 실행 확인을 부탁드립니다.
-
