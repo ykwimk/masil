@@ -14,6 +14,7 @@ export function Footer() {
             <div className="mt-3 mb-4 flex flex-wrap items-center gap-2 text-xs">
               <a
                 href="/privacy"
+                target="_blank"
                 className="text-muted-foreground hover:text-primary underline underline-offset-4"
               >
                 개인정보처리방침
@@ -21,6 +22,7 @@ export function Footer() {
               <span className="text-muted-foreground/50">•</span>
               <a
                 href="/terms"
+                target="_blank"
                 className="text-muted-foreground hover:text-primary underline underline-offset-4"
               >
                 이용약관
