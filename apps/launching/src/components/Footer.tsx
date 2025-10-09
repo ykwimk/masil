@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="mb-6 md:mb-0">
             <Logo />
             <p className="text-muted-foreground mt-2 max-w-md text-sm break-keep">
-              마케터들의 가벼운 마실길, 함께 배우고 성장하는 커뮤니티입니다.
+              함께 배우고 성장하는 커뮤니티입니다.
             </p>
           </div>
 
