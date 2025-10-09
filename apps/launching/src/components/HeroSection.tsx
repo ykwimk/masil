@@ -37,13 +37,12 @@ export default function HeroSection() {
             <span className="via-primary/60 to-primary bg-gradient-to-r from-white bg-clip-text text-3xl text-transparent sm:text-5xl md:text-6xl">
               실험 커뮤니티 ‘마실’
             </span>
-            <span className="ml-3 align-middle text-2xl">✨</span>
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-base break-keep text-white/80 sm:mb-8 sm:text-lg md:text-xl">
-            곧 만나요. 더 가볍고 친근한 커뮤니티의 시작,
-            <strong className="text-white"> 마실</strong>에서 함께해요.
+            마음껏 실험하는 사이드프로젝트,{' '}
+            <strong className="text-white">마실</strong>
             <br />
-            작은 인사이트가 내일의 선택을 바꿉니다.
+            이번 실험은 ‘카피’로 시작합니다.
           </p>
           <WaitListForm />
         </motion.div>

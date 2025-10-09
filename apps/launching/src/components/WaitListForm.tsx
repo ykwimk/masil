@@ -39,8 +39,8 @@ export default function WaitListForm() {
           <SubmitButton />
         </div>
       </form>
-      <p className="mt-4 text-center text-sm text-white/70 sm:mt-2">
-        사전예약하시면 런칭 소식을 가장 먼저 이메일로 알려드려요.
+      <p className="mt-4 ml-0 text-center text-sm break-keep text-white/70 sm:ml-5 sm:text-left">
+        사전예약 시, 런칭 소식을 가장 먼저 알려드려요.
       </p>
       {state.message && (
         <div
