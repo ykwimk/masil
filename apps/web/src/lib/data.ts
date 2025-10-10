@@ -19,7 +19,7 @@ export async function getListPosts({
   let query = supabase
     .from('posts')
     .select(
-      'id,title,description,nickname,email,tags,created_at,updated_at,status',
+      'id,title,description,card_image_url,nickname,email,tags,created_at,updated_at,status',
       {
         count: 'exact',
       },

@@ -104,8 +104,8 @@ export function PostsSection({ selectedTag }: { selectedTag?: string }) {
         </div>
       ) : (
         <ul className="masonry">
-          {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
+          {posts.map((post, index) => (
+            <PostCard key={post.id} post={post} priority={index === 0} />
           ))}
         </ul>
       )}

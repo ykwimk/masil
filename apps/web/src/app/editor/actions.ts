@@ -21,6 +21,8 @@ export async function createPost(formData: FormData) {
   const tags = parseTags(formData.getAll('tags').map(String));
   const isPublish = String(formData.get('publish') || '') === 'on';
   const descriptionInput = String(formData.get('description') || '').trim();
+  const cardImageUrlInput = String(formData.get('cardImageUrl') || '').trim();
+  const cardImageUrl = cardImageUrlInput ?? null;
 
   if (!title || !content) {
     return redirect('/editor');
@@ -50,6 +52,7 @@ export async function createPost(formData: FormData) {
     nickname,
     email: session.user.email,
     status,
+    card_image_url: cardImageUrl,
   };
 
   if (tags && tags.length > 0) {
@@ -153,6 +156,9 @@ export async function updatePost(formData: FormData) {
   const content = String(formData.get('content') || '').trim();
   const tags = parseTags(formData.getAll('tags').map(String));
   const descriptionInput = String(formData.get('description') || '').trim();
+  const cardImageUrlInput = String(formData.get('cardImageUrl') || '').trim();
+
+  const cardImageUrl = cardImageUrlInput ?? null;
 
   if (!Number.isInteger(idNum)) {
     return redirect('/editor');
@@ -172,6 +178,7 @@ export async function updatePost(formData: FormData) {
     description,
     content,
     tags,
+    card_image_url: cardImageUrl,
   };
 
   const isPublish = String(formData.get('publish') || '') === 'on';
@@ -236,7 +243,9 @@ export async function getPostEditorById(id: string) {
   const idNum = Number(id);
   let selectQuery = admin
     .from('posts')
-    .select('id,title,description,tags,content,nickname,email,status')
+    .select(
+      'id,title,description,tags,content,nickname,email,status,card_image_url',
+    )
     .eq('id', Number.isInteger(idNum) ? idNum : id);
   if (role !== 'admin') {
     selectQuery = selectQuery.eq('email', email);

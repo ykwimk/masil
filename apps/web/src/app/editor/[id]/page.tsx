@@ -31,6 +31,7 @@ export default async function EditPostPage(props: PageProps) {
                 description: post.description ?? '',
                 tags: post.tags ?? [],
                 content: post.content ?? '',
+                cardImageUrl: post.card_image_url ?? '',
               }}
               submitLabel="수정 저장"
               isShowPublishToggle={false}

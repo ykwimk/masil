@@ -12,6 +12,7 @@ export interface Post {
   id: number; // id
   title: string; // 제목
   description: string; // 요약
+  card_image_url?: string | null; // 카드 이미지
   nickname: string; // 작성자 닉네임
   email: string; // 작성자 이메일
   tags: string[]; // 태그
