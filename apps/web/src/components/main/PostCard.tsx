@@ -14,7 +14,7 @@ export function PostCard({ post, priority = false }: PostCardProps) {
   return (
     <li key={id} className="masonry-item">
       <Card className="group hover:border-primary/40 overflow-hidden p-0 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
-        <Link href={`/posts/${id}`} className="flex h-full flex-col">
+        <Link href={`/magazine/${id}`} className="flex h-full flex-col">
           {card_image_url && (
             <div className="bg-muted relative aspect-[4/3] w-full overflow-hidden">
               <Image
