@@ -8,7 +8,7 @@ export default function SubmitButton() {
     <Button
       type="submit"
       size="lg"
-      className="rounded-full px-6 sm:px-8"
+      className="cursor-pointer rounded-full px-6 sm:px-8"
       disabled={pending}
     >
       {pending ? '등록 중…' : '사전예약 신청'}

@@ -43,6 +43,8 @@ export default function HeroSection() {
             <strong className="text-white">마실</strong>
             <br />
             이번 실험은 ‘카피’로 시작합니다.
+            <br />
+            실험과 성장에 진심인 분들을 기다리고 있어요!
           </p>
           <WaitListForm />
         </motion.div>
