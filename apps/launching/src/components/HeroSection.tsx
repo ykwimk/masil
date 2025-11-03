@@ -33,16 +33,16 @@ export default function HeroSection() {
             <span className="bg-primary size-2 rounded-full" />
             COMING SOON
           </div>
-          <h1 className="mb-4 text-4xl leading-tight font-bold text-white sm:mb-8 sm:text-5xl md:text-6xl">
-            <span className="via-primary/60 to-primary bg-gradient-to-r from-white bg-clip-text text-3xl text-transparent sm:text-5xl md:text-6xl">
+          <h1 className="mb-4 text-4xl leading-tight font-bold text-white sm:mb-4 sm:text-5xl md:text-6xl">
+            <span className="via-primary/60 from-primary bg-gradient-to-r to-white bg-clip-text text-3xl text-transparent sm:text-5xl md:text-6xl">
               실험 커뮤니티 ‘마실’
             </span>
           </h1>
-          <p className="mx-auto mb-8 max-w-2xl text-base break-keep text-white/80 sm:mb-8 sm:text-lg md:text-xl">
-            마음껏 실험하는 사이드프로젝트,{' '}
-            <strong className="text-white">마실</strong>
+          <p className="mx-auto mb-8 max-w-2xl text-base break-keep text-white/80 sm:mb-8 sm:text-lg md:text-lg">
+            마음껏 실험하는 사이드프로젝트, 마실
             <br />
-            이번 실험은 ‘카피’로 시작합니다.
+            이번 실험은 <strong className="text-white">‘카피’</strong>로
+            시작합니다.
             <br />
             실험과 성장에 진심인 분들을 기다리고 있어요!
           </p>

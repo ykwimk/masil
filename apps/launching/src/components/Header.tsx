@@ -22,7 +22,7 @@ export default function Header() {
         <Button
           type="button"
           size="lg"
-          className="cursor-pointer rounded-xl px-6 sm:px-8"
+          className={`cursor-pointer rounded-xl px-6 transition-all duration-300 sm:px-8 ${isScrolled ? 'opacity-1000' : 'opacity-0'}`}
           onClick={() =>
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
           }

@@ -31,21 +31,21 @@ export default function ProgramDetailsSection() {
             <div className="inline-block">
               <ul className="mt-6 space-y-3 text-left">
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="text-primary mt-0.5 h-5 w-5 shrink-0" />
-                  <p className="text-foreground/80 text-base break-keep">
+                  <CheckCircle2 className="text-primary mt-0.5 h-6 w-6 shrink-0" />
+                  <p className="text-foreground/80 text-lg font-medium break-keep">
                     책과 강의로 배운 카피라이팅! 실제 프로젝트에서 써보고
                     싶어요.
                   </p>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="text-primary mt-0.5 h-5 w-5 shrink-0" />
-                  <p className="text-foreground/80 text-base break-keep">
+                  <CheckCircle2 className="text-primary mt-0.5 h-6 w-6 shrink-0" />
+                  <p className="text-foreground/80 text-lg font-medium break-keep">
                     내가 쓴 카피가 좋은지, 나쁜지 모르겠어요.
                   </p>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="text-primary mt-0.5 h-5 w-5 shrink-0" />
-                  <p className="text-foreground/80 text-base break-keep">
+                  <CheckCircle2 className="text-primary mt-0.5 h-6 w-6 shrink-0" />
+                  <p className="text-foreground/80 text-lg font-medium break-keep">
                     같이 고민하고 실행할 동료가 필요해요.
                   </p>
                 </li>
@@ -87,76 +87,121 @@ export default function ProgramDetailsSection() {
             className="mx-auto max-w-5xl"
           >
             <div className="text-center">
-              <span className="badge">함께 하게 될 5주간의 활동들</span>
-              <h3 className="mt-3 text-2xl font-bold md:text-3xl">
-                5주 로드맵으로 완성하는 <br className="block sm:hidden" />
+              {/* <span className="badge">주차별 활동 커리큘럼</span> */}
+              <h3 className="mt-3 text-2xl font-bold tracking-tight md:text-3xl">
+                5주 로드맵으로 완성하는
+                <br />
                 실전형 프로젝트
               </h3>
-              <p className="bg-primary/10 text-primary mt-3 inline-block rounded-full px-3 py-1 text-sm">
-                핵심 활동 내용 = 인터뷰 콘텐츠 제작 및 성과 분석
-              </p>
+              {/* <p className="text-muted-foreground mt-3 text-sm">
+                핵심 활동: 인터뷰 콘텐츠 제작 및 성과 분석
+              </p> */}
             </div>
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <div className="border-border rounded-xl border bg-white p-5">
-                <div className="text-muted-foreground flex items-center gap-2 text-sm">
-                  <NotebookPen className="h-4 w-4" />
-                  Week 1
+            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
+                    <span className="badge">
+                      <span className="font-semibold">Week 1</span>
+                    </span>
+                  </div>
                 </div>
-                <h4 className="mt-2 font-semibold">
-                  인터뷰 질문 설계 & 서면 인터뷰 진행
-                </h4>
-                <p className="text-foreground/70 mt-2 break-keep">
-                  핵심 메시지를 끌어낼 인터뷰 질문지를 만들고, (특별한 스토리를
-                  가진 ~의) 서면 인터뷰를 진행합니다.
-                </p>
+                <div className="mt-3 flex items-start justify-between gap-3">
+                  <NotebookPen className="text-muted-foreground mt-1 h-4 w-4" />
+                  <div className="flex-1">
+                    <h4 className="text-base font-semibold">
+                      인터뷰 질문 설계 & 서면 인터뷰 진행
+                    </h4>
+                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
+                      핵심 메시지를 끌어낼 인터뷰 질문지를 만들고, 서면 인터뷰를
+                      진행합니다.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="border-border rounded-xl border bg-white p-5">
-                <div className="text-muted-foreground flex items-center gap-2 text-sm">
-                  <NotebookPen className="h-4 w-4" />
-                  Week 2
+              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
+                    <span className="badge">
+                      <span className="font-semibold">Week 2</span>
+                    </span>
+                  </div>
                 </div>
-                <h4 className="mt-2 font-semibold">인터뷰 콘텐츠 제작</h4>
-                <p className="text-foreground/70 mt-2 break-keep">
-                  수집한 인터뷰 내용을 바탕으로 핵심 메시지를 명확히 전달하는
-                  인터뷰 콘텐츠를 완성합니다.
-                </p>
+                <div className="mt-3 flex items-start justify-between gap-3">
+                  <NotebookPen className="text-muted-foreground mt-1 h-4 w-4" />
+                  <div className="flex-1">
+                    <h4 className="text-base font-semibold">
+                      인터뷰 콘텐츠 제작
+                    </h4>
+                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
+                      수집한 인터뷰를 바탕으로 핵심 메시지를 명확히 전달하는
+                      인터뷰 콘텐츠를 완성합니다.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="border-border rounded-xl border bg-white p-5">
-                <div className="text-muted-foreground flex items-center gap-2 text-sm">
-                  <Megaphone className="h-4 w-4" />
-                  Week 3
+              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
+                    <span className="badge">
+                      <span className="font-semibold">Week 3</span>
+                    </span>
+                  </div>
                 </div>
-                <h4 className="mt-2 font-semibold">홍보 게시글 기획</h4>
-                <p className="text-foreground/70 mt-2 break-keep">
-                  인터뷰 콘텐츠를 홍보하기 위해 채널별(인스타그램, 블로그 등)
-                  게시글을 기획하고, 멤버들과 피드백을 주고받습니다.
-                </p>
+                <div className="mt-3 flex items-start justify-between gap-3">
+                  <Megaphone className="text-muted-foreground mt-1 h-4 w-4" />
+                  <div className="flex-1">
+                    <h4 className="text-base font-semibold">
+                      홍보 게시글 기획
+                    </h4>
+                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
+                      채널별(인스타그램, 블로그 등) 홍보 게시글을 기획하고,
+                      멤버들과 피드백을 주고받습니다.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="border-border rounded-xl border bg-white p-5">
-                <div className="text-muted-foreground flex items-center gap-2 text-sm">
-                  <BarChart3 className="h-4 w-4" />
-                  Week 4
+              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
+                    <span className="badge">
+                      <span className="font-semibold">Week 4</span>
+                    </span>
+                  </div>
                 </div>
-                <h4 className="mt-2 font-semibold">
-                  채널별 게시글 발행 및 인사이트 도출
-                </h4>
-                <p className="text-foreground/70 mt-2 break-keep">
-                  3주차에서 기획한 홍보 게시글을 실제로 발행하고, 조회수/반응 등
-                  데이터를 기반으로 결과를 분석합니다.
-                </p>
+                <div className="mt-3 flex items-start justify-between gap-3">
+                  <BarChart3 className="text-muted-foreground mt-1 h-4 w-4" />
+                  <div className="flex-1">
+                    <h4 className="text-base font-semibold">
+                      채널별 게시글 발행 및 인사이트 도출
+                    </h4>
+                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
+                      실제로 게시글을 발행하고, 조회수/반응 등 데이터를 기반으로
+                      결과를 분석합니다.
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="border-border rounded-xl border bg-white p-5 lg:col-span-2">
-                <div className="text-muted-foreground flex items-center gap-2 text-sm">
-                  <FileText className="h-4 w-4" />
-                  Week 5
+              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
+                <div className="flex items-center justify-between">
+                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
+                    <span className="badge">
+                      <span className="font-semibold">Week 5</span>
+                    </span>
+                  </div>
                 </div>
-                <h4 className="mt-2 font-semibold">
-                  2기 활동 결과 리포트 제작
-                </h4>
-                <p className="text-foreground/70 mt-2 break-keep">
-                  5주간의 실험을 정리하며 성과와 배움을 담은 결과 리포트를
-                  완성합니다.
-                </p>
+                <div className="mt-3 flex items-start justify-between gap-3">
+                  <FileText className="text-muted-foreground mt-1 h-4 w-4" />
+                  <div className="flex-1">
+                    <h4 className="text-base font-semibold">
+                      2기 활동 결과 리포트 제작
+                    </h4>
+                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
+                      5주간의 실험을 정리하여 성과와 배움을 담은 결과 리포트를
+                      완성합니다.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -178,7 +223,7 @@ export default function ProgramDetailsSection() {
                 멤버들이 전하는 생생한 경험
               </h3>
             </div>
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-4">
               <ReviewCard
                 authorLabel="김**님 후기 글"
                 text="부족한 부분은 서로 매꿔나가며, 자발적으로 아이디어를 내고 결과 값을 만들어 내는 멤버들을 보며 자극을 많이 받았습니다."
