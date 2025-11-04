@@ -9,6 +9,7 @@ import {
   FileText,
 } from 'lucide-react';
 import ReviewCard from './ReviewCard';
+import WeekCard from './WeekCard';
 
 export default function ProgramDetailsSection() {
   return (
@@ -98,111 +99,46 @@ export default function ProgramDetailsSection() {
               </p> */}
             </div>
             <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
-                <div className="flex items-center justify-between">
-                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
-                    <span className="badge">
-                      <span className="font-semibold">Week 1</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 flex items-start justify-between gap-3">
+              <WeekCard
+                tag="Week 1"
+                icon={
                   <NotebookPen className="text-muted-foreground mt-1 h-4 w-4" />
-                  <div className="flex-1">
-                    <h4 className="text-base font-semibold">
-                      인터뷰 질문 설계 & 서면 인터뷰 진행
-                    </h4>
-                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
-                      핵심 메시지를 끌어낼 인터뷰 질문지를 만들고, 서면 인터뷰를
-                      진행합니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
-                <div className="flex items-center justify-between">
-                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
-                    <span className="badge">
-                      <span className="font-semibold">Week 2</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 flex items-start justify-between gap-3">
+                }
+                title="인터뷰 질문 설계 & 서면 인터뷰 진행"
+                description="핵심 메시지를 끌어낼 인터뷰 질문지를 만들고, 서면 인터뷰를 진행합니다."
+              />
+              <WeekCard
+                tag="Week 2"
+                icon={
                   <NotebookPen className="text-muted-foreground mt-1 h-4 w-4" />
-                  <div className="flex-1">
-                    <h4 className="text-base font-semibold">
-                      인터뷰 콘텐츠 제작
-                    </h4>
-                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
-                      수집한 인터뷰를 바탕으로 핵심 메시지를 명확히 전달하는
-                      인터뷰 콘텐츠를 완성합니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
-                <div className="flex items-center justify-between">
-                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
-                    <span className="badge">
-                      <span className="font-semibold">Week 3</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 flex items-start justify-between gap-3">
+                }
+                title="인터뷰 콘텐츠 제작"
+                description="수집한 인터뷰를 바탕으로 핵심 메시지를 명확히 전달하는 인터뷰 콘텐츠를 완성합니다."
+              />
+              <WeekCard
+                tag="Week 3"
+                icon={
                   <Megaphone className="text-muted-foreground mt-1 h-4 w-4" />
-                  <div className="flex-1">
-                    <h4 className="text-base font-semibold">
-                      홍보 게시글 기획
-                    </h4>
-                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
-                      채널별(인스타그램, 블로그 등) 홍보 게시글을 기획하고,
-                      멤버들과 피드백을 주고받습니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
-                <div className="flex items-center justify-between">
-                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
-                    <span className="badge">
-                      <span className="font-semibold">Week 4</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 flex items-start justify-between gap-3">
+                }
+                title="홍보 게시글 기획"
+                description="채널별(인스타그램, 블로그 등) 홍보 게시글을 기획하고, 멤버들과 피드백을 주고받습니다."
+              />
+              <WeekCard
+                tag="Week 4"
+                icon={
                   <BarChart3 className="text-muted-foreground mt-1 h-4 w-4" />
-                  <div className="flex-1">
-                    <h4 className="text-base font-semibold">
-                      채널별 게시글 발행 및 인사이트 도출
-                    </h4>
-                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
-                      실제로 게시글을 발행하고, 조회수/반응 등 데이터를 기반으로
-                      결과를 분석합니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="border-border rounded-2xl border bg-white p-6 transition-shadow hover:shadow-sm">
-                <div className="flex items-center justify-between">
-                  <div className="text-muted-foreground inline-flex items-center gap-2 text-sm">
-                    <span className="badge">
-                      <span className="font-semibold">Week 5</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-3 flex items-start justify-between gap-3">
+                }
+                title="채널별 게시글 발행 및 인사이트 도출"
+                description="실제로 게시글을 발행하고, 조회수/반응 등 데이터를 기반으로 결과를 분석합니다."
+              />
+              <WeekCard
+                tag="Week 5"
+                icon={
                   <FileText className="text-muted-foreground mt-1 h-4 w-4" />
-                  <div className="flex-1">
-                    <h4 className="text-base font-semibold">
-                      2기 활동 결과 리포트 제작
-                    </h4>
-                    <p className="text-foreground/70 mt-2 text-sm leading-relaxed break-keep md:text-[15px]">
-                      5주간의 실험을 정리하여 성과와 배움을 담은 결과 리포트를
-                      완성합니다.
-                    </p>
-                  </div>
-                </div>
-              </div>
+                }
+                title="2기 활동 결과 리포트 제작"
+                description="5주간의 실험을 정리하여 성과와 배움을 담은 결과 리포트를 완성합니다."
+              />
             </div>
           </motion.div>
         </div>
