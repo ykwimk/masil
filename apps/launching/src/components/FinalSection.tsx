@@ -20,8 +20,9 @@ export default function FinalSection() {
             실전에서 성장하세요
           </h2>
           <p className="mt-3 break-keep text-white/70">
-            이메일을 남겨주시면 모집/진행 관련 소식을 가장 먼저 보내드려요. 함께
-            실행하며 배우는 경험을 시작해 보세요.
+            이메일을 남겨주시면 모집/진행 관련 소식을 가장 먼저 보내드려요.
+            <br />
+            함께 실행하며 배우는 경험을 시작해 보세요.
           </p>
         </motion.div>
       </div>

@@ -25,9 +25,9 @@ export default function ProgramDetailsSection() {
             className="mx-auto max-w-3xl text-center"
           >
             <span className="badge">이런 고민, 해본 적 있나요?</span>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold md:text-4xl">
               실전에서 검증하고, <br className="block sm:hidden" />
-              함께 성장해요
+              <span className="text-primary">함께 성장</span>해요
             </h2>
             <div className="inline-block">
               <ul className="mt-6 space-y-3 text-left">
@@ -60,16 +60,16 @@ export default function ProgramDetailsSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mx-auto mt-12 max-w-4xl"
           >
-            <div className="border-border bg-secondary/30 rounded-2xl border p-6 text-center md:p-8">
-              <h3 className="text-xl font-bold md:text-2xl">
-                그 고민, <span className="text-primary">마실</span>에서
+            <div className="rounded-3xl bg-gradient-to-br from-[#22C55E] to-[#16A34A] p-8 text-center text-white shadow-[0_16px_40px_-16px_rgba(22,163,74,0.55)] ring-1 ring-white/15 md:p-10">
+              <h3 className="text-2xl font-bold md:text-3xl">
+                그 고민, <span className="font-semibold">마실</span>에서
                 해결하세요!
               </h3>
-              <p className="text-foreground/70 mt-3 break-keep">
+              <p className="mt-4 text-base leading-relaxed break-keep text-white/90 md:text-lg">
                 카피 작성 → 콘텐츠 발행 → 인사이트 도출까지 전 과정을 경험할 수
                 있는
               </p>
-              <p className="text-foreground/70 mt-2 break-keep">
+              <p className="mt-2 text-base leading-relaxed break-keep text-white/90 md:text-lg">
                 ‘실전형 카피라이팅 프로젝트’ <strong>마실 2기</strong>에 참여해
                 보세요.
               </p>
@@ -89,10 +89,10 @@ export default function ProgramDetailsSection() {
           >
             <div className="text-center">
               {/* <span className="badge">주차별 활동 커리큘럼</span> */}
-              <h3 className="mt-3 text-2xl font-bold tracking-tight md:text-3xl">
+              <h3 className="mt-3 text-2xl font-bold md:text-3xl">
                 5주 로드맵으로 완성하는
                 <br />
-                실전형 프로젝트
+                <span className="text-primary">실전형</span> 프로젝트
               </h3>
               {/* <p className="text-muted-foreground mt-3 text-sm">
                 핵심 활동: 인터뷰 콘텐츠 제작 및 성과 분석
@@ -102,7 +102,7 @@ export default function ProgramDetailsSection() {
               <WeekCard
                 tag="Week 1"
                 icon={
-                  <NotebookPen className="text-muted-foreground mt-1 h-4 w-4" />
+                  <NotebookPen className="text-muted-foreground h-4 w-4 flex-1" />
                 }
                 title="인터뷰 질문 설계 & 서면 인터뷰 진행"
                 description="핵심 메시지를 끌어낼 인터뷰 질문지를 만들고, 서면 인터뷰를 진행합니다."
@@ -110,7 +110,7 @@ export default function ProgramDetailsSection() {
               <WeekCard
                 tag="Week 2"
                 icon={
-                  <NotebookPen className="text-muted-foreground mt-1 h-4 w-4" />
+                  <NotebookPen className="text-muted-foreground h-4 w-4 flex-1" />
                 }
                 title="인터뷰 콘텐츠 제작"
                 description="수집한 인터뷰를 바탕으로 핵심 메시지를 명확히 전달하는 인터뷰 콘텐츠를 완성합니다."
@@ -118,7 +118,7 @@ export default function ProgramDetailsSection() {
               <WeekCard
                 tag="Week 3"
                 icon={
-                  <Megaphone className="text-muted-foreground mt-1 h-4 w-4" />
+                  <Megaphone className="text-muted-foreground h-4 w-4 flex-1" />
                 }
                 title="홍보 게시글 기획"
                 description="채널별(인스타그램, 블로그 등) 홍보 게시글을 기획하고, 멤버들과 피드백을 주고받습니다."
@@ -126,7 +126,7 @@ export default function ProgramDetailsSection() {
               <WeekCard
                 tag="Week 4"
                 icon={
-                  <BarChart3 className="text-muted-foreground mt-1 h-4 w-4" />
+                  <BarChart3 className="text-muted-foreground h-4 w-4 flex-1" />
                 }
                 title="채널별 게시글 발행 및 인사이트 도출"
                 description="실제로 게시글을 발행하고, 조회수/반응 등 데이터를 기반으로 결과를 분석합니다."
@@ -134,7 +134,7 @@ export default function ProgramDetailsSection() {
               <WeekCard
                 tag="Week 5"
                 icon={
-                  <FileText className="text-muted-foreground mt-1 h-4 w-4" />
+                  <FileText className="text-muted-foreground h-4 w-4 flex-1" />
                 }
                 title="2기 활동 결과 리포트 제작"
                 description="5주간의 실험을 정리하여 성과와 배움을 담은 결과 리포트를 완성합니다."

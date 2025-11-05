@@ -35,7 +35,7 @@ export default function HeroSection() {
           </div>
           <h1 className="mb-4 text-4xl leading-tight font-bold text-white sm:mb-4 sm:text-5xl md:text-6xl">
             <span className="via-primary/60 from-primary bg-gradient-to-r to-white bg-clip-text text-3xl text-transparent sm:text-5xl md:text-6xl">
-              실험 커뮤니티 ‘마실’
+              실험 커뮤니티 마실
             </span>
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-base break-keep text-white/80 sm:mb-8 sm:text-lg md:text-lg">
