@@ -2,6 +2,7 @@
 
 import { motion } from 'motion/react';
 import WaitListForm from './WaitListForm';
+import { Button } from './ui/button';
 
 export default function HeroSection() {
   return (
@@ -46,7 +47,21 @@ export default function HeroSection() {
             <br />
             실험과 성장에 진심인 분들을 기다리고 있어요!
           </p>
-          <WaitListForm />
+          <Button
+            type="button"
+            size="lg"
+            className="cursor-pointer rounded-full px-6 text-xl sm:px-12 sm:py-6"
+            onClick={() => {
+              window.open(
+                'https://docs.google.com/forms/d/e/1FAIpQLSf_GJLFrCJ7gEOj9M8VY2fuJw-oQCXWb4tF_kxbIMsdEKPUuA/viewform?pli=1',
+                '_blank',
+                'noopener',
+              );
+            }}
+          >
+            사전예약 신청
+          </Button>
+          {/* <WaitListForm /> */}
         </motion.div>
       </div>
     </section>
