@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 
 export default function HeroSection() {
   const statTitleClassName =
-    "relative inline-flex items-center px-1 transition-all duration-300 group-hover:text-white group-hover:tracking-[0.02em] group-focus-visible:text-white group-focus-visible:tracking-[0.02em] before:absolute before:inset-x-0 before:bottom-1 before:h-[0.45em] before:rounded-sm before:bg-white/12 before:opacity-0 before:blur-[0.5px] before:transition-all before:duration-300 before:content-[''] group-hover:before:opacity-100 group-focus-visible:before:opacity-100";
+    "relative inline-flex items-center px-0.5 text-primary transition-all duration-300 before:absolute before:inset-x-0 before:bottom-0.5 before:h-[0.38em] before:rounded-sm before:bg-white/10 before:opacity-100 before:blur-[0.5px] before:content-[''] sm:px-1 md:before:bottom-1 md:before:h-[0.45em] md:before:opacity-0 md:before:transition-all md:before:duration-300 md:group-hover:text-white md:group-hover:tracking-[0.02em] md:group-hover:before:opacity-100 md:group-focus-visible:text-white md:group-focus-visible:tracking-[0.02em] md:group-focus-visible:before:opacity-100";
 
   return (
     <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-black">

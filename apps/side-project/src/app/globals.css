@@ -124,11 +124,15 @@
   }
 
   .stats-container {
-    @apply p-4;
+    @apply p-2 gap-0;
   }
 
   .stat-value {
-    @apply text-2xl;
+    @apply text-xl;
+  }
+
+  .stat-label {
+    @apply text-xs;
   }
 
   .floating-tag {
