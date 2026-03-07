@@ -55,7 +55,7 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             <Link
-              href="https://kacykim.notion.site/2d066610840280e4bf4cfe982fdd4494"
+              href="https://www.notion.so/kacykim/2d066610840280e4bf4cfe982fdd4494?source=copy_link"
               target="_blank"
               className="group block h-full rounded-md outline-none"
             >
@@ -67,7 +67,7 @@ export default function HeroSection() {
               </div>
             </Link>
             <Link
-              href="https://kacykim.notion.site/2d066610840280c8a568c43df50298d7"
+              href="https://www.notion.so/kacykim/2d066610840280c8a568c43df50298d7?source=copy_link"
               target="_blank"
               className="group block h-full rounded-md outline-none"
             >
@@ -79,7 +79,7 @@ export default function HeroSection() {
               </div>
             </Link>
             <Link
-              href="https://kacykim.notion.site/2db666108402808d9dfee123ed893662"
+              href="https://www.notion.so/kacykim/2db666108402808d9dfee123ed893662?source=copy_link"
               target="_blank"
               className="group block h-full rounded-md outline-none"
             >
