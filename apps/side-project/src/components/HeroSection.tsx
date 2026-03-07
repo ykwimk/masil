@@ -5,45 +5,13 @@ import { motion } from 'motion/react';
 import { Button } from './ui/button';
 
 export default function HeroSection() {
+  const statTitleClassName =
+    "relative inline-flex items-center px-1 transition-all duration-300 group-hover:text-white group-hover:tracking-[0.02em] group-focus-visible:text-white group-focus-visible:tracking-[0.02em] before:absolute before:inset-x-0 before:bottom-1 before:h-[0.45em] before:rounded-sm before:bg-white/12 before:opacity-0 before:blur-[0.5px] before:transition-all before:duration-300 before:content-[''] group-hover:before:opacity-100 group-focus-visible:before:opacity-100";
+
   return (
-    <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-black pt-16">
+    <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-black">
       <div className="gradient-bg absolute inset-0"></div>
-
-      {/* Floating tags */}
-      {/* <motion.div
-        className="floating-tag absolute top-[30%] left-[15%] hidden sm:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        마케팅
-      </motion.div>
-      <motion.div
-        className="floating-tag absolute top-[20%] right-[20%] hidden sm:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
-      >
-        브랜딩
-      </motion.div>
-      <motion.div
-        className="floating-tag absolute bottom-[35%] left-[25%] hidden sm:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.9 }}
-      >
-        콘텐츠
-      </motion.div>
-      <motion.div
-        className="floating-tag absolute right-[25%] bottom-[25%] hidden sm:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.1 }}
-      >
-        인사이트
-      </motion.div> */}
-
-      <div className="sm:md-28 z-10 container mx-auto mb-12 px-4 text-center">
+      <div className="sm:md-28 z-10 container mx-auto px-4 text-center">
         <motion.div
           className="mx-auto max-w-3xl"
           initial={{ opacity: 0, y: 20 }}
@@ -51,19 +19,17 @@ export default function HeroSection() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="mb-4 text-3xl leading-tight font-bold text-white sm:mb-6 sm:text-4xl md:text-6xl">
-            실패를 나누고,
-            <br className="block md:hidden" /> 성장을 함께하는
+            <br className="block md:hidden" />
+            마음껏 실험하는
             <br />
-            <span className="text-primary">마케터 커뮤니티 ‘마실’</span>
+            <span className="text-primary">사이드 프로젝트</span>
           </h1>
-
           <p className="mx-auto mb-6 max-w-2xl text-base text-white/80 sm:mb-8 sm:text-lg md:text-xl">
-            마케팅에 진심인 마실 멤버들의 첫번째 실험,
+            새해 마실과 통하는 카피를 완성하세요.
             <br />
-            <strong>연사 초청 세미나에 여러분을 초대합니다.</strong>
+            직접 쓰고, 피드백 받고, 발행하며 결과물을 완성해요.
           </p>
-
-          <motion.div
+          {/* <motion.div
             className="flex flex-row justify-center gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,47 +44,57 @@ export default function HeroSection() {
                 href="https://event-us.kr/masilcommunity/event/105246"
                 target="_blank"
               >
-                세미나 참가하기
+                5주 동안 함께 달려요
               </Link>
             </Button>
-            {/* <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="rounded-full border-white px-6 py-5 text-sm text-white sm:px-8 sm:py-6 sm:text-base"
+          </motion.div> */}
+          <motion.div
+            className="stats-container mx-auto mt-20 max-w-4xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <Link
+              href="https://kacykim.notion.site/2d066610840280e4bf4cfe982fdd4494"
+              target="_blank"
+              className="group block h-full rounded-md outline-none"
             >
-              <Link href="#about">더 알아보기</Link>
-            </Button> */}
+              <div className="stat-item">
+                <div className="stat-value">
+                  <span className={statTitleClassName}>About</span>
+                </div>
+                <div className="stat-label text-white/70">마실이란?</div>
+              </div>
+            </Link>
+            <Link
+              href="https://kacykim.notion.site/2d066610840280c8a568c43df50298d7"
+              target="_blank"
+              className="group block h-full rounded-md outline-none"
+            >
+              <div className="stat-item">
+                <div className="stat-value">
+                  <span className={statTitleClassName}>History</span>
+                </div>
+                <div className="stat-label text-white/70">지난 실험들</div>
+              </div>
+            </Link>
+            <Link
+              href="https://kacykim.notion.site/2db666108402808d9dfee123ed893662"
+              target="_blank"
+              className="group block h-full rounded-md outline-none"
+            >
+              <div className="stat-item line-none">
+                <div className="stat-value">
+                  <span className={statTitleClassName}>Partners</span>
+                </div>
+                <div className="stat-label text-white/70">
+                  인터뷰 컨텐츠 결과
+                </div>
+              </div>
+            </Link>
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Stats */}
-      {/* <div className="absolute right-0 bottom-8 left-0 px-4">
-        <motion.div
-          className="stats-container mx-auto max-w-4xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <div className="stat-item">
-            <div className="stat-value">100+</div>
-            <div className="stat-label text-white/70">마케터</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">24+</div>
-            <div className="stat-label text-white/70">모임 횟수</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">50+</div>
-            <div className="stat-label text-white/70">인사이트</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">12+</div>
-            <div className="stat-label text-white/70">파트너</div>
-          </div>
-        </motion.div>
-      </div> */}
     </section>
   );
 }
