@@ -8,7 +8,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "landing": "pnpm --filter landing dev",
     "web": "pnpm --filter web dev",
-    "launching": "pnpm --filter launching dev"
+    "launching": "pnpm --filter launching dev",
+    "sideproject": "pnpm --filter side-project dev"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
