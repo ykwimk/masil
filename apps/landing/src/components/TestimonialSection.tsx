@@ -25,7 +25,7 @@ const testimonials: Testimonial[] = [
     isTag: true,
     imageUrl: '/images/img-profile1.png',
     linkUrl:
-      'https://kacykim.notion.site/2026661084028079879ae2bed4aec198?pvs=4',
+      'https://app.notion.com/p/kacykim/22866610840281af82a0eccad1648265?source=copy_link',
   },
   {
     quote:
