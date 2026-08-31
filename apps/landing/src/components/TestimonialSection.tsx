@@ -72,7 +72,7 @@ const testimonials: Testimonial[] = [
 
 export default function TestimonialsSection() {
   return (
-    <section id="testimonials" className="bg-section py-16 md:py-20">
+    <section id="people" className="bg-section scroll-mt-[72px] py-16 md:py-20">
       <div className="container mx-auto px-4">
         <motion.div
           className="section-title"

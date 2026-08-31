@@ -9,15 +9,24 @@ import TestimonialsSection from '@/components/TestimonialSection';
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-dvh flex-col overflow-hidden">
+    <>
+      <a className="skip-link" href="#content">
+        본문으로 바로가기
+      </a>
       <Header />
-      <HeroSection />
-      {/* <AboutSection /> */}
-      <FeaturesSection />
-      <TestimonialsSection />
-      <PartnersSection />
-      <JoinSection />
+      <main
+        id="content"
+        tabIndex={-1}
+        className="flex min-h-dvh flex-col overflow-x-clip"
+      >
+        <HeroSection />
+        {/* <AboutSection /> */}
+        <FeaturesSection />
+        <TestimonialsSection />
+        <PartnersSection />
+        <JoinSection />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
