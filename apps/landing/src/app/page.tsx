@@ -1,11 +1,11 @@
-// import AboutSection from '@/components/AboutSection';
-import FeaturesSection from '@/components/FeaturesSection';
+import ExperimentSection from '@/components/ExperimentSection';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import JoinSection from '@/components/JoinSection';
 import PartnersSection from '@/components/PartnersSection';
 import TestimonialsSection from '@/components/TestimonialSection';
+import WhySection from '@/components/WhySection';
 
 export default function HomePage() {
   return (
@@ -20,8 +20,8 @@ export default function HomePage() {
         className="flex min-h-dvh flex-col overflow-x-clip"
       >
         <HeroSection />
-        {/* <AboutSection /> */}
-        <FeaturesSection />
+        <WhySection />
+        <ExperimentSection />
         <TestimonialsSection />
         <PartnersSection />
         <JoinSection />
