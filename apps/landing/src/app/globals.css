@@ -69,22 +69,6 @@
   @apply absolute top-4 right-4 px-2 py-1 rounded-full text-xs font-medium bg-primary text-white;
 }
 
-.instructor-card {
-  @apply relative overflow-hidden rounded-xl bg-white transition-all duration-300;
-}
-
-.instructor-card:hover {
-  @apply shadow-lg shadow-primary/10;
-}
-
-.instructor-card .tag {
-  @apply absolute top-4 right-4 px-2 py-1 rounded-full text-xs font-medium bg-primary text-white;
-}
-
-.instructor-card .content {
-  @apply p-4 border-t border-gray-200;
-}
-
 .section-title {
   @apply flex flex-col items-center text-center mb-12;
 }

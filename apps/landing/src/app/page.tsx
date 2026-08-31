@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import JoinSection from '@/components/JoinSection';
 import PartnersSection from '@/components/PartnersSection';
-import TestimonialsSection from '@/components/TestimonialSection';
+import PeopleSection from '@/components/PeopleSection';
 import WhySection from '@/components/WhySection';
 
 export default function HomePage() {
@@ -22,7 +22,7 @@ export default function HomePage() {
         <HeroSection />
         <WhySection />
         <ExperimentSection />
-        <TestimonialsSection />
+        <PeopleSection />
         <PartnersSection />
         <JoinSection />
       </main>
