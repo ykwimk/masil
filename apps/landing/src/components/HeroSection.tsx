@@ -40,7 +40,7 @@ export default function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="min-h-12 rounded-full border border-[var(--landing-accent)] bg-[var(--landing-accent)] px-6 text-[15px] font-semibold text-[var(--landing-ink)] shadow-none transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--landing-accent)_84%,white)] active:translate-y-0"
+              className="min-h-12 rounded-full border border-[var(--landing-accent)] bg-[var(--landing-accent)] px-6 text-[15px] font-semibold text-[var(--landing-ink)] shadow-none transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--landing-accent)_84%,white)] active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             >
               <Link
                 href="https://event-us.kr/masilcommunity/event/105246"
@@ -48,6 +48,7 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
               >
                 세미나 참가하기 <span aria-hidden="true">↗</span>
+                <span className="sr-only">새 창에서 열림</span>
               </Link>
             </Button>
           </div>

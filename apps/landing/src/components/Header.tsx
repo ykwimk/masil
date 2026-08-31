@@ -66,7 +66,7 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex min-h-11 items-center text-sm font-medium text-[var(--landing-muted)] transition-colors duration-200 hover:text-[var(--landing-foreground)] focus-visible:text-[var(--landing-foreground)]"
+              className="-mx-2.5 inline-flex min-h-11 min-w-11 items-center justify-center px-2.5 text-sm font-medium text-[var(--landing-muted)] transition-colors duration-200 hover:text-[var(--landing-foreground)] focus-visible:text-[var(--landing-foreground)]"
             >
               {item.label}
             </Link>
@@ -81,7 +81,8 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              세미나 안내 ↗
+              세미나 안내 <span aria-hidden="true">↗</span>
+              <span className="sr-only">새 창에서 열림</span>
             </Link>
           </Button>
         </nav>
@@ -134,7 +135,8 @@ export default function Header() {
               rel="noopener noreferrer"
               onClick={closeMobileMenu}
             >
-              세미나 참가하기 ↗
+              세미나 참가하기 <span aria-hidden="true">↗</span>
+              <span className="sr-only">새 창에서 열림</span>
             </Link>
           </Button>
         </nav>
