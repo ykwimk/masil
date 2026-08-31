@@ -127,8 +127,4 @@
   .stat-value {
     @apply text-2xl;
   }
-
-  .floating-tag {
-    @apply text-xs px-2 py-0.5;
-  }
 }
