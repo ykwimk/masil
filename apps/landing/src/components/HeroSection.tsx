@@ -1,124 +1,63 @@
-'use client';
-
 import Link from 'next/link';
-import { motion } from 'motion/react';
-import { Button } from '../components/ui/button';
+import HeroAmbient from './HeroAmbient';
+import { Button } from './ui/button';
 
 export default function HeroSection() {
   return (
-    <section className="relative flex min-h-dvh items-center justify-center overflow-hidden bg-black pt-16">
-      <div className="gradient-bg absolute inset-0"></div>
+    <section
+      id="hero"
+      aria-labelledby="hero-heading"
+      className="relative isolate grid min-h-[100svh] scroll-mt-[72px] place-items-center overflow-hidden bg-[var(--landing-ink)] pt-[132px] pb-24 text-center text-[var(--landing-foreground)] max-[920px]:min-h-[92svh] max-[920px]:pt-[126px]"
+    >
+      <HeroAmbient />
 
-      {/* Floating tags */}
-      {/* <motion.div
-        className="floating-tag absolute top-[30%] left-[15%] hidden sm:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        마케팅
-      </motion.div>
-      <motion.div
-        className="floating-tag absolute top-[20%] right-[20%] hidden sm:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
-      >
-        브랜딩
-      </motion.div>
-      <motion.div
-        className="floating-tag absolute bottom-[35%] left-[25%] hidden sm:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.9 }}
-      >
-        콘텐츠
-      </motion.div>
-      <motion.div
-        className="floating-tag absolute right-[25%] bottom-[25%] hidden sm:block"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.1 }}
-      >
-        인사이트
-      </motion.div> */}
-
-      <div className="sm:md-28 z-10 container mx-auto mb-12 px-4 text-center">
-        <motion.div
-          className="mx-auto max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="mb-4 text-3xl leading-tight font-bold text-white sm:mb-6 sm:text-4xl md:text-6xl">
+      <div className="landing-container relative z-10">
+        <div className="mx-auto w-full max-w-[960px]">
+          <p className="mb-5 font-mono text-[11px] font-semibold tracking-[0.13em] text-[var(--landing-accent)] uppercase">
+            Marketer Community · Seoul
+          </p>
+          <h1
+            id="hero-heading"
+            className="font-pretendard mx-auto max-w-[13ch] text-[clamp(46px,6.4vw,92px)] leading-[1.16] font-semibold tracking-[-0.035em] break-keep max-[560px]:max-w-[9.5ch] max-[560px]:text-[clamp(42px,13vw,58px)]"
+          >
             실패를 나누고,
-            <br className="block md:hidden" /> 성장을 함께하는
             <br />
-            <span className="text-primary">마케터 커뮤니티 ‘마실’</span>
+            성장을 함께하는
+            <br />
+            마케터 커뮤니티{' '}
+            <span className="font-hakgyoansimMulgyeol font-bold tracking-[-0.02em] text-[var(--landing-accent)]">
+              ‘마실’
+            </span>
           </h1>
 
-          <p className="mx-auto mb-6 max-w-2xl text-base text-white/80 sm:mb-8 sm:text-lg md:text-xl">
-            마케팅에 진심인 마실 멤버들의 첫번째 실험,
+          <p className="mx-auto mt-7 max-w-[34ch] text-[clamp(17px,1.6vw,21px)] leading-[1.65] break-keep text-[var(--landing-muted)] max-[560px]:max-w-[20ch]">
+            마케팅에 진심인 마실 멤버들의 첫 번째 실험,
             <br />
-            <strong>연사 초청 세미나에 여러분을 초대합니다.</strong>
+            연사 초청 세미나에 여러분을 초대합니다.
           </p>
 
-          <motion.div
-            className="flex flex-row justify-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
+          <div className="mt-9 flex justify-center">
             <Button
               asChild
               size="lg"
-              className="rounded-full px-6 py-5 text-sm sm:px-8 sm:py-6 sm:text-base"
+              className="min-h-12 rounded-full border border-[var(--landing-accent)] bg-[var(--landing-accent)] px-6 text-[15px] font-semibold text-[var(--landing-ink)] shadow-none transition-transform duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--landing-accent)_84%,white)] active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             >
               <Link
                 href="https://event-us.kr/masilcommunity/event/105246"
                 target="_blank"
+                rel="noopener noreferrer"
               >
-                세미나 참가하기
+                세미나 참가하기 <span aria-hidden="true">↗</span>
+                <span className="sr-only">새 창에서 열림</span>
               </Link>
             </Button>
-            {/* <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="rounded-full border-white px-6 py-5 text-sm text-white sm:px-8 sm:py-6 sm:text-base"
-            >
-              <Link href="#about">더 알아보기</Link>
-            </Button> */}
-          </motion.div>
-        </motion.div>
-      </div>
+          </div>
 
-      {/* Stats */}
-      {/* <div className="absolute right-0 bottom-8 left-0 px-4">
-        <motion.div
-          className="stats-container mx-auto max-w-4xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <div className="stat-item">
-            <div className="stat-value">100+</div>
-            <div className="stat-label text-white/70">마케터</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">24+</div>
-            <div className="stat-label text-white/70">모임 횟수</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">50+</div>
-            <div className="stat-label text-white/70">인사이트</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">12+</div>
-            <div className="stat-label text-white/70">파트너</div>
-          </div>
-        </motion.div>
-      </div> */}
+          <p className="mt-[18px] text-[13px] break-keep text-[var(--landing-muted)]">
+            가볍게 와서, 진심을 나누고, 다시 해보는 힘을 얻는 곳
+          </p>
+        </div>
+      </div>
     </section>
   );
 }
