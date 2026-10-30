@@ -1,87 +1,99 @@
-'use client';
-
-import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'motion/react';
-import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import styles from './PartnersSection.module.css';
 
-interface Partner {
-  name: string;
-  logo: string;
-  url: string;
-}
+const partners = [
+  {
+    name: '이지스퍼블리싱',
+    logo: '/images/redesign/partners/partners-logo1.png',
+    href: 'https://www.easyspub.co.kr',
+  },
+  {
+    name: '달샘',
+    logo: '/images/redesign/partners/partners-logo3.png',
+    href: 'https://www.instagram.com/dalsam2023',
+  },
+  {
+    name: '위올워크',
+    logo: '/images/redesign/partners/partners-logo4.png',
+    href: 'https://www.weallwork.kr',
+  },
+  {
+    name: 'GroupBy',
+    logo: '/images/redesign/partners/partners-logo2.svg',
+    href: 'https://groupby.kr',
+  },
+] as const;
 
 export default function PartnersSection() {
-  const partners: Partner[] = [
-    {
-      name: '이지스퍼블리싱',
-      logo: '/images/partners-logo1.png',
-      url: 'https://www.easyspub.co.kr',
-    },
-    {
-      name: '달샘',
-      logo: '/images/partners-logo3.png',
-      url: 'https://www.instagram.com/dalsam2023',
-    },
-    {
-      name: '위올워크',
-      logo: '/images/partners-logo4.png',
-      url: 'https://www.weallwork.kr',
-    },
-    {
-      name: '그룹바이',
-      logo: '/images/partners-logo2.svg',
-      url: 'https://groupby.kr',
-    },
-  ];
-
   return (
     <section
       id="partners"
-      className="border-b border-gray-100 bg-white py-16 md:py-20"
+      aria-labelledby="partners-heading"
+      className="font-pretendard scroll-mt-[72px] bg-[var(--landing-ink)] py-[clamp(88px,12vw,176px)] text-[var(--landing-foreground)] max-[560px]:py-24"
     >
-      <div className="container mx-auto px-4">
-        <motion.div
-          className="section-title mb-8 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <span className="tag">파트너스</span>
-          <h2>마실과 함께합니다</h2>
-          <p className="break-keep opacity-70">
-            마케터의 성장을 지원하는 파트너사들입니다.
+      <div className="landing-container">
+        <div className="mx-auto w-full max-w-[760px] text-center">
+          <p className="mb-5 font-mono text-[11px] font-semibold tracking-[0.13em] text-[var(--landing-accent)] uppercase">
+            Partners
           </p>
-        </motion.div>
+          <h2
+            id="partners-heading"
+            className="text-[clamp(34px,4vw,58px)] leading-[1.22] font-semibold tracking-[-0.025em] break-keep [line-break:strict] max-[560px]:text-[clamp(31px,9vw,42px)]"
+          >
+            마실과 함께합니다
+          </h2>
+          <p className="mx-auto mt-6 max-w-[54ch] text-[clamp(17px,1.6vw,21px)] leading-[1.65] break-keep text-[var(--landing-muted)] [line-break:strict]">
+            마케터의 배움과 실행을 응원하는 네 파트너입니다.
+          </p>
+        </div>
 
-        <div className="mx-auto px-4 md:max-w-3xl">
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
-            {partners.map((partner, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="flex items-center justify-center"
-              >
-                <Link href={partner.url} target="_blank">
+        <div
+          className={styles.marquee}
+          role="group"
+          aria-label="마실 파트너 로고"
+        >
+          <div className={styles.track}>
+            <ul className={styles.set}>
+              {partners.map((partner) => (
+                <li key={partner.name}>
+                  <Link
+                    href={partner.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.tile} ${styles.link}`}
+                  >
+                    <Image
+                      src={partner.logo}
+                      alt={partner.name}
+                      width={300}
+                      height={100}
+                      sizes="(max-width: 720px) 50vw, 286px"
+                      className={styles.logo}
+                    />
+                    <span className="sr-only">새 창에서 열림</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <div
+              className={`${styles.set} ${styles.duplicate}`}
+              aria-hidden="true"
+            >
+              {partners.map((partner) => (
+                <span className={styles.tile} key={partner.name}>
                   <Image
                     src={partner.logo}
-                    alt={partner.name}
+                    alt=""
                     width={300}
-                    height={300}
-                    className={cn(
-                      'partner-logo h-auto object-contain',
-                      partner.name === '달샘'
-                        ? 'max-h-14 w-28 md:max-h-16 md:w-32 lg:w-40'
-                        : 'max-h-8 w-28 md:max-h-10 md:w-24 lg:w-36',
-                    )}
+                    height={100}
+                    sizes="286px"
+                    className={styles.logo}
                   />
-                </Link>
-              </motion.div>
-            ))}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

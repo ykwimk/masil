@@ -1,0 +1,45 @@
+.line {
+  padding-block: 24px;
+  color: color-mix(in oklch, var(--landing-muted) 42%, var(--landing-ink));
+  font-size: clamp(25px, 3.2vw, 44px);
+  font-weight: 600;
+  line-height: 1.42;
+  letter-spacing: -0.025em;
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  line-break: strict;
+  transition: color 500ms ease;
+}
+
+.line[data-active='true'] {
+  color: var(--landing-foreground);
+}
+
+.key {
+  transition: color 500ms ease;
+}
+
+.line[data-active='true'] .key {
+  color: var(--landing-accent);
+}
+
+@media (max-width: 560px) {
+  .line {
+    padding-block: 18px;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    color: var(--landing-foreground);
+    transition: none;
+  }
+
+  .key,
+  .line[data-active='true'] .key {
+    color: inherit;
+    transition: none;
+  }
+}

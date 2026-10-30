@@ -1,0 +1,165 @@
+.ambient {
+  position: absolute;
+  inset: -16%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.field {
+  --field-parallax-x: 0px;
+  --field-parallax-y: 0px;
+
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(98px);
+  translate: var(--field-parallax-x) var(--field-parallax-y);
+  transition: translate var(--parallax-duration, 1200ms)
+    cubic-bezier(0.22, 1, 0.36, 1);
+  animation-play-state: paused;
+}
+
+.fieldA {
+  --parallax-duration: 1400ms;
+
+  top: -26%;
+  left: 26%;
+  width: 72%;
+  height: 82%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--landing-accent) 38%, var(--landing-ink)) 0%,
+    color-mix(in oklch, var(--landing-accent) 18%, var(--landing-ink)) 42%,
+    transparent 76%
+  );
+  opacity: 0.74;
+  animation: hero-drift-a 30s ease-in-out infinite;
+}
+
+.fieldB {
+  --parallax-duration: 1100ms;
+
+  right: -12%;
+  bottom: -28%;
+  width: 86%;
+  height: 90%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--landing-accent) 34%, var(--landing-surface)) 0%,
+    color-mix(in oklch, var(--landing-accent) 15%, var(--landing-ink)) 46%,
+    transparent 78%
+  );
+  opacity: 0.7;
+  animation: hero-drift-b 34s ease-in-out infinite;
+}
+
+.fieldC {
+  --parallax-duration: 900ms;
+
+  top: 26%;
+  left: 44%;
+  width: 54%;
+  height: 68%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--landing-accent) 26%, var(--landing-surface)) 0%,
+    transparent 72%
+  );
+  opacity: 0.52;
+  animation: hero-drift-c 26s ease-in-out infinite;
+}
+
+.ambient[data-active='false'] .field {
+  transition: none;
+  animation-play-state: paused;
+}
+
+.ambient[data-active='true'] .field {
+  will-change: transform, translate;
+  animation-play-state: running;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  mix-blend-mode: soft-light;
+  opacity: 0.025;
+}
+
+@keyframes hero-drift-a {
+  0%,
+  100% {
+    transform: translate3d(-3%, -2%, 0) scale(1.02);
+  }
+  50% {
+    transform: translate3d(7%, 5%, 0) scale(1.1);
+  }
+}
+
+@keyframes hero-drift-b {
+  0%,
+  100% {
+    transform: translate3d(4%, 3%, 0) scale(1.08);
+  }
+  50% {
+    transform: translate3d(-6%, -4%, 0) scale(0.99);
+  }
+}
+
+@keyframes hero-drift-c {
+  0%,
+  100% {
+    transform: translate3d(-2%, 5%, 0) scale(0.98);
+  }
+  50% {
+    transform: translate3d(5%, -5%, 0) scale(1.09);
+  }
+}
+
+@media (max-width: 560px) {
+  .ambient {
+    inset: -18% -28%;
+  }
+
+  .field {
+    filter: blur(74px);
+  }
+
+  .fieldA {
+    left: 34%;
+    width: 86%;
+  }
+
+  .fieldB {
+    right: -16%;
+    width: 96%;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .field {
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field {
+    translate: 0 0;
+    transition: none;
+    animation: none;
+  }
+
+  .fieldA {
+    transform: translate3d(1%, 1%, 0) scale(1.06);
+  }
+
+  .fieldB {
+    transform: translate3d(-2%, -1%, 0) scale(1.03);
+  }
+
+  .fieldC {
+    transform: translate3d(1%, -2%, 0) scale(1.02);
+  }
+}
