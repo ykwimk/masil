@@ -78,6 +78,7 @@ export const authOptions: NextAuthOptions = {
             if (!error && data?.role) {
               token.role = data.role;
               token.nickname = data.nickname ?? null;
+              token.roleFetchedAt = now;
             } else if (!error && !data) {
               await admin.from('profiles').upsert(
                 {
@@ -87,16 +88,21 @@ export const authOptions: NextAuthOptions = {
                 },
                 { onConflict: 'email' },
               );
-              token.role = token.role || 'user';
+              token.role = 'user';
+              token.roleFetchedAt = now;
             } else {
-              token.role = token.role || 'user';
+              // 역할을 확인 못 하면 권한을 주지 않는다 (강등된 admin이 남지 않게)
+              token.role = 'user';
+              // 4분 전으로 적어 1분 뒤 다시 확인한다 (진짜 admin은 1분만 막히고, 아픈 DB는 1분 쉰다)
+              token.roleFetchedAt = now - 240;
             }
-            token.roleFetchedAt = now;
           } catch {
-            token.role = token.role || 'user';
+            // 위 else와 같은 이유
+            token.role = 'user';
+            token.roleFetchedAt = now - 240;
           }
         } else {
-          token.role = token.role || 'user';
+          token.role = 'user';
         }
       }
       return token;
