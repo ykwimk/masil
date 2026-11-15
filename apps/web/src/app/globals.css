@@ -1,19 +1,4 @@
 @import "tailwindcss";
-@import "@masil/ui/styles/base.css";
-
-/* shortcut: 약관 두 화면(privacy·terms)용. 2단계 prose.css가 생기면 지운다 */
-.prose-custom {
-  color: var(--foreground);
-  line-height: 1.75;
-}
-.prose-custom :first-child { margin-top: 0; }
-.prose-custom :last-child { margin-bottom: 0; }
-.prose-custom h2 {
-  font-size: 1.5rem; /* text-2xl */
-  line-height: 2rem;
-  font-weight: 700;
-  margin: 1.2em 0 0.5em;
-}
-.prose-custom p { margin: 0.9em 0; }
-.prose-custom ul { margin: 0.9em 0; padding-left: 1.25rem; list-style: disc; }
-.prose-custom li { margin: 0.25em 0; }
+@import "@masil/ui/styles/tokens.css";
+@import "@masil/ui/styles/prose.css";
+@source "../../../../packages/ui/src";

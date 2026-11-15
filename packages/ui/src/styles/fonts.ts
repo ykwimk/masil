@@ -1,22 +1,8 @@
 import localFont from 'next/font/local';
 
+// 쓰는 굵기만: 본문 400, 라벨 500, 제목 600·700 (PRODUCT.md 디자인 절)
 export const pretendard = localFont({
   src: [
-    {
-      path: '../fonts/Pretendard-Thin.woff2',
-      weight: '100',
-      style: 'normal',
-    },
-    {
-      path: '../fonts/Pretendard-ExtraLight.woff2',
-      weight: '200',
-      style: 'normal',
-    },
-    {
-      path: '../fonts/Pretendard-Light.woff2',
-      weight: '300',
-      style: 'normal',
-    },
     {
       path: '../fonts/Pretendard-Regular.woff2',
       weight: '400',
@@ -37,28 +23,14 @@ export const pretendard = localFont({
       weight: '700',
       style: 'normal',
     },
-    {
-      path: '../fonts/Pretendard-ExtraBold.woff2',
-      weight: '800',
-      style: 'normal',
-    },
-    {
-      path: '../fonts/Pretendard-Black.woff2',
-      weight: '900',
-      style: 'normal',
-    },
   ],
   variable: '--font-pretendard',
   display: 'swap',
 });
 
+// '마실' 로고와 홈 제목의 '마실'에만
 export const hakgyoansimMulgyeol = localFont({
   src: [
-    {
-      path: '../fonts/TTHakgyoansimMulgyeolR.woff2',
-      weight: '400',
-      style: 'normal',
-    },
     {
       path: '../fonts/TTHakgyoansimMulgyeolB.woff2',
       weight: '700',

@@ -8,6 +8,7 @@
     ".": "./src/index.ts",
     "./styles/fonts": "./src/styles/fonts.ts",
     "./utils/cn": "./src/utils/cn.ts",
+    "./components/*": "./src/components/*.tsx",
     "./styles/*": "./styles/*"
   },
   "scripts": {

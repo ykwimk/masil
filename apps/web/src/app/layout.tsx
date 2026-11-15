@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { hakgyoansimMulgyeol, pretendard } from '@masil/ui/styles/fonts';
+import { RoughFilter } from '@/components/Wave';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -41,10 +42,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body
-        className={`${pretendard.variable} ${hakgyoansimMulgyeol.variable} font-pretendard antialiased`}
-      >
+    <html
+      lang="ko"
+      className={`${pretendard.variable} ${hakgyoansimMulgyeol.variable}`}
+    >
+      <body>
+        <RoughFilter />
         {children}
       </body>
     </html>
