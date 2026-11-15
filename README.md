@@ -10,7 +10,7 @@
 
 ```
 apps/
-  web/       # 독자용 웹 (Next.js). 3단계 전까지는 '준비 중' 화면
+  web/       # 독자용 웹 (Next.js). 5단계 전까지는 홈 첫 화면만
   landing/   # 소개 페이지. packages를 쓰지 않는 독립 앱, 건드리지 않음
 packages/
   ui/        # web·admin이 같이 쓰는 토큰·글꼴·컴포넌트
