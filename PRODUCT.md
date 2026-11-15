@@ -16,7 +16,7 @@
 | --- | --- | --- |
 | apps/web | 독자용 웹 | 다시 만든다 |
 | apps/admin | 에디터·관리자용 | 새로 만든다 |
-| apps/landing | 기존 소개 페이지 | **손대지 않는다** |
+| apps/landing | 기존 소개 페이지 | **손대지 않는다** (packages를 쓰지 않는 독립 앱) |
 | 마실 앱 (~/www/masil-app) | 나중. 같은 Supabase의 글과 계정을 쓴다 | 이 저장소 밖 |
 
 ## 정해진 것
@@ -25,7 +25,7 @@
 - **로그인**: Supabase Auth + Google. 에디터와 독자가 같은 계정 체계를 쓰고, `profiles.role`(reader/editor/admin)로 구분한다. 권한은 RLS로 막는다.
 - **본문**: 어드민에서 Tiptap으로 쓰고 HTML로 저장한다. 저장할 때 서버에서 허용한 태그만 남긴다. 나중에 앱 WebView도 같은 HTML을 쓴다.
 - **테마**: 웹·어드민 모두 어두운 테마 하나. 어드민 미리보기는 웹과 같은 본문 스타일을 쓴다.
-- **공통 UI**: `packages/ui`에 새 파일로 만든 토큰과 컴포넌트를 web·admin이 같이 쓴다. 앱 안에 복사본을 만들지 않는다. landing은 지금 쓰는 기존 파일을 계속 쓰고, 그 파일들은 바꾸지 않는다.
+- **공통 UI**: `packages/ui`의 토큰과 컴포넌트를 web·admin이 같이 쓴다. 앱 안에 복사본을 만들지 않는다. landing은 packages를 쓰지 않는다.
 
 ## 디자인
 

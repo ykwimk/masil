@@ -6,9 +6,9 @@
 ## 구조
 
 - `apps/web`: 독자용 / `apps/admin`: 에디터용 (둘 다 Next.js)
-- `packages/ui`: 새 토큰(`styles/tokens.css`), 본문 스타일(`styles/prose.css`), 공통 컴포넌트(`src/components/`). 모두 새 파일이고 web·admin만 가져다 쓴다. 앱 안에 복사본을 만들지 않는다.
+- `packages/ui`: 디자인 토큰, 본문 스타일, 공통 컴포넌트. web·admin만 쓴다. 앱 안에 복사본을 만들지 않는다.
 - `supabase/migrations`: DB 스키마. 대시보드에서 직접 바꾸지 않는다.
-- `apps/landing`: **손대지 않는다.** landing이 쓰는 기존 파일도 바꾸지 않는다: `packages/ui/styles/base.css`, `packages/ui/src/styles/fonts.ts`, `packages/ui/src/utils/cn.ts`, `packages/hooks`.
+- `apps/landing`: **건드리지 않는다.** 1단계에서 packages와 떼어낸 독립 앱이다.
 
 ## 확인
 
@@ -17,7 +17,7 @@
     pnpm lint && pnpm typecheck && pnpm build
 
 화면을 바꿨으면 브라우저에서 직접 본다.
-단계를 끝낼 때는 PLAN.md의 'landing 확인'(diff 없음, landing 빌드, 기준 캡처와 화면 비교)도 한다.
+단계를 끝낼 때는 `git diff main -- apps/landing`이 비어 있고 `pnpm --filter landing build`가 통과하는지 본다. 루트 tailwind·eslint·typescript 버전을 올릴 때도 landing 빌드를 꼭 돌린다.
 
 ## 규칙
 

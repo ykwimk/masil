@@ -13,32 +13,30 @@
 
 ## 모든 단계 공통: landing 확인
 
-apps/landing은 손대지 않는다. landing이 쓰는 기존 파일도 바꾸지 않는다.
-`packages/ui/styles/base.css`, `packages/ui/src/styles/fonts.ts`, `packages/ui/src/utils/cn.ts`, `packages/hooks`
-새 토큰·컴포넌트는 packages/ui 안에 새 파일로 만들고 web·admin만 import한다. `packages/ui/package.json`의 `exports`는 기존 항목을 그대로 두고 새 항목만 더한다.
+apps/landing은 1단계에서 packages와 떼어낸 뒤로 건드리지 않는다. landing은 packages를 쓰지 않고, packages는 web과 admin만 쓴다.
 
-단계를 끝낼 때마다 아래를 확인한다. 하나라도 걸리면 그 단계는 끝나지 않은 것이다.
+단계를 끝낼 때 확인한다.
 
-1. `git diff main -- apps/landing packages/hooks packages/ui/styles/base.css packages/ui/src/styles packages/ui/src/utils`가 비어 있다.
-2. `pnpm --filter landing build`가 통과한다.
-3. landing을 운영 모드로 띄워(`pnpm --filter landing start -p 3100`) 1440px·390px 전체 페이지를 캡처하고, `.baseline/landing/`의 기준 캡처와 나란히 비교한다. 레이아웃·색·글꼴이 같아야 한다(애니메이션 때문에 생기는 픽셀 차이는 괜찮다).
-4. 루트 설정(`tsconfig.base.json`, `eslint.config.mjs`, 루트 devDependencies)이나 `pnpm-lock.yaml`의 landing 항목이 바뀌었으면 왜 바뀌었는지 PR에 적는다.
+1. `git diff main -- apps/landing`이 비어 있다.
+2. `pnpm --filter landing build`가 통과한다. 루트의 tailwind·eslint·typescript 버전을 올리는 변경은 이 빌드 확인을 반드시 거친다.
 
 ## 1. 정리
 
 **할 일**
 
-- **가장 먼저** landing 기준 캡처를 찍는다(위 3번 방법). `.baseline/landing/`에 두고, `.gitignore`에 `.baseline/`을 더한다.
+- **가장 먼저** landing을 packages에서 떼어낸다. landing이 쓰던 `packages/ui`의 `styles/base.css`·글꼴·`cn`과 `packages/hooks`의 `useScrollHeader`를 apps/landing 안으로 복사하고 import를 바꾼다. 글꼴은 실제로 쓰는 굵기만(Pretendard 400·500·600·700, 물결체 700) 가져온다. `next.config.mjs`의 `transpilePackages`와 `package.json`의 `@masil/*` 의존성을 지운다.
 - `apps/side-project`, `apps/launching`을 지우고 루트 `package.json`의 `launching`·`sideproject` 스크립트를 지운다.
+- `packages/hooks`를 지운다(쓰는 곳이 없어진다).
 - git 밖의 폴더를 지운다: `_bmad`, `_bmad-output`, `.codex`, `supabase/.temp`, 루트 `next-env.d.ts`. (`apps/landing/docs`는 landing 것이라 둔다)
 - apps/web을 비운다: 에디터, NextAuth, 예전 Supabase 코드, API 라우트, `components/` 전부, `tailwind.config.mjs`, `components.json`, globals.css의 복사 스타일, 쓰지 않게 된 의존성. 남기는 것: `layout.tsx`, '준비 중' 한 화면, `privacy`·`terms`(4단계에서 다시 본다).
-- 확인 명령을 갖춘다: web과 packages/ui에 `"typecheck": "tsc --noEmit"`, `turbo.json`에 `typecheck` 작업, 루트에 `pnpm typecheck`.
+- 확인 명령을 갖춘다: web에 `"typecheck": "next typegen && tsc --noEmit"`, packages/ui에 `"typecheck": "tsc --noEmit"`, `turbo.json`에 `typecheck` 작업, 루트에 `pnpm typecheck`.
 - README를 지금 구조에 맞게 고친다.
 
 **끝났다는 기준**
 
 - `pnpm install`, `pnpm lint`, `pnpm typecheck`, `pnpm build`가 통과한다.
-- landing 확인(공통) 통과. 앱 두 개를 지우면 lockfile이 바뀌므로 landing 항목의 버전이 그대로인지 특히 본다.
+- `grep -rn "@masil/" apps/landing`(node_modules·.next 제외)이 비어 있다.
+- landing 화면 확인은 이번 한 번만: PR의 Vercel landing 미리보기와 masil-landing.vercel.app을 사용자가 눈으로 비교한다.
 - 배포된 web에 '준비 중' 화면이 보인다.
 - Vercel의 launching·side-project 프로젝트를 지울지는 사용자가 정한다.
 
@@ -49,8 +47,8 @@ apps/landing은 손대지 않는다. landing이 쓰는 기존 파일도 바꾸�
 1. PC 배치 시안: 홈·글 화면을 HTML로 그려 1440px·390px 폭에서 사용자와 확인한다. 시안 파일은 저장소에 넣지 않는다.
 2. `packages/ui/styles/tokens.css`(새 파일): PRODUCT.md의 색·글꼴·읽기 수치를 Tailwind v4 `@theme`으로 정의한다.
 3. `packages/ui/styles/prose.css`(새 파일): 글 본문 스타일. 웹 글 화면과 어드민 에디터·미리보기가 같이 쓴다.
-4. `packages/ui/src/components/`(새 폴더): 3단계에 필요한 것만 만든다(Button, 입력 필드, 마실 글자 로고 정도). 쓸 곳이 생기면 그때 더한다. 기존 `src/index.ts`는 바꾸지 않고, 컴포넌트는 새 export 경로(`@masil/ui/components/*`)로 내보낸다.
-5. web의 globals.css가 `base.css` 대신 tokens.css와 prose.css를 import하고, `@source`로 packages/ui를 스캔하게 한다. '준비 중' 화면이 새 토큰을 쓴다. 글꼴은 기존 `@masil/ui/styles/fonts`를 그대로 import해서 쓴다.
+4. `packages/ui/src/components/`(새 폴더): 3단계에 필요한 것만 만든다(Button, 입력 필드, 마실 글자 로고 정도). 쓸 곳이 생기면 그때 더한다.
+5. web의 globals.css가 tokens.css와 prose.css를 import하고, `@source`로 packages/ui를 스캔하게 한다. '준비 중' 화면이 새 토큰을 쓴다. 쓰지 않게 된 base.css 같은 예전 파일은 지운다.
 
 **끝났다는 기준**
 

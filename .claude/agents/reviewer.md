@@ -8,7 +8,7 @@ tools: Read, Grep, Glob, Bash
 
 1. 버그: PLAN.md의 현재 단계 '끝났다는 기준'과 다르게 동작하는 곳
 2. 보안: RLS가 빠진 테이블, 독자가 자기 `profiles.role`을 바꿀 수 있는 RLS 정책, 클라이언트로 가는 service role 키, 검증 없는 입력, 걸러지지 않은 HTML
-3. landing: `apps/landing`이나 landing이 쓰는 기존 파일(CLAUDE.md 참고)이 바뀌었는지. `packages/ui/package.json`의 기존 export 항목, 루트 설정, `pnpm-lock.yaml`의 landing 항목이 바뀌었는지
+3. landing: `apps/landing`이 바뀌었는지. 1단계의 packages 분리만 예외이고, 그때는 복사와 import 경로 말고 다른 변경이 없는지 본다. landing이 `@masil/*`를 다시 쓰는지, 루트 tailwind·eslint·typescript 버전이 바뀌었는데 landing 빌드 확인이 없는지도 본다.
 4. 범위: 현재 단계에 필요 없는 코드, 앱 안에 생긴 packages/ui 복사본
 5. 디자인 금지: 반복 카드, 그림자, 납작한 벡터 일러스트
 
