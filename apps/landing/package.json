@@ -9,8 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@masil/hooks": "workspace:*",
-    "@masil/ui": "workspace:*",
     "@radix-ui/react-avatar": "1.3.1",
     "@radix-ui/react-slot": "^1.2.2",
     "class-variance-authority": "^0.7.1",
