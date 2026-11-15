@@ -44,16 +44,16 @@ apps/landing은 1단계에서 packages와 떼어낸 뒤로 건드리지 않는�
 
 **할 일**
 
-1. PC 배치 시안: 홈·글 화면을 HTML로 그려 1440px·390px 폭에서 사용자와 확인한다. 시안 파일은 저장소에 넣지 않는다.
+1. ~~PC 배치 시안~~ 끝남: Artifact 시안 03(https://claude.ai/code/artifact/3a332ca2-9bca-4335-83c1-32edda54a727). 밝은 바탕, 홈 7:5 두 열, '마실' 물결 밑줄, 캐릭터는 홈 첫 화면에만. 정한 값은 PRODUCT.md 디자인 절에 있다.
 2. `packages/ui/styles/tokens.css`(새 파일): PRODUCT.md의 색·글꼴·읽기 수치를 Tailwind v4 `@theme`으로 정의한다.
 3. `packages/ui/styles/prose.css`(새 파일): 글 본문 스타일. 웹 글 화면과 어드민 에디터·미리보기가 같이 쓴다.
-4. `packages/ui/src/components/`(새 폴더): 3단계에 필요한 것만 만든다(Button, 입력 필드, 마실 글자 로고 정도). 쓸 곳이 생기면 그때 더한다.
-5. web의 globals.css가 tokens.css와 prose.css를 import하고, `@source`로 packages/ui를 스캔하게 한다. '준비 중' 화면이 새 토큰을 쓴다. 쓰지 않게 된 base.css 같은 예전 파일은 지운다.
+4. `packages/ui/src/components/Logo.tsx`: '마실' 글자 로고. Button·입력 필드는 3단계에서 처음 쓸 때 만든다. 글꼴은 쓰는 굵기만 남기고, 예전 base.css를 지운다.
+5. web: globals.css가 tokens.css와 prose.css를 import한다. '준비 중' 화면은 **홈 첫 화면**으로 만든다(제목과 '마실' 물결 밑줄, 소개, 임시 캐릭터 그림, 빈 상태 문장). privacy·terms도 새 토큰으로 옮긴다.
 
 **끝났다는 기준**
 
 - web에 `components/ui` 복사본이 없다.
-- '준비 중' 화면이 새 색·글꼴로 배포된다.
+- 홈 첫 화면이 새 토큰으로 배포된다. 휴대폰(390×844)에서 캐릭터가 제목 옆에 작게 있어, 아래에 대표 글이 들어갈 자리가 첫 화면 안에 남는다.
 - landing 확인(공통) 통과.
 
 ## 3. 어드민 쓰기 → 웹 읽기
@@ -70,10 +70,11 @@ apps/landing은 1단계에서 packages와 떼어낸 뒤로 건드리지 않는�
 - Google 로그인. editor·admin이 아니면 들어올 수 없다.
 - 글 목록, 새 글, 수정, 초안 저장·발행·발행 취소, 대표 이미지 올리기.
 - Tiptap 에디터 → 서버에서 HTML을 걸러서 저장. 미리보기는 prose.css를 쓴다.
+- Button·입력 필드는 여기서 처음 쓰므로 packages/ui에 만든다.
 
 **apps/web**
 
-- 홈: 대표 글 한 편 + 나머지 발행 글 목록. 글이 없을 때와 한 편일 때도 다룬다.
+- 홈: 2단계 첫 화면 아래에 대표 글 한 편과 '더 읽어볼 이야기'(물결 밑줄 제목) 목록을 둔다. 글이 없을 때와 한 편일 때도 다룬다.
 - 글 화면 `/posts/[id]`: 메타데이터·OG, 없는 글은 404.
 - 새로 발행한 글은 1분 안에 보이면 된다(시간 기반 재검증).
 
