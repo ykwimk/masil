@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
-import { useScrollHeader } from '@masil/hooks';
+import { useScrollHeader } from '../hooks/useScrollHeader';
 import { cn } from '../lib/utils';
 import { Button } from './ui/button';
 import { Logo } from './shared/Logo';

@@ -9,6 +9,7 @@
     "lint": {
       "cache": true
     },
+    "typecheck": {},
     "dev": {
       "cache": false,
       "persistent": true

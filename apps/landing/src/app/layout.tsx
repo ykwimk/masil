@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { pretendard, hakgyoansimMulgyeol } from '@masil/ui/styles/fonts';
+import { pretendard, hakgyoansimMulgyeol } from '../lib/fonts';
 import './globals.css';
 
 export const metadata: Metadata = {

@@ -1,11 +1,5 @@
 import type { Metadata } from 'next';
 import { hakgyoansimMulgyeol, pretendard } from '@masil/ui/styles/fonts';
-import { Header } from '@/components/shared/Header';
-import { Footer } from '@/components/shared/Footer';
-import { AuthProvider } from '@/providers/AuthProvider';
-import NicknameModal from '@/components/shared/NicknameModal';
-import EditorFab from '@/components/shared/EditorFab';
-import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -49,18 +43,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} ${hakgyoansimMulgyeol.variable} font-sans antialiased`}
+        className={`${pretendard.variable} ${hakgyoansimMulgyeol.variable} font-pretendard antialiased`}
       >
-        <AuthProvider>
-          <div className="relative flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-          <EditorFab />
-          <NicknameModal />
-          <Toaster position="top-center" />
-        </AuthProvider>
+        {children}
       </body>
     </html>
   );
