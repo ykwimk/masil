@@ -1,0 +1,112 @@
+/* 글 본문. 웹 글 화면과 어드민 미리보기가 같이 쓴다. 시작값은 masil-app article-v1.html의 .prose */
+@layer components {
+  .prose {
+    --reading-size: 1.0625rem;
+    font-size: var(--reading-size);
+    line-height: 1.8;
+    letter-spacing: -0.012em;
+  }
+
+  @media (min-width: 64rem) {
+    .prose {
+      --reading-size: 1.125rem;
+    }
+  }
+
+  .prose > * + * {
+    margin-top: 24px;
+  }
+
+  .prose h2 {
+    margin: 44px 0 18px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  .prose h3 {
+    margin: 36px 0 14px;
+    font-size: 1.08em;
+    line-height: 1.55;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .prose blockquote {
+    margin: 32px 0;
+    padding: 4px 0 4px 18px;
+    border-left: 2px solid var(--color-accent);
+    font-size: 1.15em;
+    line-height: 1.65;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.2em;
+  }
+
+  .prose ul {
+    list-style: disc;
+  }
+
+  .prose ol {
+    list-style: decimal;
+  }
+
+  .prose li + li {
+    margin-top: 8px;
+  }
+
+  .prose a {
+    color: var(--color-accent-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .prose strong {
+    font-weight: 600;
+  }
+
+  .prose hr {
+    margin: 40px 0;
+    border: 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  /* 본문 이미지: 사진은 원본 비율, 캡션은 13px 보조 글자색 */
+  .prose img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+
+  .prose figure {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 작은 사진을 열 폭으로 늘리지 않는다 */
+    gap: 10px;
+    margin: 32px 0;
+  }
+
+  .prose figcaption {
+    font-size: var(--text-meta);
+    line-height: var(--text-meta--line-height);
+    color: var(--color-muted);
+  }
+
+  /* 아래는 위의 요소별 여백보다 이겨야 해서 맨 끝에 둔다 */
+  .prose :is(h2, h3) + * {
+    margin-top: 0; /* 소제목 바로 뒤는 소제목의 아래 여백만 */
+  }
+
+  .prose > :first-child {
+    margin-top: 0;
+  }
+
+  .prose > :last-child {
+    margin-bottom: 0;
+  }
+}
