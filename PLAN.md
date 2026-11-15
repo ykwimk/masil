@@ -20,6 +20,22 @@ apps/landing은 1단계에서 packages와 떼어낸 뒤로 건드리지 않는�
 1. `git diff main -- apps/landing`이 비어 있다.
 2. `pnpm --filter landing build`가 통과한다. 루트의 tailwind·eslint·typescript 버전을 올리는 변경은 이 빌드 확인을 반드시 거친다.
 
+## 3단계부터 공통
+
+**환경**
+
+- 개발은 Supabase CLI 로컬 DB(`supabase start`)로 한다. 스키마·정책은 `supabase/migrations`, RLS 확인 스크립트는 `supabase/tests`(`supabase test db`).
+- 운영 Supabase 프로젝트는 서울 지역(ap-northeast-2)에 새로 만든다. 마이그레이션을 로컬에서 확인한 뒤 운영에 적용한다.
+
+**사용자 확인**
+
+- 서버(서버 컴포넌트·서버 액션·라우트·미들웨어)에서 로그인한 사용자는 `supabase.auth.getUser()`로 확인한다. 쿠키의 세션을 그대로 믿는 `getSession()`으로 권한을 판단하지 않는다.
+
+**직접 짜는 부분**
+
+- 로그인, RLS 정책과 확인 스크립트, 발행·재검증, HTML 거르기, Button·Input, 이미지 업로드는 사용자가 직접 짠다.
+- Claude는 틀(파일, 타입, 호출 위치, 빈 함수)과 `TODO(human)`만 만든다. 한 번에 `TODO(human)` 하나씩 두고, 채워지면 확인한 뒤 다음으로 간다.
+
 ## 1. 정리
 
 **할 일**
@@ -61,28 +77,50 @@ apps/landing은 1단계에서 packages와 떼어낸 뒤로 건드리지 않는�
 **DB** (`supabase/migrations`)
 
 - `profiles(id → auth.users, nickname, role)`. 가입하면 트리거가 profiles 행을 만든다. 첫 admin은 SQL로 지정한다.
+  - 본인은 자기 행의 `nickname`만 바꿀 수 있다. `role`은 사용자가 바꿀 수 없다(칼럼 권한). role 변경은 admin이 서버(service role)에서만 한다.
 - `posts(id, author_id, title, excerpt, body_html, cover_image_url, status draft|published, published_at, created_at, updated_at)`.
-- Storage에 글 이미지 버킷을 둔다.
 - RLS: 발행된 글은 누구나 읽는다. 쓰기는 editor(자기 글)와 admin(모든 글)만 할 수 있다.
+- Storage 글 이미지 버킷
+  - 업로드는 editor·admin만 한다(Storage 정책). 읽기는 공개다.
+  - 파일 종류(이미지만)와 크기를 버킷에서 제한한다.
+  - 파일 이름은 서버에서 무작위(UUID)로 정한다. 올린 사람이 정한 이름을 쓰지 않는다.
 
 **apps/admin** (Next.js, `@supabase/ssr`)
 
 - Google 로그인. editor·admin이 아니면 들어올 수 없다.
-- 글 목록, 새 글, 수정, 초안 저장·발행·발행 취소, 대표 이미지 올리기.
-- Tiptap 에디터 → 서버에서 HTML을 걸러서 저장. 미리보기는 prose.css를 쓴다.
+- 글 목록, 새 글, 수정, 초안 저장·발행·발행 취소, 대표 이미지·본문 이미지 올리기.
+- Tiptap 에디터 → 서버에서 HTML을 걸러서 저장한다. 미리보기는 prose.css를 쓴다.
+  - 허용한 태그만 남긴다.
+  - `javascript:` 같은 위험한 링크 주소와 `on*` 속성을 막는다.
+  - 본문 `<img>`의 주소는 우리 Storage 주소만 허용한다.
+- 발행·발행 취소·수정하면 web에 재검증을 요청한다(비밀 토큰을 함께 보낸다).
 - Button·입력 필드는 여기서 처음 쓰므로 packages/ui에 만든다.
 
 **apps/web**
 
 - 홈: 2단계 첫 화면 아래에 대표 글 한 편과 '더 읽어볼 이야기'(물결 밑줄 제목) 목록을 둔다. 글이 없을 때와 한 편일 때도 다룬다.
 - 글 화면 `/posts/[id]`: 메타데이터·OG, 없는 글은 404.
-- 새로 발행한 글은 1분 안에 보이면 된다(시간 기반 재검증).
+- 재검증
+  - admin이 요청하면 해당 글과 홈을 바로 다시 만든다(on-demand). 요청은 비밀 토큰을 확인한 뒤에만 받는다.
+  - 시간 기반 재검증은 놓친 요청에 대비한 보조로만 둔다.
+
+**운영 보안 헤더** (web·admin)
+
+- CSP를 좁힌다. 운영에서 외부 스크립트 출처(`https:`)와 `unsafe-eval`을 뺀다. `connect-src`는 자기 자신과 우리 Supabase 주소만 허용한다.
+- `images.remotePatterns`는 `*.supabase.co`가 아니라 우리 프로젝트 주소만 허용한다.
 
 **끝났다는 기준**
 
-- 운영 환경 어드민에서 발행한 글이 1분 안에 운영 환경 web에 보인다.
+- 운영 어드민에서 발행·발행 취소·수정하면 운영 web에 바로 반영된다(on-demand 재검증). 재검증 요청은 토큰이 없거나 틀리면 거절된다.
 - 초안은 anon 키로 조회해도 나오지 않는다.
-- reader 계정으로 posts에 쓰기를 시도하면 RLS가 막는다(SQL 또는 스크립트로 확인).
+- 스크립트(`supabase test db`)로 확인한다.
+  - reader 계정으로 posts에 쓰기를 시도하면 RLS가 막는다.
+  - reader가 자기 `profiles.role`을 바꾸려 하면 RLS가 막는다.
+  - reader와 anon은 Storage에 올릴 수 없다. 허용하지 않은 종류나 너무 큰 파일은 거절된다.
+- HTML 거르기 확인
+  - `<script>`, `on*` 속성, `javascript:` 링크, 외부 주소의 `<img>`가 저장된 본문에 남지 않는다.
+  - 에디터로 넣은 본문 사진이 웹 글 화면에 제대로 보인다.
+- 운영 CSP에 `unsafe-eval`과 외부 스크립트 출처가 없고, 페이지가 CSP 오류 없이 뜬다.
 - admin을 새 Vercel 프로젝트로 배포한다.
 - landing 확인(공통) 통과.
 
@@ -91,13 +129,25 @@ apps/landing은 1단계에서 packages와 떼어낸 뒤로 건드리지 않는�
 - web에 Google 로그인과 닉네임 설정을 붙인다.
 - `likes(post_id, user_id)`, `saves(post_id, user_id)`, `comments(id, post_id, user_id, body, created_at)`를 만들고 RLS를 건다.
 - 글 화면에 좋아요 수·저장·댓글, '저장한 글' 화면을 만든다.
+- 댓글
+  - 글자 수를 제한한다(DB 제약과 서버 둘 다).
+  - 도배를 제한한다(같은 사용자가 짧은 시간에 여러 개를 못 쓴다).
+  - 평문으로만 보여준다(HTML을 해석하지 않는다).
+- 회원 탈퇴: 계정을 지우면 profiles·좋아요·저장도 지운다. 댓글을 지울지 '탈퇴한 사용자'로 남길지는 4단계를 시작할 때 정한다.
 - 어드민에서 admin이 댓글을 지울 수 있게 한다.
-- privacy·terms 내용을 새 서비스에 맞게 고친다.
+- privacy·terms 내용을 새 서비스에 맞게 고친다. 개인정보 처리방침의 연락처는 개인 이메일이 아니라 서비스 이메일로 바꾼다.
 
 **끝났다는 기준**
 
-- 로그인하지 않은 독자는 숫자는 보지만, 누르면 로그인으로 안내받는다.
-- 다른 사람의 댓글·좋아요·저장은 RLS로 지우거나 볼 수 없다.
+- 로그인하지 않은 독자도 좋아요 수와 댓글은 보고, 누르면 로그인으로 안내받는다.
+- 스크립트(`supabase test db`)로 확인한다.
+  - 남의 댓글·좋아요·저장은 지울 수 없다.
+  - 저장 목록은 본인만 볼 수 있다.
+  - 댓글은 누구나 읽을 수 있다.
+  - reader가 자기 `profiles.role`을 바꾸려 하면 RLS가 막는다.
+- 댓글 글자 수와 도배 제한이 서버와 DB에서 모두 걸린다. `<script>`가 든 댓글도 글자 그대로 보인다.
+- 회원 탈퇴하면 계정·좋아요·저장이 지워지고, 댓글은 정한 방식대로 처리된다.
+- 개인정보 처리방침의 연락처가 서비스 이메일이다.
 - landing 확인(공통) 통과.
 - 배포.
 
