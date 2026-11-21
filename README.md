@@ -59,43 +59,6 @@ supabase db advisors       # 보안·성능 점검
 
 - `NEXT_PUBLIC_SUPABASE_URL`이 없으면 admin 빌드가 멈춥니다. CSP `connect-src`에 넣을 주소이기 때문입니다.
 
-## 운영 설정
-
-이 저장소는 공개입니다. 비밀 값, 이메일 주소, 운영 admin 주소는 적지 않고 `<…>` 자리표시로 둡니다. 실제 값은 콘솔에서 직접 넣습니다. service role 키와 Secret key는 어디에도 넣지 않습니다.
-
-**Supabase** (서울 지역)
-
-- Authentication → Sign In / Providers
-  - Google 켬. Client ID와 Secret은 Google Cloud 값, Skip nonce checks는 끔.
-  - Email 끔.
-- Authentication → URL Configuration
-  - Site URL `<admin 운영 주소>`
-  - Redirect URLs: `<admin 운영 주소>/auth/callback**`, `<admin 운영 주소>/auth/popup`
-- 마이그레이션은 로컬에서 확인한 뒤 `supabase db push`로 올립니다(`supabase link --project-ref <ref>` 뒤에).
-
-**Google Cloud** (Google Auth Platform)
-
-- 앱 이름 `마실`, 지원 이메일 `<지원 이메일>`, Audience External
-- 게시 상태는 Testing. Test users에는 `<에디터·관리자 Gmail>`만 넣습니다(7단계에서 프로덕션으로 바꿉니다).
-- OAuth 클라이언트(Web application)의 Authorized redirect URIs
-  - `https://<ref>.supabase.co/auth/v1/callback`
-  - `http://127.0.0.1:54321/auth/v1/callback`
-
-**Vercel** (admin 프로젝트)
-
-- Root Directory `apps/admin`, Framework Next.js
-- Environment Variables(Production·Preview): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
-- Preview 주소에서는 로그인이 되지 않습니다. 리다이렉트 허용 목록에 운영 주소만 있기 때문이고, 의도한 것입니다.
-
-**첫 admin과 editor 지정** (운영에서 한 번 로그인한 뒤, Supabase SQL Editor)
-
-```sql
-update public.profiles set role = 'admin'
-where id = (select id from auth.users where email = '<관리자 Gmail>');
-```
-
-editor도 같은 방식으로 `'editor'`를 넣습니다. role을 바꾸는 화면은 없습니다.
-
 ## 확인
 
 ```bash

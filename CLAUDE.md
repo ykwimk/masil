@@ -17,6 +17,7 @@
     pnpm lint && pnpm typecheck && pnpm build
 
 화면을 바꿨으면 브라우저에서 직접 본다.
+배포한 뒤에는 배포된 JS에 들어간 Supabase 키가 운영 키인지 확인한다. 3단계에서 Vercel에 로컬 키가 들어가 로그인 코드 교환이 401로 실패했다.
 단계를 끝낼 때는 `git diff main -- apps/landing`이 비어 있고 `pnpm --filter landing build`가 통과하는지 본다. 루트 tailwind·eslint·typescript 버전을 올릴 때도 landing 빌드를 꼭 돌린다.
 
 ## 규칙
