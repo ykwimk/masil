@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { AUTH_CHANNEL } from '@/lib/supabase/client';
+import { AUTH_CHANNEL } from '@/lib/auth-channel';
 
 // 팝업 로그인이 돌아오는 곳. 코드 교환은 하지 않고 본 창에 code를 넘긴 뒤 닫힌다.
 // window.opener 대신 BroadcastChannel을 쓴다: Google 페이지를 거치며 opener 연결이 끊길 수 있다(COOP)

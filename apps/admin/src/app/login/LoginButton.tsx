@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { Button } from '@masil/ui/components/Button';
-import { AUTH_CHANNEL, createClient } from '@/lib/supabase/client';
+import { AUTH_CHANNEL } from '@/lib/auth-channel';
+import { createClient } from '@/lib/supabase/client';
 
 const POPUP_WIDTH = 500;
 const POPUP_HEIGHT = 600;
