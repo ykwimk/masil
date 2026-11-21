@@ -14,7 +14,9 @@ export default async function LoginPage({
   searchParams: Promise<{ error?: string; next?: string }>;
 }) {
   const { error, next } = await searchParams;
-  const message = error ? ERRORS[error] : undefined;
+  // 쿼리 값으로 __proto__·constructor 같은 프로토타입 키를 찾지 않게 자기 키만 본다
+  const message =
+    error && Object.hasOwn(ERRORS, error) ? ERRORS[error] : undefined;
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-sm flex-col justify-center gap-6 px-4">

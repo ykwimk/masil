@@ -22,7 +22,7 @@ supabase/
 
 ## 시작하기
 
-Node.js 20 이상, pnpm 10.x(`packageManager` 참고).
+Node.js 22 이상(`@supabase/supabase-js`가 요구), pnpm 10.x(`packageManager` 참고).
 
 ```bash
 pnpm install
