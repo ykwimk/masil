@@ -38,7 +38,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-!**/.env.example
+
+# Claude Code 계획 파일(.claude/settings.local.json의 plansDirectory). 개인 진행 메모라 올리지 않는다
+.claude/plans/
 
 # vercel
 .vercel
