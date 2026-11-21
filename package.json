@@ -8,7 +8,9 @@
     "typecheck": "turbo typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "landing": "pnpm --filter landing dev",
-    "web": "pnpm --filter web dev"
+    "web": "pnpm --filter web dev",
+    "admin": "pnpm --filter admin dev",
+    "db:start": "supabase start -x realtime,storage-api,imgproxy,mailpit,studio,postgres-meta,edge-runtime,logflare,vector,supavisor"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
