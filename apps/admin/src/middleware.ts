@@ -55,6 +55,33 @@ export async function middleware(request: NextRequest) {
     return withSession(NextResponse.redirect(url));
   }
 
+  // 들어오는 문: editor·admin만. 본인 행 읽기 RLS로 자기 role만 읽힌다. 데이터 권한은 4단계부터 RLS가 막는다
+  // /login도 role을 본다: 이미 들어온 사람을 로그인 화면에 두지 않기 위해
+  const isLogin = pathname === '/login';
+  if (claims && (!isPublic || isLogin)) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', claims.sub)
+      .maybeSingle();
+    const canEdit = profile?.role === 'editor' || profile?.role === 'admin';
+
+    // 이미 들어온 editor·admin은 홈으로, 권한이 없으면 forbidden으로. forbidden 화면(/login)에서는 보내지 않아야 로그아웃할 수 있다
+    if (isLogin && canEdit) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/';
+      url.search = '';
+      return withSession(NextResponse.redirect(url));
+    }
+
+    if (!isLogin && !canEdit) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/login';
+      url.search = '?error=forbidden';
+      return withSession(NextResponse.redirect(url));
+    }
+  }
+
   return withSession(NextResponse.next({ request }));
 }
 
